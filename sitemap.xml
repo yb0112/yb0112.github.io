@@ -123,6 +123,13 @@
   </url>
   
   <url>
+    <loc>https://www.yubo365.cn/tags/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2021-01-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.yubo365.cn/tags/Next/</loc>
     <lastmod>2021-01-10</lastmod>
     <changefreq>daily</changefreq>
@@ -130,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://www.yubo365.cn/tags/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/</loc>
+    <loc>https://www.yubo365.cn/tags/Hexo/</loc>
     <lastmod>2021-01-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -151,7 +158,7 @@
   </url>
   
   <url>
-    <loc>https://www.yubo365.cn/tags/Hexo/</loc>
+    <loc>https://www.yubo365.cn/tags/Nrm/</loc>
     <lastmod>2021-01-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -166,13 +173,6 @@
   
   <url>
     <loc>https://www.yubo365.cn/tags/Git/</loc>
-    <lastmod>2021-01-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.yubo365.cn/tags/Nrm/</loc>
     <lastmod>2021-01-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -209,14 +209,14 @@
   </url>
   
   <url>
-    <loc>https://www.yubo365.cn/categories/Hexo/</loc>
+    <loc>https://www.yubo365.cn/categories/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2021-01-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.yubo365.cn/categories/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/</loc>
+    <loc>https://www.yubo365.cn/categories/Hexo/</loc>
     <lastmod>2021-01-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
