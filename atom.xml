@@ -6,7 +6,7 @@
   <link href="https://www.yubo365.cn/atom.xml" rel="self"/>
   
   <link href="https://www.yubo365.cn/"/>
-  <updated>2021-01-10T13:28:37.118Z</updated>
+  <updated>2021-01-11T07:46:36.863Z</updated>
   <id>https://www.yubo365.cn/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx/1.18.0进行SSL证书配置</title>
+    <link href="https://www.yubo365.cn/posts/5510b3d9.html"/>
+    <id>https://www.yubo365.cn/posts/5510b3d9.html</id>
+    <published>2021-01-11T07:19:32.000Z</published>
+    <updated>2021-01-11T07:46:36.863Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;服务器：腾讯云服务器&lt;br&gt;nginx版本：nginx/1.18.0 &lt;a href=&quot;http://nginx.org/en/download.html&quot;&gt;nginx下载地址&lt;/a&gt;&lt;br&gt;CentOS:   CentOS Linux release 7.6.1810 (Core)&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="nginx" scheme="https://www.yubo365.cn/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>腾讯云服务器nginx安装配置</title>
+    <link href="https://www.yubo365.cn/posts/a477be03.html"/>
+    <id>https://www.yubo365.cn/posts/a477be03.html</id>
+    <published>2021-01-11T02:44:40.000Z</published>
+    <updated>2021-01-11T07:18:23.351Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;开始配置前，需要购买一个服务器 &lt;a href=&quot;https://url.cn/NEdlZzvJ&quot;&gt;腾讯云官网&lt;/a&gt;，购买过后还需要你先去备案，从提交备案到管理局通过正常大概一个星期，下面是我的备案操作记录，被腾讯云客服打电话驳回一次，因为填写的备用电话打不通，需要注意：提交备案后注意保持电话畅通。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="nginx" scheme="https://www.yubo365.cn/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>Vuex</title>
@@ -99,10 +133,10 @@
     <link href="https://www.yubo365.cn/posts/c2d19cb2.html"/>
     <id>https://www.yubo365.cn/posts/c2d19cb2.html</id>
     <published>2020-12-23T07:40:08.000Z</published>
-    <updated>2020-12-30T07:05:53.123Z</updated>
+    <updated>2021-01-11T06:57:21.794Z</updated>
     
     
-    <summary type="html">Hexo默认搭建出来的next，真的是简洁，哈哈哈~，需要自己去慢慢美化，这里记录一下，部分功能美化的过程</summary>
+    <summary type="html">Hexo默认搭建出来的next主题，真的是简洁，需要慢慢去美化，这里记录一下，部分功能美化的过程，持续更新……</summary>
     
     
     
@@ -238,9 +272,9 @@
     <category term="工具" scheme="https://www.yubo365.cn/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-    <category term="Nrm" scheme="https://www.yubo365.cn/tags/Nrm/"/>
-    
     <category term="Npm" scheme="https://www.yubo365.cn/tags/Npm/"/>
+    
+    <category term="Nrm" scheme="https://www.yubo365.cn/tags/Nrm/"/>
     
   </entry>
   

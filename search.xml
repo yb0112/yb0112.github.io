@@ -251,6 +251,177 @@
       </tags>
   </entry>
   <entry>
+    <title>nginx/1.18.0进行SSL证书配置</title>
+    <url>/posts/5510b3d9.html</url>
+    <content><![CDATA[<p>服务器：腾讯云服务器<br>nginx版本：nginx/1.18.0 <a href="http://nginx.org/en/download.html">nginx下载地址</a><br>CentOS:   CentOS Linux release 7.6.1810 (Core)</p>
+<a id="more"></a>
+<h3 id="查看安装模块"><a href="#查看安装模块" class="headerlink" title="查看安装模块"></a>查看安装模块</h3><ul>
+<li>查看安装了哪些模块，<code>nginx -V</code> 显示的很乱，看起来不是很方便，如下：<br><img src="/posts/5510b3d9/1.png" alt="没排版的样式"></li>
+<li>输入下面的命令，就可以很清晰查看安装了哪些模块了<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">nginx</span> -V <span class="number">2</span>&gt;&amp;<span class="number">1</span> | sed <span class="string">&quot;s/\s\+--/\n --/g&quot;</span></span><br></pre></td></tr></table></figure>
+<img src="/posts/5510b3d9/2.png" alt="排版后的样式"></li>
+</ul>
+<h3 id="配置SSL证书"><a href="#配置SSL证书" class="headerlink" title="配置SSL证书"></a>配置SSL证书</h3><ul>
+<li>这里我用的是腾讯云服务器，点击下载证书<br><img src="/posts/5510b3d9/3.png" alt="下载位置"></li>
+<li>下载后有个这个文件夹<br><img src="/posts/5510b3d9/4.png" alt="下载后文件夹"></li>
+<li>打开文件夹，找到nginx文件<br><img src="/posts/5510b3d9/5.png" alt="图示"></li>
+<li>打开nginx文件里面两个文件复制一下<br><img src="/posts/5510b3d9/6.png" alt="图示"></li>
+<li>这个时候连接到云服务器<br>把刚刚nginx文件里面复制的两个文件，放在<code>/etc/nginx/conf</code>文件中<br><img src="/posts/5510b3d9/7.png" alt="图示"></li>
+<li>通过<code>vim /etc/nginx/conf.d/default.conf</code>进行编辑配置，将下面的<code>www.yubo365.cn</code>换成你的域名<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">    <span class="comment">#server_name  localhost;</span></span><br><span class="line">    <span class="attribute">server_name</span> www.yubo365.cn;</span><br><span class="line">    <span class="attribute">return</span>       <span class="number">301</span> https://$server_name$request_uri;</span><br><span class="line">    <span class="comment">#charset koi8-r;</span></span><br><span class="line">    <span class="comment">#access_log  /var/log/nginx/host.access.log  main;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#location / &#123;</span></span><br><span class="line">        <span class="comment">#root   /usr/share/nginx/html;</span></span><br><span class="line">        <span class="comment">#index  index.html index.htm;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#error_page  404              /404.html;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># redirect server error pages to the static page /50x.html</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#error_page   500 502 503 504  /50x.html;</span></span><br><span class="line">    <span class="comment">#location = /50x.html &#123;</span></span><br><span class="line">        <span class="comment">#root   /usr/share/nginx/html;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># proxy the PHP scripts to Apache listening on 127.0.0.1:80</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#location ~ \.php$ &#123;</span></span><br><span class="line">    <span class="comment">#    proxy_pass   http://127.0.0.1;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#location ~ \.php$ &#123;</span></span><br><span class="line">    <span class="comment">#    root           html;</span></span><br><span class="line">    <span class="comment">#    fastcgi_pass   127.0.0.1:9000;</span></span><br><span class="line">    <span class="comment">#    fastcgi_index  index.php;</span></span><br><span class="line">    <span class="comment">#    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</span></span><br><span class="line">    <span class="comment">#    include        fastcgi_params;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># deny access to .htaccess files, if Apache&#x27;s document root</span></span><br><span class="line">    <span class="comment"># concurs with nginx&#x27;s one</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#location ~ /\.ht &#123;</span></span><br><span class="line">    <span class="comment">#    deny  all;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">443</span> ssl;  <span class="comment"># nginx1.15之后用这个语法,老的语法是ssl on;</span></span><br><span class="line">    <span class="attribute">server_name</span>  service.yuming.com;</span><br><span class="line">    <span class="attribute">ssl_certificate</span>   /etc/nginx/conf/1_www.yubo365.cn_bundle.crt;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span>  /etc/nginx/conf/2_www.yubo365.cn.key;</span><br><span class="line">    <span class="attribute">ssl_session_timeout</span> <span class="number">5m</span>;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;        </span><br><span class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">       <span class="attribute">root</span>   /usr/share/nginx/html;</span><br><span class="line">       <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">#location / &#123;</span></span><br><span class="line">       <span class="comment">#proxy_set_header Host $http_host;</span></span><br><span class="line">       <span class="comment">#proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span></span><br><span class="line">       <span class="comment">#proxy_set_header X-Real-Ip $remote_addr;</span></span><br><span class="line">       <span class="comment">#proxy_set_header X-NginX-Proxy true;</span></span><br><span class="line">       <span class="comment">#proxy_pass http://localhost:8081;</span></span><br><span class="line">       <span class="comment">#proxy_redirect off;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">    <span class="attribute">error_page</span>   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /50x.html;</span><br><span class="line">    <span class="attribute">location</span> = /50x.html &#123;</span><br><span class="line">        <span class="attribute">root</span>   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="开启80-443端口"><a href="#开启80-443端口" class="headerlink" title="开启80/443端口"></a>开启80/443端口</h3><p>进入到购买的腾讯云服务器后台，服务器安全组开启80/443端口，因为https默认的是443端口。  </p>
+<ul>
+<li>配置好以后，重启下服务器<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;关闭</span><br><span class="line">nginx -s quit</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;开启nginx</span><br><span class="line">nginx</span><br></pre></td></tr></table></figure></li>
+<li>访问<a href="https://www.yubo365.cn/">https://www.yubo365.cn/</a><br><img src="/posts/5510b3d9/8.png" alt="https图示"><br>可以看到小锁连接是绿色的说明已经配置成功了</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>腾讯云服务器nginx安装配置</title>
+    <url>/posts/a477be03.html</url>
+    <content><![CDATA[<p>开始配置前，需要购买一个服务器 <a href="https://url.cn/NEdlZzvJ">腾讯云官网</a>，购买过后还需要你先去备案，从提交备案到管理局通过正常大概一个星期，下面是我的备案操作记录，被腾讯云客服打电话驳回一次，因为填写的备用电话打不通，需要注意：提交备案后注意保持电话畅通。</p>
+<a id="more"></a>
+
+<p><img src="/posts/a477be03/1.png" alt="我的备案截图"></p>
+<h3 id="我的环境："><a href="#我的环境：" class="headerlink" title="我的环境："></a>我的环境：</h3><ul>
+<li>服务器：腾讯云服务器</li>
+<li>nginx版本：nginx/1.18.0 <a href="http://nginx.org/en/download.html">nginx下载地址</a></li>
+<li>CentOS: CentOS Linux release 7.6.1810 (Core)</li>
+</ul>
+<h3 id="查看你的公网IP和私网IP"><a href="#查看你的公网IP和私网IP" class="headerlink" title="查看你的公网IP和私网IP"></a>查看你的公网IP和私网IP</h3><p><img src="/posts/a477be03/2.png" alt="查看ip"></p>
+<h3 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h3><p>windows系统需要下载个连接服务器的客户端，xshell、xmanager等，根据自己喜欢的来选择 <a href="https://www.netsarang.com/zh/all-downloads/">下载地址</a>，我用的mac系统操作这里就直接打开终端，选择左上角的shell进行下图步骤操作就可，<br><img src="/posts/a477be03/3.png" alt="官网图"><br><img src="/posts/a477be03/4.png" alt="image.png"></p>
+<ul>
+<li>这里输入的服务器名称是购买服务器时候给你发的名称默认root，IP地址就是公网的IP地址<br><img src="/posts/a477be03/5.png" alt="image.png"><br><img src="/posts/a477be03/6.png" alt="image.png"></li>
+<li>点击连接后，终端会弹出来，让输入密码<br><img src="/posts/a477be03/7.png" alt="输入密码"></li>
+<li>输入完密码后，点击回车，即刻连接上了</li>
+</ul>
+<h3 id="用yum进行安装必要程序，安装一些服务和vim编辑器"><a href="#用yum进行安装必要程序，安装一些服务和vim编辑器" class="headerlink" title="用yum进行安装必要程序，安装一些服务和vim编辑器"></a>用yum进行安装必要程序，安装一些服务和vim编辑器</h3><p>先查看连接的linux服务器有么有安装yum（腾讯云默认是安装了）</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">rpm -<span class="keyword">qa</span> | <span class="keyword">grep</span> yum</span><br></pre></td></tr></table></figure>
+<p><img src="/posts/a477be03/8.png" alt="查看有没有安装yum"></p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">yum -y install gcc gcc-c++ <span class="built_in">auto</span>conf pcre-devel make <span class="built_in">auto</span>make</span><br><span class="line">yum -y install wget httpd-tools vim</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装完成后，新建一个文件存放文件的文件夹<br><img src="/posts/a477be03/9.png" alt="新建文件夹"></li>
+<li>再进入到文件夹分别新建下面几个文件<br><code>app</code>  放程序用<br><code>backup</code> 放备份文件<br><code>download</code> 下载的东西都放这里<br><code>logs</code> 日志放在这里<br><code>work</code> 工作文档都放这里<br><img src="/posts/a477be03/10.png" alt="新建文件"></li>
+</ul>
+<h3 id="nginx下载"><a href="#nginx下载" class="headerlink" title="nginx下载"></a>nginx下载</h3><ul>
+<li>下载nginx <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">yum <span class="keyword">install</span> nginx</span><br></pre></td></tr></table></figure></li>
+<li>下载完成后，查看一下版本<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">nginx -v</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h3><p>在使用yum安装完Nginx后，需要知道系统中多了哪些文件，它们都安装到了那里。可以使用下面的命令进行查看。</p>
+<ul>
+<li><p>查看Nginx的安装目录</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">rpm -ql nginx</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>rpm</code>是<code>linux</code>的<code>rpm</code>包管理工具，<code>-q</code> 代表询问模式，<code>-l</code> 代表返回列表，这样我们就可以找到nginx的所有安装位置了。</p>
+</blockquote>
+</li>
+<li><p>nginx.conf文件解读<br><code>nginx.conf</code> 文件是<code>Nginx</code>总配置文件，在我们搭建服务器时经常调整的文件。</p>
+</li>
+<li><p>进入<code>etc/nginx</code>目录下，然后用 <code>vim</code>进行打开<code>nginx.conf</code>文件</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cd</span> /etc/nginx</span><br><span class="line"></span><br><span class="line"><span class="keyword">vim</span> nginx.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment">#运行用户，默认即是nginx，可以不进行设置</span></span><br><span class="line"><span class="attribute">user</span>  nginx;</span><br><span class="line"><span class="comment">#Nginx进程，一般设置为和CPU核数一样</span></span><br><span class="line"><span class="attribute">worker_processes</span>  <span class="number">1</span>; </span><br><span class="line"><span class="comment">#错误日志存放目录</span></span><br><span class="line"><span class="attribute">error_log</span>  /var/log/nginx/error.log <span class="literal">warn</span>;</span><br><span class="line"><span class="comment">#进程pid存放位置</span></span><br><span class="line"><span class="attribute">pid</span>        /var/run/nginx.pid;</span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="attribute">worker_connections</span>  <span class="number">1024</span>; <span class="comment"># 单个后台进程的最大并发数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">include</span>       /etc/nginx/mime.types; <span class="comment">#文件扩展名与类型映射表</span></span><br><span class="line">    <span class="attribute">default_type</span>  application/octet-stream; <span class="comment">#默认文件类型</span></span><br><span class="line">    <span class="comment">#设置日志模式</span></span><br><span class="line">    <span class="attribute">log_format</span>  main  <span class="string">&#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;</span>;</span><br><span class="line">    <span class="comment">#nginx访问日志存放位置</span></span><br><span class="line">    <span class="attribute">access_log</span>  /var/log/nginx/access.log  main;</span><br><span class="line">    <span class="comment">#开启高效传输模式</span></span><br><span class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;</span><br><span class="line">    <span class="comment">#减少网络报文段的数量</span></span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line">    <span class="comment">#保持连接的时间，也叫超时时间</span></span><br><span class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;</span><br><span class="line">   <span class="comment">#开启gzip压缩</span></span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br><span class="line">    <span class="comment">#包含的子配置项位置和文件</span></span><br><span class="line">    <span class="attribute">include</span> /etc/nginx/conf.d/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看到<code>nginx.conf</code>文件中最底下部分有个<code>include /etc/nginx/conf.d/*.conf;</code><br>在通过命令进入到<code>/etc/nginx/conf.d</code>文件夹下面，通过<code>vim default.conf</code>打开文件</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">80</span>;   <span class="comment">#配置监听端口</span></span><br><span class="line">    server_name  localhost;  <span class="regexp">//</span>配置域名</span><br><span class="line"></span><br><span class="line">    <span class="comment">#charset koi8-r;     </span></span><br><span class="line">    <span class="comment">#access_log  /var/log/nginx/host.access.log  main;</span></span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   <span class="regexp">/usr/</span>share<span class="regexp">/nginx/</span>html;     <span class="comment">#服务默认启动目录</span></span><br><span class="line">        index  index.html index.htm;    <span class="comment">#默认访问文件</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#error_page  404              /404.html;   # 配置404页面</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># redirect server error pages to the static page /50x.html</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    error_page   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /<span class="number">50</span>x.html;   <span class="comment">#错误状态码的显示页面，配置后需要重启</span></span><br><span class="line">    location = /<span class="number">50</span>x.html &#123;</span><br><span class="line">        root   <span class="regexp">/usr/</span>share<span class="regexp">/nginx/</span>html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># proxy the PHP scripts to Apache listening on 127.0.0.1:80</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#location ~ \.php$ &#123;</span></span><br><span class="line">    <span class="comment">#    proxy_pass   http://127.0.0.1;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#location ~ \.php$ &#123;</span></span><br><span class="line">    <span class="comment">#    root           html;</span></span><br><span class="line">    <span class="comment">#    fastcgi_pass   127.0.0.1:9000;</span></span><br><span class="line">    <span class="comment">#    fastcgi_index  index.php;</span></span><br><span class="line">    <span class="comment">#    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</span></span><br><span class="line">    <span class="comment">#    include        fastcgi_params;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># deny access to .htaccess files, if Apache&#x27;s document root</span></span><br><span class="line">    <span class="comment"># concurs with nginx&#x27;s one</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#location ~ /\.ht &#123;</span></span><br><span class="line">    <span class="comment">#    deny  all;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>这里补充一下<code>vim</code>进行编辑的一个简单操作</p>
+<ol>
+<li>打开文件，首先进入 命令模式</li>
+<li>按下 <code>i(insert)</code> 进入 编辑模式</li>
+<li>按下 <code>esc</code>再按下 <code>: </code>进入 末行模式 ，以下为命令功能说明</li>
+</ol>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>英文</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:w</code></td>
+<td><code>write</code></td>
+<td>保存</td>
+</tr>
+<tr>
+<td><code>:q</code></td>
+<td><code>quit</code></td>
+<td>退出</td>
+</tr>
+<tr>
+<td><code>:q!</code></td>
+<td></td>
+<td>强制退出</td>
+</tr>
+<tr>
+<td><code>:wq</code></td>
+<td><code>write &amp; quit</code></td>
+<td>强制保存并退出</td>
+</tr>
+<tr>
+<td><code>:x</code></td>
+<td></td>
+<td>保存并退出</td>
+</tr>
+</tbody></table>
+<h3 id="nginx启动，关闭"><a href="#nginx启动，关闭" class="headerlink" title="nginx启动，关闭"></a>nginx启动，关闭</h3><ul>
+<li>查看nginx有没有启动，如果出现三条记录就说明开启了<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ps aux | grep nginx</span><br></pre></td></tr></table></figure>
+<img src="/posts/a477be03/11.png" alt="查看nginx运行状态"></li>
+<li>启动nginx<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nginx</span><br></pre></td></tr></table></figure></li>
+<li>停止nginx<br>方法一：立刻停止，无论程序有没有运行完，都立刻停止<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nginx  -s stop</span><br></pre></td></tr></table></figure>
+方法二：从容停止，有未运行完的程序，运行完成后才停止<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nginx -s quit</span><br></pre></td></tr></table></figure></li>
+<li>killall 方法杀死进程<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">killall nginx</span><br></pre></td></tr></table></figure></li>
+<li>查看端口<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netstat -tlnp</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="自定义错误页面"><a href="#自定义错误页面" class="headerlink" title="自定义错误页面"></a>自定义错误页面</h3><p>我们在上面的时候看到了<code>/etc/nginx/conf.d/default.conf</code>文件中</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">error_page   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /<span class="number">50</span>x.html;   <span class="comment">#错误状态码的显示页面，配置后需要重启</span></span><br><span class="line">    location = /<span class="number">50</span>x.html &#123;</span><br><span class="line">        root   <span class="regexp">/usr/</span>share<span class="regexp">/nginx/</span>html;   <span class="regexp">//</span>出现上面状态错误的时候，进入的页面</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用域名设置虚拟主机"><a href="#使用域名设置虚拟主机" class="headerlink" title="使用域名设置虚拟主机"></a>使用域名设置虚拟主机</h3><p>修改<code>etc/nginx/conf.d</code>目录下的<code>default.conf</code> 文件，把原来的80端口虚拟主机改为以域名划分的虚拟主机。代码如下：</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">server</span> &#123;</span><br><span class="line">    <span class="keyword">listen</span>       <span class="number">80</span>;</span><br><span class="line">    server_name  www.yubo365.cn;</span><br><span class="line">    <span class="keyword">location</span> / &#123;</span><br><span class="line">        root   /usr/<span class="keyword">share</span>/nginx/html;</span><br><span class="line">        <span class="keyword">index</span>  <span class="keyword">index</span>.html <span class="keyword">index</span>.htm;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这时候我们再重启服务，然后属于域名就可以看到了，这里找的是<code> /usr/share/nginx/html</code>文件下面的 <code>index.html</code>文件</p>
+<h3 id="设置反向代理"><a href="#设置反向代理" class="headerlink" title="设置反向代理"></a>设置反向代理</h3><p>正常代理的是ip地址，这里用域名也是可以的</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">        listen <span class="number">80</span>;</span><br><span class="line">        server_name www.yubo365.cn;</span><br><span class="line">        <span class="keyword">location</span> <span class="title">/ &#123;</span></span><br><span class="line"><span class="title">               proxy_pass</span> https://baidu.com;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其它反向代理指令：</p>
+<ul>
+<li>proxy_set_header :在将客户端请求发送给后端服务器之前，更改来自客户端的请求头信息。</li>
+<li>proxy_connect_timeout:配置Nginx与后端代理服务器尝试建立连接的超时时间。</li>
+<li>proxy_read_timeout : 配置Nginx向后端服务器组发出read请求后，等待相应的超时时间。</li>
+<li>proxy_send_timeout：配置Nginx向后端服务器组发出write请求后，等待相应的超时时间。</li>
+<li>proxy_redirect :用于修改后端服务器返回的响应头中的Location和Refresh。</li>
+</ul>
+<h3 id="Nginx适配PC或移动设备"><a href="#Nginx适配PC或移动设备" class="headerlink" title="Nginx适配PC或移动设备"></a>Nginx适配PC或移动设备</h3><p>这里是在<code>/usr/share/nginx/</code>文件夹下面创建<code>pc</code>和<code>mobile</code>文件，然后通过<code>$http_user_agent </code>正则判断来选择进入到PC还是移动端的index</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">       root   <span class="regexp">/usr/</span>share<span class="regexp">/nginx/</span>pc;</span><br><span class="line">       <span class="keyword">if</span> (<span class="variable">$http_user_agent</span> ~* <span class="string">&quot;(Android|iPhone|Windows Phone|UC|Kindle)&quot;</span>)&#123;</span><br><span class="line">         root <span class="regexp">/usr/</span>share<span class="regexp">/nginx/m</span>obile;</span><br><span class="line">       &#125;</span><br><span class="line">       index  index.html;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启nginx的gzip压缩"><a href="#开启nginx的gzip压缩" class="headerlink" title="开启nginx的gzip压缩"></a>开启nginx的gzip压缩</h3><p>Gzip是网页的一种网页压缩技术，经过gzip压缩后，页面大小可以变为原来的30%甚至更小。更小的网页会让用户浏览的体验更好，速度更快，下面简单配置代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    gzip on;</span><br><span class="line">    gzip_comp_level 8;</span><br><span class="line">    gzip_types text&#x2F;plain application&#x2F;javascript text&#x2F;css;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/posts/a477be03/12.png" alt="部分代码"><br>配置好以后，重启服务，查看HTTP响应头信息。你可以看见Content-Encoding为gzip类型。<br><img src="/posts/a477be03/13.png" alt="浏览器截图"><br>Nginx提供了专门的gzip模块，并且模块中的指令非常丰富，下面可以查看：</p>
+<ul>
+<li>gzip :  该指令用于开启（on）或 关闭（off）gzip模块。</li>
+<li>gzip_buffers : 设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流。</li>
+<li>gzip_comp_level : gzip压缩比，压缩级别是1-9，1的压缩级别最低，9的压缩级别最高。压缩级别越高压缩率越大，压缩时间越长。</li>
+<li>gzip_disable : 可以通过该指令对一些特定的User-Agent不使用压缩功能。</li>
+<li>gzip_min_length:设置允许压缩的页面最小字节数，页面字节数从相应消息头的Content-length中进行获取。</li>
+<li>gzip_http_version：识别HTTP协议版本，其值可以是1.1.或1.0.</li>
+<li>gzip_proxied : 用于设置启用或禁用从代理服务器上收到相应内容gzip压缩。</li>
+<li>gzip_vary : 用于在响应消息头中添加Vary：Accept-Encoding,使代理服务器根据请求头中的Accept-Encoding识别是否启用gzip压缩。</li>
+</ul>
+<blockquote>
+<p>最后分享一个可以在线压缩检测的站长工具<a href="https://tool.chinaz.com/Gzips">https://tool.chinaz.com/Gzips</a></p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vuex</title>
     <url>/posts/vuex.html</url>
     <content><![CDATA[<h3 id="安装Vuex"><a href="#安装Vuex" class="headerlink" title="安装Vuex"></a>安装Vuex</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span> vuex <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
@@ -399,6 +570,27 @@
 <p>这样设置过后地址栏可以展示.html后缀格式的地址了，但是这个时候会出现一个问题，之前使用<code>hexo-asset-image</code>插件生成的图片无法显示了<br>解决方法：<br>打开源文件<code>\node_modules\hexo-asset-image\index.js</code>,修改如下：<br><img src="/posts/c2d19cb2/imgshow.png" alt="imgshow"></p>
 <figure class="highlight lasso"><table><tr><td class="code"><pre><span class="line"><span class="built_in">var</span> appendLink = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(/.*\/index\.html$/.test(<span class="keyword">link</span>))&#123;</span><br><span class="line">	appendLink = <span class="string">&#x27;index/&#x27;</span></span><br><span class="line">	<span class="built_in">var</span> endPos = <span class="keyword">link</span>.lastIndexOf(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="built_in">var</span> endPos = <span class="keyword">link</span>.length - <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// var endPos = link.lastIndexOf(&#x27;/&#x27;) + 1;</span></span><br><span class="line">   <span class="comment">// link = link.substring(beginPos, endPos);</span></span><br><span class="line">   <span class="keyword">link</span> = <span class="keyword">link</span>.substring(beginPos, endPos) + <span class="string">&#x27;/&#x27;</span> + appendLink;</span><br></pre></td></tr></table></figure>
 <p>重新运行，图片就可以正常展示了</p>
+<h3 id="文章加密访问"><a href="#文章加密访问" class="headerlink" title="文章加密访问"></a>文章加密访问</h3><p>通过引入<a href="https://github.com/D0n9X1n/hexo-blog-encrypt">hexo-blog-encrypt</a>依赖包，进行加密.</p>
+<h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ul>
+<li>一旦你输入了正确的密码, 它将会被存储在本地浏览器的 localStorage中. 按个按钮, 密码将会被清空. 若博客中又脚本, 它将会被正确地执行.</li>
+<li>支持按标签加密.</li>
+<li>所有的核心功能都是由原生的 API 所提供的. 在 Node.js中, 我们使用 <a href="https://nodejs.org/dist/latest-v12.x/docs/api/crypto.html">Crypto</a>. 在浏览器中, 我们使用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>.</li>
+<li><a href="https://tools.ietf.org/html/rfc2898">PBKDF2</a>, <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf">SHA256</a> 被用于分发密钥, <a href="https://csrc.nist.gov/publications/detail/sp/800-38a/final">AES256-CBC</a> 被用于加解密, 我们还使用 <a href="https://csrc.nist.gov/csrc/media/publications/fips/198/1/final/documents/fips-198-1_final.pdf">HMAC</a> 来验证密文的来源, 并确保其未被篡改.</li>
+<li>我们广泛地使用 Promise 来进行异步操作, 以此确保线程不被杜塞.</li>
+<li>加密页面多主题支持, 现在已经支持的主题有 [default, xray], 更多的主题正在开发中.</li>
+<li>过时的浏览器将不能正常显示, 因此, 请升级您的浏览器.  </li>
+</ul>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install </span>hexo-<span class="keyword">blog-encrypt </span>-S</span><br></pre></td></tr></table></figure>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ul>
+<li>文章信息头使用<br>将<code>password</code>字段，添加到文章信息头<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020-01-11 14:11:00</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">bac123</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure></li>
+<li>高级设置<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">加密文章tag</span></span><br><span class="line"><span class="attr">date:</span> </span><br><span class="line"><span class="attr">password:</span> <span class="string">aabbcc</span></span><br><span class="line"><span class="attr">abstract:</span> <span class="string">该文章已加密,</span> <span class="string">请输入密码查看。</span></span><br><span class="line"><span class="attr">message:</span> <span class="string">该文章已加密,</span> <span class="string">请输入密码查看。</span></span><br><span class="line"><span class="attr">wrong_pass_message:</span> <span class="string">密码不正确，请重新输入！</span></span><br><span class="line"><span class="attr">wrong_hash_message:</span> <span class="string">文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容！</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure></li>
+<li>在根目录下<code>_config.yml</code>中全局设置<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="attribute">encrypt</span>:</span><br><span class="line">  <span class="attribute">abstract</span>: 该文章已加密, 请输入密码查看.</span><br><span class="line">  <span class="attribute">message</span>: 该文章已加密, 请输入密码查看.</span><br><span class="line">  <span class="attribute">tags</span>:</span><br><span class="line">  - &#123;<span class="attribute">name</span>: tagName, <span class="attribute">password</span>: 密码A&#125;</span><br><span class="line">  <span class="selector-tag">-</span> &#123;<span class="attribute">name</span>: tagName, <span class="attribute">password</span>: 密码B&#125;</span><br><span class="line">  <span class="attribute">wrong_pass_message</span>: 密码不正确，请重新输入.</span><br><span class="line">  <span class="attribute">wrong_hash_message</span>: 抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.</span><br></pre></td></tr></table></figure>
+注：若文章中采用_config.yml中的全局配置，则文章的tags只能有一个，若有多个tags，则失效。  </li>
+</ul>
+<h4 id="设置主题"><a href="#设置主题" class="headerlink" title="设置主题"></a>设置主题</h4><p>增加一个<code>theme</code>字段，可以选择的主题：<code>default</code>、<code>blink</code>、<code>shrink</code>、<code>flip</code>、<code>up</code>、<code>surge</code>、<code>wave</code>、<code>xray</code></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Security</span></span><br><span class="line"><span class="attr">encrypt:</span> <span class="comment"># hexo-blog-encrypt</span></span><br><span class="line">  <span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> &#123;<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码A</span>&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123;<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码B</span>&#125;</span><br><span class="line">  <span class="attr">theme:</span> <span class="string">xray</span></span><br><span class="line">  <span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line">  <span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br></pre></td></tr></table></figure>
+<h4 id="配置优先级"><a href="#配置优先级" class="headerlink" title="配置优先级"></a>配置优先级</h4><p>文章信息头 <code>&gt;</code> _config.yml (站点根目录下的) <code>&gt;</code> 默认配置  </p>
+<p>使用<code>hexo clean</code> &amp;&amp; <code>hexo g</code> &amp;&amp; <code>hexo s</code>在本地预览加密的文章。</p>
 ]]></content>
       <categories>
         <category>Hexo</category>
@@ -517,8 +709,8 @@
         <category>工具</category>
       </categories>
       <tags>
-        <tag>Nrm</tag>
         <tag>Npm</tag>
+        <tag>Nrm</tag>
       </tags>
   </entry>
 </search>
