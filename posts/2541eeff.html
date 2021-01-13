@@ -20,21 +20,22 @@
     var CONFIG = {"hostname":"www.yubo365.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="npm 是 JavaScript 世界的包管理工具,并且是 Node.js 平台的默认包管理工具。通过 npm 可以安装、共享、分发代码,管理项目依赖关系。但是npm官方镜像在国外，当我们下载一些依赖包的时候，受到限制，可以通过进行一些国内镜像配置来下载，有的时候在公司里面网络会被设置代理，也需要我们对工具进行一些代理设置才能进行下载，下面一些基本的操作">
+  <meta name="description" content="作为前端开发，想要在这个领域走的长远，必须要有扎实的JavaScript编码能力，朋友圈中刚好看到有朋友购买并分享这个课程，果断下单购买并开始学习，由于记性太差，这里对这个课程的学习做的一些记录总结，方便温故知新。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="npm的镜像源以及代理的查看和配置">
-<meta property="og:url" content="https://www.yubo365.cn/posts/b660c1ef.html">
+<meta property="og:title" content="JavaScript核心原理">
+<meta property="og:url" content="https://www.yubo365.cn/posts/2541eeff.html">
 <meta property="og:site_name" content="余波的博客">
-<meta property="og:description" content="npm 是 JavaScript 世界的包管理工具,并且是 Node.js 平台的默认包管理工具。通过 npm 可以安装、共享、分发代码,管理项目依赖关系。但是npm官方镜像在国外，当我们下载一些依赖包的时候，受到限制，可以通过进行一些国内镜像配置来下载，有的时候在公司里面网络会被设置代理，也需要我们对工具进行一些代理设置才能进行下载，下面一些基本的操作">
+<meta property="og:description" content="作为前端开发，想要在这个领域走的长远，必须要有扎实的JavaScript编码能力，朋友圈中刚好看到有朋友购买并分享这个课程，果断下单购买并开始学习，由于记性太差，这里对这个课程的学习做的一些记录总结，方便温故知新。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-12-11T14:41:54.000Z">
-<meta property="article:modified_time" content="2020-12-30T04:17:47.722Z">
+<meta property="og:image" content="https://www.yubo365.cn/posts/2541eeff/1.png">
+<meta property="article:published_time" content="2021-01-13T02:37:05.000Z">
+<meta property="article:modified_time" content="2021-01-13T12:16:56.847Z">
 <meta property="article:author" content="Yu Bo">
-<meta property="article:tag" content="Npm">
-<meta property="article:tag" content="Git">
+<meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.yubo365.cn/posts/2541eeff/1.png">
 
-<link rel="canonical" href="https://www.yubo365.cn/posts/b660c1ef.html">
+<link rel="canonical" href="https://www.yubo365.cn/posts/2541eeff.html">
 
 
 <script id="page-configurations">
@@ -47,7 +48,7 @@
   };
 </script>
 
-  <title>npm的镜像源以及代理的查看和配置 | 余波的博客</title>
+  <title>JavaScript核心原理 | 余波的博客</title>
   
 
 
@@ -197,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.yubo365.cn/posts/b660c1ef.html">
+    <link itemprop="mainEntityOfPage" href="https://www.yubo365.cn/posts/2541eeff.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -210,7 +211,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          npm的镜像源以及代理的查看和配置
+          JavaScript核心原理
         </h1>
 
         <div class="post-meta">
@@ -219,16 +220,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-12-11 22:41:54" itemprop="dateCreated datePublished" datetime="2020-12-11T22:41:54+08:00">2020-12-11</time>
+              <time title="创建时间：2021-01-13 10:37:05 / 修改时间：20:16:56" itemprop="dateCreated datePublished" datetime="2021-01-13T10:37:05+08:00">2021-01-13</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-30 12:17:47" itemprop="dateModified" datetime="2020-12-30T12:17:47+08:00">2020-12-30</time>
-              </span>
           <!-- 置顶 -->
               
           <!-- 置顶 -->
@@ -240,7 +235,7 @@
 
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                  <a href="/categories/web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">web前端</span></a>
                 </span>
             </span>
 
@@ -260,9 +255,9 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>760</span>
+              <span>3.8k</span>
             </span>
-            <div class="post-description">npm 是 JavaScript 世界的包管理工具,并且是 Node.js 平台的默认包管理工具。通过 npm 可以安装、共享、分发代码,管理项目依赖关系。但是npm官方镜像在国外，当我们下载一些依赖包的时候，受到限制，可以通过进行一些国内镜像配置来下载，有的时候在公司里面网络会被设置代理，也需要我们对工具进行一些代理设置才能进行下载，下面一些基本的操作</div>
+            <div class="post-description">作为前端开发，想要在这个领域走的长远，必须要有扎实的JavaScript编码能力，朋友圈中刚好看到有朋友购买并分享这个课程，果断下单购买并开始学习，由于记性太差，这里对这个课程的学习做的一些记录总结，方便温故知新。</div>
 
         </div>
       </header>
@@ -273,26 +268,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="镜像源"><a href="#镜像源" class="headerlink" title="镜像源"></a>镜像源</h3><h4 id="查询当前镜像源"><a href="#查询当前镜像源" class="headerlink" title="查询当前镜像源"></a>查询当前镜像源</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="builtin-name">get</span> registry</span><br></pre></td></tr></table></figure>
-<h4 id="设置为淘宝镜像"><a href="#设置为淘宝镜像" class="headerlink" title="设置为淘宝镜像"></a>设置为淘宝镜像</h4><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="keyword">set</span> <span class="keyword">registry</span> <span class="keyword">http</span>://<span class="keyword">registry</span>.npm.taobao.org/</span><br></pre></td></tr></table></figure>
-<p>下载cnpm淘宝镜像</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https:<span class="regexp">//</span>registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<h4 id="设置默认的官方镜像"><a href="#设置默认的官方镜像" class="headerlink" title="设置默认的官方镜像"></a>设置默认的官方镜像</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">config</span> <span class="built_in">set</span> registry https:<span class="comment">//registry.npmjs.org/</span></span><br></pre></td></tr></table></figure>
-<h4 id="查看和删除设置的淘宝镜像"><a href="#查看和删除设置的淘宝镜像" class="headerlink" title="查看和删除设置的淘宝镜像"></a>查看和删除设置的淘宝镜像</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm<span class="built_in"> config </span><span class="builtin-name">get</span> 前面设置的名字</span><br></pre></td></tr></table></figure>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">config</span> <span class="keyword">delete</span> 前面设置名字</span><br></pre></td></tr></table></figure>
-<h3 id="npm代理"><a href="#npm代理" class="headerlink" title="npm代理"></a>npm代理</h3><h4 id="查看当前代理"><a href="#查看当前代理" class="headerlink" title="查看当前代理"></a>查看当前代理</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm<span class="built_in"> config </span><span class="builtin-name">get</span> proxy</span><br></pre></td></tr></table></figure>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm<span class="built_in"> config </span><span class="builtin-name">get</span> https-proxy</span><br></pre></td></tr></table></figure>
-<h4 id="设置代理"><a href="#设置代理" class="headerlink" title="设置代理"></a>设置代理</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">config</span> <span class="built_in">set</span> proxy http:<span class="comment">//server:port</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">config</span> <span class="built_in">set</span> https-proxy http:<span class="comment">//server:port</span></span><br></pre></td></tr></table></figure>
-<h4 id="删除代理"><a href="#删除代理" class="headerlink" title="删除代理"></a>删除代理</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm<span class="built_in"> config </span><span class="builtin-name">set</span><span class="built_in"> proxy </span><span class="literal">null</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm<span class="built_in"> config </span><span class="builtin-name">set</span> https-proxy <span class="literal">null</span></span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">config</span> <span class="keyword">delete</span> proxy</span><br></pre></td></tr></table></figure>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">config</span> <span class="keyword">delete</span> https-proxy</span><br></pre></td></tr></table></figure>
-<h3 id="git查看、设置、删除代理"><a href="#git查看、设置、删除代理" class="headerlink" title="git查看、设置、删除代理"></a>git查看、设置、删除代理</h3><h4 id="查看git代理"><a href="#查看git代理" class="headerlink" title="查看git代理"></a>查看git代理</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global --<span class="builtin-name">get</span> http.proxy</span><br><span class="line">git<span class="built_in"> config </span>--global --<span class="builtin-name">get</span> https.proxy</span><br></pre></td></tr></table></figure>
+        <h3 id="JS数据类型"><a href="#JS数据类型" class="headerlink" title="JS数据类型"></a>JS数据类型</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>JavaScript 的数据类型有下图所示的 8 种：<br><img src="/posts/2541eeff/1.png" alt="8种类型"><br>前 7 种类型为基础类型，最后 1 种（Object）为引用类型，而引用数据类型（Object）又分为图上这几种常见的类型：<code>Array</code> - 数组对象、<code>RegExp</code> - 正则对象、<code>Date</code> - 日期对象、<code>Math</code> - 数学函数、<code>Function</code> - 函数对象。<br>各种 JavaScript 的数据类型最后都会在初始化之后放在不同的内存中，因此上面的数据类型大致可以分成两类来进行存储：</p>
+<ul>
+<li>基础类型存储在<code>栈内存</code>，被引用或拷贝时，会创建一个完全相等的变量；</li>
+<li>引用类型存储在<code>堆内存</code>，存储的是地址，多个引用指向同一个地址，这里会涉及一个<code>“共享”</code>的概念。</li>
+</ul>
+<h4 id="类型检测"><a href="#类型检测" class="headerlink" title="类型检测"></a>类型检测</h4><h5 id="判断方法1：typeof"><a href="#判断方法1：typeof" class="headerlink" title="判断方法1：typeof"></a>判断方法1：typeof</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">typeof <span class="number">1</span> <span class="regexp">//</span> <span class="string">&#x27;number&#x27;</span></span><br><span class="line"></span><br><span class="line">typeof <span class="string">&#x27;1&#x27;</span> <span class="regexp">//</span> <span class="string">&#x27;string&#x27;</span></span><br><span class="line"></span><br><span class="line">typeof undefined <span class="regexp">//</span> <span class="string">&#x27;undefined&#x27;</span></span><br><span class="line"></span><br><span class="line">typeof true <span class="regexp">//</span> <span class="string">&#x27;boolean&#x27;</span></span><br><span class="line"></span><br><span class="line">typeof Symbol() <span class="regexp">//</span> <span class="string">&#x27;symbol&#x27;</span></span><br><span class="line"></span><br><span class="line">typeof null <span class="regexp">//</span> <span class="string">&#x27;object&#x27;</span></span><br><span class="line"></span><br><span class="line">typeof [] <span class="regexp">//</span> <span class="string">&#x27;object&#x27;</span></span><br><span class="line"></span><br><span class="line">typeof &#123;&#125; <span class="regexp">//</span> <span class="string">&#x27;object&#x27;</span></span><br><span class="line"></span><br><span class="line">typeof console <span class="regexp">//</span> <span class="string">&#x27;object&#x27;</span></span><br><span class="line"></span><br><span class="line">typeof console.log <span class="regexp">//</span> <span class="string">&#x27;function&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><code>typeof</code>对于基本类型，除了 <code>null</code> 都可以显示正确的类型，虽然<code>null</code>是基本类型，但是会显示<code>object</code>，这是一个存在很久的Bug，因为在 JS 的最初版本中，使用的是 <code>32位系统</code>，为了性能考虑使用低位存储了变量的类型信息，<code>000</code>开头代表是对象，然而 <code>null</code> 表示为全零，所以将它错误的判断为 <code>object</code> 。虽然现在的内部类型判断代码已经改变了，但是对于这个 Bug 却是一直流传下来。</p>
+<h5 id="判断方法2：instanceof"><a href="#判断方法2：instanceof" class="headerlink" title="判断方法2：instanceof"></a>判断方法2：instanceof</h5><p>我们<code>new</code>一个对象，那么这个新对象就是它原型链继承上面的对象了，通过<code>instanceof</code>我们能判断这个对象是否是之前那个构造函数生成的对象，这样就基本可以判断出这个新对象的数据类型。下面通过代码来了解一下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Car = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> benz = <span class="keyword">new</span> Car()</span><br><span class="line"></span><br><span class="line">benz <span class="keyword">instanceof</span> Car <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> car = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">&#x27;Mercedes Benz&#x27;</span>)</span><br><span class="line"></span><br><span class="line">car <span class="keyword">instanceof</span> <span class="built_in">String</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;Covid-19&#x27;</span></span><br><span class="line"></span><br><span class="line">str <span class="keyword">instanceof</span> <span class="built_in">String</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>那么如何实现一个<code>instanceof</code>的底层实现呢，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myInstanceof</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这里先用typeof来判断基础数据类型，如果是，直接返回false</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> left !== <span class="string">&#x27;object&#x27;</span> || left === <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// getProtypeOf是Object对象自带的API，能够拿到参数的原型对象</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> proto = <span class="built_in">Object</span>.getPrototypeOf(left);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;                  <span class="comment">//循环往下寻找，直到找到相同的原型对象</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(proto === <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(proto === right.prototype) <span class="keyword">return</span> <span class="literal">true</span>;<span class="comment">//找到相同原型对象，返回true</span></span><br><span class="line"></span><br><span class="line">    proto = <span class="built_in">Object</span>.getPrototypeof(proto);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 验证一下自己实现的myInstanceof是否OK</span></span><br><span class="line"><span class="built_in">console</span>.log(myInstanceof(<span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">123</span>), <span class="built_in">Number</span>));    <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(myInstanceof(<span class="number">123</span>, <span class="built_in">Number</span>));                <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>前面两种判断数据类型的方法它们之间有什么差异呢？我总结了下面两点：</p>
+<ul>
+<li><p>instanceof 可以准确地判断复杂引用数据类型，但是不能正确判断基础数据类型；</p>
+</li>
+<li><p>而 typeof 也存在弊端，它虽然可以判断基础数据类型（null 除外），但是引用数据类型中，除了 function 类型以外，其他的也无法判断。</p>
+</li>
+</ul>
+<h5 id="判断方法3：Object-prototype-toString"><a href="#判断方法3：Object-prototype-toString" class="headerlink" title="判断方法3：Object.prototype.toString"></a>判断方法3：Object.prototype.toString</h5><p><code>toString()</code>是<code>Object</code>的原型方法，调用该方法，可以统一返回格式为<code>“[object Xxx]”</code>的字符串，其中 <code>Xxx</code> 就是对象的类型。对于 <code>Object</code> 对象，直接调用 <code>toString()</code> 就能返回 <code>[object Object]</code>；而对于其他对象，则需要通过 <code>call</code> 来调用，才能返回正确的类型信息。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Object</span>.prototype.toString(&#123;&#125;)       // &quot;[object Object]&quot;</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>(&#123;&#125;)  // 同上结果，加上<span class="keyword">call</span>也ok</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>(<span class="number">1</span>)    // &quot;[object Number]&quot;</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>(<span class="string">&#x27;1&#x27;</span>)  // &quot;[object String]&quot;</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>(<span class="keyword">true</span>)  // &quot;[object Boolean]&quot;</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>(<span class="keyword">function</span>()&#123;&#125;)  // &quot;[object Function]&quot;</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>(<span class="keyword">null</span>)   //&quot;[object Null]&quot;</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>(undefined) //&quot;[object Undefined]&quot;</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>(/<span class="number">123</span>/g)    //&quot;[object RegExp]&quot;</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>(<span class="built_in">new</span> <span class="type">Date</span>()) //&quot;[object Date]&quot;</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>([])       //&quot;[object Array]&quot;</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>(document)  //&quot;[object HTMLDocument]&quot;</span><br><span class="line"><span class="keyword">Object</span>.prototype.toString.<span class="keyword">call</span>(<span class="keyword">window</span>)   //&quot;[object Window]&quot;</span><br></pre></td></tr></table></figure>
+<p>下面来实现一个全局通用的数据类型判断方法，代码如下：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> getType(obj)&#123;</span><br><span class="line">    let type  = typeof obj;</span><br><span class="line">    <span class="keyword">if</span> (type !== <span class="string">&quot;object&quot;</span>) &#123;    <span class="regexp">//</span> 先进行typeof判断，如果是基础数据类型，直接返回</span><br><span class="line">        return type;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="regexp">//</span> 对于typeof返回结果是object的，再进行如下的判断，正则返回结果</span><br><span class="line">    return Object.prototype.toString.call(obj).replace(<span class="regexp">/^\[object (\S+)\]$/</span>, <span class="string">&#x27;$1&#x27;</span>);  <span class="regexp">//</span> 注意正则中间有个空格</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="regexp">/* 代码验证，需要注意大小写，哪些是typeof判断，哪些是toString判断？思考下 */</span></span><br><span class="line">getType([])     <span class="regexp">//</span> <span class="string">&quot;Array&quot;</span> typeof []是object，因此toString返回</span><br><span class="line">getType(<span class="string">&#x27;123&#x27;</span>)  <span class="regexp">//</span> <span class="string">&quot;string&quot;</span> typeof 直接返回</span><br><span class="line">getType(window) <span class="regexp">//</span> <span class="string">&quot;Window&quot;</span> toString返回</span><br><span class="line">getType(null)   <span class="regexp">//</span> <span class="string">&quot;Null&quot;</span>首字母大写，typeof null是object，需toString来判断</span><br><span class="line">getType(undefined)   <span class="regexp">//</span> <span class="string">&quot;undefined&quot;</span> typeof 直接返回</span><br><span class="line">getType()            <span class="regexp">//</span> <span class="string">&quot;undefined&quot;</span> typeof 直接返回</span><br><span class="line">getType(<span class="keyword">function</span>()&#123;&#125;) <span class="regexp">//</span> <span class="string">&quot;function&quot;</span> typeof能判断，因此首字母小写</span><br><span class="line">getType(<span class="regexp">/123/g</span>)      <span class="regexp">//</span><span class="string">&quot;RegExp&quot;</span> toString返回</span><br></pre></td></tr></table></figure>
+<h3 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h3><h3 id="JS常见的6种继承方式"><a href="#JS常见的6种继承方式" class="headerlink" title="JS常见的6种继承方式"></a>JS常见的6种继承方式</h3><h3 id="实现new、apply、call、bind的底层逻辑"><a href="#实现new、apply、call、bind的底层逻辑" class="headerlink" title="实现new、apply、call、bind的底层逻辑"></a>实现new、apply、call、bind的底层逻辑</h3><p>—————— 改篇文章继续学习中，未完待续 ——————</p>
 
-<h4 id="设置git代理"><a href="#设置git代理" class="headerlink" title="设置git代理"></a>设置git代理</h4><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">config</span> --<span class="keyword">global</span> http<span class="variable">.proxy</span> http:<span class="comment">//IP:Port</span></span><br><span class="line">git <span class="keyword">config</span> --<span class="keyword">global</span> https<span class="variable">.proxy</span> http:<span class="comment">//IP:Port</span></span><br></pre></td></tr></table></figure>
-<h4 id="删除git代理"><a href="#删除git代理" class="headerlink" title="删除git代理"></a>删除git代理</h4><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="keyword">global</span> --<span class="keyword">unset</span> <span class="keyword">http</span>.proxy</span><br><span class="line">git config --<span class="keyword">global</span> --<span class="keyword">unset</span> https.proxy</span><br></pre></td></tr></table></figure>
     </div>
     
       <div>
@@ -365,7 +364,7 @@ mobShare.config( {
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.yubo365.cn/posts/b660c1ef.html" title="npm的镜像源以及代理的查看和配置">https://www.yubo365.cn/posts/b660c1ef.html</a>
+    <a href="https://www.yubo365.cn/posts/2541eeff.html" title="JavaScript核心原理">https://www.yubo365.cn/posts/2541eeff.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -375,10 +374,6 @@ mobShare.config( {
 
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Npm/" rel="tag"><i class="fa fa-tag"></i> Npm</a>
-              <a href="/tags/Git/" rel="tag"><i class="fa fa-tag"></i> Git</a>
-          </div>
 
         
 
@@ -386,13 +381,10 @@ mobShare.config( {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/3b4634fc.html" rel="prev" title="Hexo使用">
-      <i class="fa fa-chevron-left"></i> Hexo使用
+    <a href="/posts/5510b3d9.html" rel="prev" title="nginx/1.18.0进行SSL证书配置">
+      <i class="fa fa-chevron-left"></i> nginx/1.18.0进行SSL证书配置
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/64663d25.html" rel="next" title="Windows下安装nvm管理nodejs版本">
-      Windows下安装nvm管理nodejs版本 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
       <div>
@@ -453,7 +445,7 @@ mobShare.config( {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">镜像源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%BD%93%E5%89%8D%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-number">1.1.</span> <span class="nav-text">查询当前镜像源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%BA%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F"><span class="nav-number">1.2.</span> <span class="nav-text">设置为淘宝镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E7%9A%84%E5%AE%98%E6%96%B9%E9%95%9C%E5%83%8F"><span class="nav-number">1.3.</span> <span class="nav-text">设置默认的官方镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%92%8C%E5%88%A0%E9%99%A4%E8%AE%BE%E7%BD%AE%E7%9A%84%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F"><span class="nav-number">1.4.</span> <span class="nav-text">查看和删除设置的淘宝镜像</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm%E4%BB%A3%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">npm代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E4%BB%A3%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">查看当前代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">设置代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E4%BB%A3%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">删除代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git%E6%9F%A5%E7%9C%8B%E3%80%81%E8%AE%BE%E7%BD%AE%E3%80%81%E5%88%A0%E9%99%A4%E4%BB%A3%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">git查看、设置、删除代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bgit%E4%BB%A3%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text">查看git代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEgit%E4%BB%A3%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">设置git代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4git%E4%BB%A3%E7%90%86"><span class="nav-number">3.3.</span> <span class="nav-text">删除git代理</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">JS数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B"><span class="nav-number">1.2.</span> <span class="nav-text">类型检测</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%951%EF%BC%9Atypeof"><span class="nav-number">1.2.1.</span> <span class="nav-text">判断方法1：typeof</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%952%EF%BC%9Ainstanceof"><span class="nav-number">1.2.2.</span> <span class="nav-text">判断方法2：instanceof</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%953%EF%BC%9AObject-prototype-toString"><span class="nav-number">1.2.3.</span> <span class="nav-text">判断方法3：Object.prototype.toString</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="nav-number">2.</span> <span class="nav-text">深浅拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS%E5%B8%B8%E8%A7%81%E7%9A%846%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">JS常见的6种继承方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0new%E3%80%81apply%E3%80%81call%E3%80%81bind%E7%9A%84%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91"><span class="nav-number">4.</span> <span class="nav-text">实现new、apply、call、bind的底层逻辑</span></a></li></ol></div>
       </div>
       <!--/noindex-->
     
