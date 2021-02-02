@@ -6,7 +6,7 @@
   <link href="https://www.yubo365.cn/atom.xml" rel="self"/>
   
   <link href="https://www.yubo365.cn/"/>
-  <updated>2021-01-26T07:51:24.114Z</updated>
+  <updated>2021-02-02T10:11:32.329Z</updated>
   <id>https://www.yubo365.cn/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>fiddler抓包</title>
+    <link href="https://www.yubo365.cn/posts/654bf45c.html"/>
+    <id>https://www.yubo365.cn/posts/654bf45c.html</id>
+    <published>2021-02-01T02:37:00.000Z</published>
+    <updated>2021-02-02T10:11:32.329Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/posts/654bf45c/fiddler.jpg&quot; alt=&quot;fiddler&quot;&gt;&lt;br&gt;&lt;code&gt;Fiddler&lt;/code&gt;是一个通过代理的方式进行抓包工具，它能记录所有客户端和服务器的&lt;code&gt;http&lt;/code&gt;和&lt;code&gt;https&lt;/code&gt;请求，允许你监视，设置断点，甚至修改输入输出数据，它运行时会在本地建立一个代理服务，可以将网络传输发送与接受的数据包进行&lt;code&gt;截获&lt;/code&gt;、&lt;code&gt;重发&lt;/code&gt;、&lt;code&gt;编辑&lt;/code&gt;、&lt;code&gt;转存&lt;/code&gt;等操作，也可以用来&lt;code&gt;检测网络安全&lt;/code&gt;。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="抓包" scheme="https://www.yubo365.cn/tags/%E6%8A%93%E5%8C%85/"/>
+    
+    <category term="fiddler" scheme="https://www.yubo365.cn/tags/fiddler/"/>
+    
+  </entry>
   
   <entry>
     <title>JavaScript核心原理</title>

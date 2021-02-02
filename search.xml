@@ -251,6 +251,215 @@
       </tags>
   </entry>
   <entry>
+    <title>fiddler抓包</title>
+    <url>/posts/654bf45c.html</url>
+    <content><![CDATA[<p><img src="/posts/654bf45c/fiddler.jpg" alt="fiddler"><br><code>Fiddler</code>是一个通过代理的方式进行抓包工具，它能记录所有客户端和服务器的<code>http</code>和<code>https</code>请求，允许你监视，设置断点，甚至修改输入输出数据，它运行时会在本地建立一个代理服务，可以将网络传输发送与接受的数据包进行<code>截获</code>、<code>重发</code>、<code>编辑</code>、<code>转存</code>等操作，也可以用来<code>检测网络安全</code>。</p>
+<a id="more"></a>
+<!-- ![charles](charles.png) -->
+
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><h4 id="window系统安装Fiddler（下面以window为例）"><a href="#window系统安装Fiddler（下面以window为例）" class="headerlink" title="window系统安装Fiddler（下面以window为例）"></a>window系统安装<code>Fiddler</code>（下面以window为例）</h4><p>下载地址： <a href="https://www.telerik.com/download/fiddler">https://www.telerik.com/download/fiddler</a>  （需要梯子）</p>
+<p>网盘下载： <a href="https://pan.baidu.com/s/1AQ1IBhNxg8xywiTR2ow68Q">https://pan.baidu.com/s/1AQ1IBhNxg8xywiTR2ow68Q</a>  提取码: k2jm  （下载到本地的）</p>
+<blockquote>
+<p>注意：win8之前用<code>Fiidler for .NET2</code>，win8之后用<code>Fiddler for .NET4</code>比较好</p>
+</blockquote>
+<h4 id="Mac系统安装Charles"><a href="#Mac系统安装Charles" class="headerlink" title="Mac系统安装Charles"></a>Mac系统安装<code>Charles</code></h4><p>跟window差别不是很大，这里不细说了，可以参考<a href="https://www.jianshu.com/p/933d78091d90">Charles使用教程</a></p>
+<h3 id="Fiddler简介"><a href="#Fiddler简介" class="headerlink" title="Fiddler简介"></a>Fiddler简介</h3><p>Fiddler是通过改写HTTP代理，让数据从它那通过，来监控并且截取到数据。当然Fiddler很屌，在打开它的那一瞬间，它就已经设置好了浏览器的代理了。当你关闭的时候，它又帮你把代理还原了</p>
+<h4 id="Fiddler设置"><a href="#Fiddler设置" class="headerlink" title="Fiddler设置"></a>Fiddler设置</h4><p>Fiddler想要抓到数据包，要确保<code>Capture Traffic</code>是开启，在<code>File</code> –&gt; <code>Capture Traffic</code>。开启后再左下角会有显示，当然也可以直接点击左下角的图标来<code>关闭/开启</code>抓包功能。<br><img src="/posts/654bf45c/1.jpg" alt="抓包设置"></p>
+<p>开启<code>Capture Traffic</code>后，Fiddler就开始工作了，抓取到的数据包就会显示在列表里面了</p>
+<p><img src="/posts/654bf45c/3.png" alt="抓包展示"></p>
+<p>标题表示的含义</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">#</td>
+<td align="left">抓取HTTP Request的顺序，从1开始，以此递增</td>
+</tr>
+<tr>
+<td align="center">Result</td>
+<td align="left">HTTP状态码</td>
+</tr>
+<tr>
+<td align="center">Protocol</td>
+<td align="left">请求使用的协议，如HTTP/HTTPS/FTP等</td>
+</tr>
+<tr>
+<td align="center">Host</td>
+<td align="left">请求地址的主机名</td>
+</tr>
+<tr>
+<td align="center">URL</td>
+<td align="left">请求资源的位置</td>
+</tr>
+<tr>
+<td align="center">Body</td>
+<td align="left">该请求的大小</td>
+</tr>
+<tr>
+<td align="center">Caching</td>
+<td align="left">请求的缓存过期时间或者缓存控制值</td>
+</tr>
+<tr>
+<td align="center">Content-Type</td>
+<td align="left">请求响应的类型</td>
+</tr>
+<tr>
+<td align="center">Process</td>
+<td align="left">发送此请求的进程：进程ID</td>
+</tr>
+<tr>
+<td align="center">Comments</td>
+<td align="left">允许用户为此回话添加备注</td>
+</tr>
+<tr>
+<td align="center">Custom</td>
+<td align="left">允许用户设置自定义值</td>
+</tr>
+</tbody></table>
+<p>图标表示的含义</p>
+<table>
+<thead>
+<tr>
+<th align="center">图标</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/posts/654bf45c/icon1.gif" alt="图标"></td>
+<td align="left">请求已经发往服务器</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon2.gif" alt="图标"></td>
+<td align="left">已从服务器下载响应结果</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon3.gif" alt="图标"></td>
+<td align="left">请求从断点处暂停</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon4.gif" alt="图标"></td>
+<td align="left">响应从断点处暂停</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon5.gif" alt="图标"></td>
+<td align="left">请求使用 HTTP 的 HEAD 方法，即响应没有内容（Body）</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon6.gif" alt="图标"></td>
+<td align="left">请求使用 HTTP 的 POST 方法</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon7.gif" alt="图标"></td>
+<td align="left">请求使用 HTTP 的 CONNECT 方法，使用 HTTPS 协议建立连接隧道</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon8.gif" alt="图标"></td>
+<td align="left">响应是 HTML 格式</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon9.gif" alt="图标"></td>
+<td align="left">响应是一张图片</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon10.gif" alt="图标"></td>
+<td align="left">响应是脚本格式</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon11.gif" alt="图标"></td>
+<td align="left">响应是 CSS 格式</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon12.gif" alt="图标"></td>
+<td align="left">响应是 XML 格式</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon13.gif" alt="图标"></td>
+<td align="left">响应是 JSON 格式</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon14.gif" alt="图标"></td>
+<td align="left">响应是一个音频文件</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon15.gif" alt="图标"></td>
+<td align="left">响应是一个视频文件</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon16.gif" alt="图标"></td>
+<td align="left">响应是一个 SilverLight</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon17.gif" alt="图标"></td>
+<td align="left">响应是一个 FLASH</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon18.gif" alt="图标"></td>
+<td align="left">响应是一个字体</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon19.gif" alt="图标"></td>
+<td align="left">普通响应成功</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon20.gif" alt="图标"></td>
+<td align="left">响应是 HTTP/300、301、302、303 或 307 重定向</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon21.gif" alt="图标"></td>
+<td align="left">响应是 HTTP/304（无变更）：使用缓存文件</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon22.gif" alt="图标"></td>
+<td align="left">响应需要客户端证书验证</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon23.gif" alt="图标"></td>
+<td align="left">服务端错误</td>
+</tr>
+<tr>
+<td align="center"><img src="/posts/654bf45c/icon24.gif" alt="图标"></td>
+<td align="left">会话被客户端、Fiddler 或者服务端终止</td>
+</tr>
+</tbody></table>
+<h4 id="Statistics-请求的性能数据分析"><a href="#Statistics-请求的性能数据分析" class="headerlink" title="Statistics 请求的性能数据分析"></a>Statistics 请求的性能数据分析</h4><p>随意点击一个请求，就可以看到<code>Statistics</code>关于HTTP请求的性能以及数据分析了<br><img src="/posts/654bf45c/4.png" alt="图标"> </p>
+<h4 id="Inspectors-查看数据内容"><a href="#Inspectors-查看数据内容" class="headerlink" title="Inspectors 查看数据内容"></a>Inspectors 查看数据内容</h4><p><code>Inspectors</code>是用于查看会话的内容，上半部分是请求的内容，下半部分是响应的内容<br><img src="/posts/654bf45c/5.png" alt="图标"> </p>
+<h4 id="AutoResponder-允许拦截指定规则的请求"><a href="#AutoResponder-允许拦截指定规则的请求" class="headerlink" title="AutoResponder 允许拦截指定规则的请求"></a>AutoResponder 允许拦截指定规则的请求</h4><p><code>AutoResponder</code>允许你拦截指定规则的请求，并<code>返回本地资源</code>或<code>Fiddler资源</code>，从而<code>代替服务器响应</code>。<br>看下图5步，我将<code>baidu</code>这个关键字与我电脑<code>F:\blog\source\_posts\fiddler\fiddler.jpg</code>这张图片绑定了，点击<code>Save</code>保存后勾选<code>Enable rules</code>，再访问<code>baidu</code>，就会被劫持。<br><img src="/posts/654bf45c/6.png" alt="图标"> </p>
+<p>设置好匹配规则后，现在去请求，返回之前设置的访问图片的地址</p>
+<p><img src="/posts/654bf45c/7.png" alt="图标"></p>
+<h4 id="Composer-自定义请求发送服务器"><a href="#Composer-自定义请求发送服务器" class="headerlink" title="Composer 自定义请求发送服务器"></a>Composer 自定义请求发送服务器</h4><p><code>Composer</code>允许自定义请求发送到服务器，可以手动创建一个新的请求，也可以在会话表中，拖拽一个现有的请求<br><code>Parsed模式</code>下你只需要提供简单的URLS地址即可（如下图，也可以在RequestBody定制一些属性，如模拟浏览器User-Agent）<br><img src="/posts/654bf45c/8.png" alt="图标"></p>
+<h4 id="Filters-请求过滤规则"><a href="#Filters-请求过滤规则" class="headerlink" title="Filters 请求过滤规则"></a>Filters 请求过滤规则</h4><p><code>Fiters</code>是过滤请求用的，左边的窗口不断的更新，当你想看你系统的请求的时候，你刷新一下浏览器，一大片不知道哪来请求，看着碍眼，它还一直刷新你的屏幕。这个时候通过过滤规则来过滤掉那些不想看到的请求。<br><img src="/posts/654bf45c/9.png" alt="图标"><br>勾选左上角的<code>Use Filters</code>开启过滤器，这里有两个最常用的过滤条件：<code>Zone</code>和<code>Host</code></p>
+<ul>
+<li>Zone 指定只显示<code>内网（Intranet）</code>或<code>互联网（Internet）</code>的内容<br><img src="/posts/654bf45c/10.png" alt="图标"></li>
+<li>Host 指定显示<code>某个域名下</code>的会话：<br><img src="/posts/654bf45c/11.png" alt="图标"></li>
+</ul>
+<h4 id="Timeline-请求响应时间"><a href="#Timeline-请求响应时间" class="headerlink" title="Timeline 请求响应时间"></a>Timeline 请求响应时间</h4><p>在左侧会话窗口点击一个或多个（同时按下 Ctrl 键），Timeline 便会显示指定内容从服务端传输到客户端的时间：<br><img src="/posts/654bf45c/12.png" alt="图标"></p>
+<h3 id="Fiddler设置解密HTTPS的网络数据"><a href="#Fiddler设置解密HTTPS的网络数据" class="headerlink" title="Fiddler设置解密HTTPS的网络数据"></a>Fiddler设置解密HTTPS的网络数据</h3><p>Fiddler可以通过伪造CA证书来欺骗浏览器和服务器。大概原理就是在浏览器面前Fiddler伪装成一个HTTPS服务器，而在真正的HTTPS服务器面前Fiddler伪装成浏览器，从而实现解密HTTPS数据包的目的。<br>解密HTTPS需要手动开启步骤：<code>Tools</code> –&gt; <code>Options</code> –&gt;  <code>HTTPS</code></p>
+<p><img src="/posts/654bf45c/13.jpg" alt="图标"><br>点击<code>Tools</code> -&gt; 选择<code>Options</code>-&gt; 选择<code>HTTPS</code> -&gt; 勾选<code>Decrypt HTTPS Traffic</code>和<code>Ignore servercertificate errors</code>(首次点击会弹出是否信任fiddler证书和安全提示，直接点击yes就行)</p>
+<p><img src="/posts/654bf45c/13.png" alt="图标"></p>
+<p>点击OK</p>
+<p><img src="/posts/654bf45c/14.png" alt="图标"></p>
+<h3 id="Fiddler-抓取Iphone-Android数据包"><a href="#Fiddler-抓取Iphone-Android数据包" class="headerlink" title="Fiddler 抓取Iphone / Android数据包"></a>Fiddler 抓取Iphone / Android数据包</h3><p>Fiddler抓取移动端设备的数据包，其实很简单，先来说说移动设备怎么去访问网络，看了下面这张图：</p>
+<p><img src="/posts/654bf45c/15.png" alt="图标"><br>想要抓取手机访问的数据，让手机和电脑在同一个局域网络下，打开<code>Fiddler</code>工具，点击菜单栏中的 <code>Tools</code> –&gt; <code>Options</code> -&gt; <code>选择Connections</code> -&gt; <code>设置代理端口是8888</code> -&gt; <code>勾选Allow remote computers to connect</code> -&gt; <code>点击OK</code><br><img src="/posts/654bf45c/16.png" alt="图标"></p>
+<p>一定要重新启动fiddler，这时在 Fiddler 可以看到自己本机无线网卡的IP了（要是没有的话可以在<code>cmd</code>终端中<code>ipconfig</code>找到自己的网卡IP）<br><img src="/posts/654bf45c/17.png" alt="图标"></p>
+<p>在手机端连接和PC相同的wifi，并且设置代理IP与端口（代理IP就是上图的IP，端口是Fiddler的代理端口8888）<br><img src="/posts/654bf45c/18.png" alt="图标"></p>
+<p>访问网页输入<code>代理IP</code>和<code>端口</code>，点击<code>FiddlerRoot certificate</code>，下载<code>Fiddler的证书</code>,注意：苹果手机用<code>safari</code>打开<br><img src="/posts/654bf45c/19.png" alt="图标"></p>
+<p>安装证书</p>
+<p><img src="/posts/654bf45c/20.png" alt="图标"></p>
+<p>安装完证书，可以用手机访问应用，就可以看到截取到的数据包了</p>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>抓包</tag>
+        <tag>fiddler</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript核心原理</title>
     <url>/posts/2541eeff.html</url>
     <content><![CDATA[<h3 id="JS数据类型"><a href="#JS数据类型" class="headerlink" title="JS数据类型"></a>JS数据类型</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>JavaScript 的数据类型有下图所示的 8 种：<br><img src="/posts/2541eeff/1.png" alt="8种类型"><br>前 7 种类型为基础类型，最后 1 种（Object）为引用类型，而引用数据类型（Object）又分为图上这几种常见的类型：<code>Array</code> - 数组对象、<code>RegExp</code> - 正则对象、<code>Date</code> - 日期对象、<code>Math</code> - 数学函数、<code>Function</code> - 函数对象。<br>各种 JavaScript 的数据类型最后都会在初始化之后放在不同的内存中，因此上面的数据类型大致可以分成两类来进行存储：</p>
