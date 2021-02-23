@@ -251,6 +251,29 @@
       </tags>
   </entry>
   <entry>
+    <title>移动端适配</title>
+    <url>/posts/783ce8a9.html</url>
+    <content><![CDATA[<p>所谓移动端适配，就是WebApp在不同尺寸的屏幕上等比显示</p>
+<h2 id="移动端适配的方案"><a href="#移动端适配的方案" class="headerlink" title="移动端适配的方案"></a>移动端适配的方案</h2><ul>
+<li>通过<code>Meida queries（媒体查询）</code>的方式</li>
+<li>以天猫首页为代表的 <code>flex</code>弹性布局</li>
+<li>以淘宝首页为代表的 <code>rem + viewport</code>缩放</li>
+<li><code>rem</code>方式<h3 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h3>它主要是通过查询设备的宽度来执行不同的 css 代码，最终达到界面的配置。核心语法是：<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line">@media 媒体类型 <span class="keyword">and</span> (媒体特性)&#123;</span><br><span class="line">    <span class="comment">// css 代码</span></span><br><span class="line">&#125;</span><br><span class="line">媒体类型：</span><br><span class="line">    screen     ====&gt;  用于电脑显示屏</span><br><span class="line">    <span class="built_in">print</span>      ====&gt;  用于打印机 </span><br><span class="line">    projection ====&gt;  用于方案展示，比如幻灯片</span><br><span class="line">    ...</span><br><span class="line">媒体特性：</span><br><span class="line">    <span class="built_in">max</span>-<span class="built_in">width</span></span><br><span class="line">    <span class="built_in">max</span>-<span class="built_in">height</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+例如：<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line">@<span class="function">media screen <span class="title">and</span> <span class="params">(<span class="built_in">max</span>-<span class="built_in">width</span>:<span class="number">320</span>px)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/* 屏幕宽度小于320px时候 */</span></span><br><span class="line">&#125;</span><br><span class="line">@<span class="function">media screen <span class="title">and</span> <span class="params">(<span class="built_in">min</span>-<span class="built_in">width</span>:<span class="number">321</span>px)</span> <span class="title">and</span> <span class="params">(<span class="built_in">max</span>-<span class="built_in">width</span>:<span class="number">375</span>px)</span></span>&#123;</span><br><span class="line">    <span class="comment">/* 屏幕宽度大于等于321px时候代码生效 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="flex-方式"><a href="#flex-方式" class="headerlink" title="flex 方式"></a>flex 方式</h3>以天猫的实现方式进行说明：<br>它的viewport是固定的：<code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no&quot;&gt;</code>高度定死，宽度自适应，元素都采用px做单位。<br>随着屏幕宽度变化，页面也会跟着变化，效果就和PC页面的流体布局差不多，在哪个宽度需要调整的时候使用响应式布局调调就行（比如网易新闻），这样就实现了<code>适配</code>。<h3 id="rem-viewport-缩放"><a href="#rem-viewport-缩放" class="headerlink" title="rem + viewport 缩放"></a>rem + viewport 缩放</h3>这也是淘宝使用的方案，根据屏幕宽度设定 rem 值，需要适配的元素都使用 rem 为单位，不需要适配的元素还是使用 px 为单位。（1em = 16px）<blockquote>
+<p>rem是CSS3新增的一个相对单位（root em，根em），这个单位引起了广泛关注。这个单位与em有什么区别呢？<br>区别在于使用rem为元素设定字体大小时，仍然是相对大小，但相对的只是HTML根元素。这个单位可谓集相对大小和绝对大小的优点于一身，通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应。目前，除了IE8及更早版本外，所有浏览器均已支持rem。对于不支持它的浏览器，应对方法也很简单，就是多写一个绝对单位的声明。这些浏览器会忽略用rem设定的字体大小。比如：p{font-size:14px;font-size:0.875rem;}<br>(推荐一个单位转换的工具：<a href="http://pxtoem.com/">http://pxtoem.com/</a>)</p>
+</blockquote>
+<h3 id="rem-方式"><a href="#rem-方式" class="headerlink" title="rem 方式"></a>rem 方式</h3><h4 id="为什么html的字体大小设置为font-size-625"><a href="#为什么html的字体大小设置为font-size-625" class="headerlink" title="为什么html的字体大小设置为font-size:625%"></a>为什么html的字体大小设置为font-size:625%</h4>浏览器默认字体大小是16px，rem与px关系为：1rem = 10px，10/16=0.625=62.5%，当设计稿和屏幕一样大的情况下（如750px），只要将设计稿中量到的px尺寸除以10就得到了相应的rem尺寸，例如：100px = 10rem，120px = 12rem。但是在项目中设置成 font-size: 62.5% 在大部分现代浏览器都没有问题，在谷歌浏览器可能会出现问题，因为chrome不支持小于12px的字体，最小就是12px，计算小于10px的时候，会默认取12px去计算，导致chrome的em/rem计算不准确。谷歌font-size:62.5%刚好是10像素，而谷歌是不支持小于12像素的字体的，所以，谷歌无形当中将所有的rem全部变大了。chrome在字体小于12px时都当12px 处理，也就是设置62.5%相当于设置成了75.0%。但是在除的时候又是除的10得到rem值，就会有问题了<br>针对这个现象，可以尝试设置html字体为625%，即100px，body修正设置为16px，这样 0.1rem 就是 10px，而body的字体仍然是默认大小，不影响未设置大小的元素的默认字体的大小。<h4 id="JS动态修改配合rem适配"><a href="#JS动态修改配合rem适配" class="headerlink" title="JS动态修改配合rem适配"></a>JS动态修改配合rem适配</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 计算屏幕宽度</span></span><br><span class="line"><span class="keyword">let</span> W = <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取html根标签</span></span><br><span class="line"><span class="keyword">let</span> HTMLDOM = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;html&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置根元素字体大小</span></span><br><span class="line">HTMLDOM.style.fontSize = W / <span class="number">10</span> +<span class="string">&#x27;px&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>移动端适配</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前端知识小册纲要</title>
     <url>/posts/e5b77e85.html</url>
     <content><![CDATA[<p>前端知识小册是在掘金网站上，有兴趣也可以上去看看 地址：<a href="https://juejin.cn/book/6844733763675488269">https://juejin.cn/book/6844733763675488269</a></p>
@@ -1110,14 +1133,20 @@ setTimeout 作为经常使用的定时器，它是存在第三个参数的，日
     <url>/posts/3b4634fc.html</url>
     <content><![CDATA[<p>本博客通过 <a href="'https://hexo.io/'">Hexo</a> + <a href="'http://theme-next.iissnan.com/'">Next主题</a> + <a href="'https://pages.github.com/'">Github pages</a> + <a href="'https://coding.net/'">Coding</a> 用了2天左右搭建而成，在此记录一下基本的使用命令，防止以后忘记</p>
 <a id="more"></a>
-<h3 id="新建草稿"><a href="#新建草稿" class="headerlink" title="新建草稿"></a>新建草稿</h3><p>新建的草稿文件会存放在/source/_drafts路径下</p>
+<h3 id="新建草稿"><a href="#新建草稿" class="headerlink" title="新建草稿"></a>新建草稿</h3><p>新建的草稿文件会存放在<code>/source/_drafts</code>路径下</p>
 <figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> <span class="type">draft</span> &lt;filename&gt;</span><br></pre></td></tr></table></figure>
 <p>测试：</p>
 <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">Yu@DESKTOP-NNKS8QQ MINGW64 /f/blog (master)</span><br><span class="line">$ hexo new draft <span class="string">&quot;草稿文章测试&quot;</span></span><br><span class="line"><span class="builtin-name">INFO</span>  Validating config</span><br><span class="line"><span class="builtin-name">INFO</span>  Created: F:\blog\source\_drafts\草稿文章测试.md</span><br></pre></td></tr></table></figure>
-<h4 id="草稿转正式文章"><a href="#草稿转正式文章" class="headerlink" title="草稿转正式文章"></a>草稿转正式文章</h4><p>当草稿写完成了要发布，输入如下命令将草稿转成正式文章，该命令会把/source/_drafts下的文章移到/source/_posts下</p>
+<h3 id="草稿运行预览"><a href="#草稿运行预览" class="headerlink" title="草稿运行预览"></a>草稿运行预览</h3><ul>
+<li>如果你希望强行预览草稿，更改配置文件：<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">render_drafts:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
+<li>也可以这种方式启动server：<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">hexo <span class="keyword">server</span> <span class="comment">--drafts</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="草稿转正式文章"><a href="#草稿转正式文章" class="headerlink" title="草稿转正式文章"></a>草稿转正式文章</h4><p>当草稿写完成了要发布，输入如下命令将草稿转成正式文章，该命令会把<code>/source/_drafts</code>下的文章移到<code>/source/_posts</code>下</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">hexo publish <span class="tag">&lt;<span class="name">filename</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="直接生成正式文章"><a href="#直接生成正式文章" class="headerlink" title="直接生成正式文章"></a>直接生成正式文章</h3><figure class="highlight actionscript"><table><tr><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> <span class="string">&quot;文章名字&quot;</span></span><br></pre></td></tr></table></figure>
-<p>之后在source/_posts目录下面，多了一个<code>文章名字.md</code>的文件  </p>
+<p>之后在<code>source/_posts</code>目录下面，多了一个<code>文章名字.md</code>的文件  </p>
 <h3 id="设置多个标签"><a href="#设置多个标签" class="headerlink" title="设置多个标签"></a>设置多个标签</h3><figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line"><span class="keyword">tags:</span> [nrm,npm]</span><br></pre></td></tr></table></figure>
 <h3 id="清除缓存"><a href="#清除缓存" class="headerlink" title="清除缓存"></a>清除缓存</h3><p>清除缓存文件 (db.json) 和已生成的静态文件 (public)。</p>
 <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">hexo clean</span></span><br></pre></td></tr></table></figure>

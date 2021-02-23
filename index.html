@@ -124,7 +124,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">17</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -134,7 +134,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -387,6 +387,107 @@
             </div>
           <!--/noindex-->
         
+      
+    </div>
+    
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yubo365.cn/posts/783ce8a9.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yu Bo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="余波的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/783ce8a9.html" class="post-title-link" itemprop="url">移动端适配</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-22 14:37:32" itemprop="dateCreated datePublished" datetime="2021-02-22T14:37:32+08:00">2021-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-23 16:43:03" itemprop="dateModified" datetime="2021-02-23T16:43:03+08:00">2021-02-23</time>
+              </span>
+          <!-- 置顶 -->
+              
+          <!-- 置顶 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">web前端</span></a>
+                </span>
+            </span>
+
+          
+
+          <!-- 最近阅读 -->
+
+          <!-- busuanzi_count 统计 -->
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.9k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>所谓移动端适配，就是WebApp在不同尺寸的屏幕上等比显示</p>
+<h2 id="移动端适配的方案"><a href="#移动端适配的方案" class="headerlink" title="移动端适配的方案"></a>移动端适配的方案</h2><ul>
+<li>通过<code>Meida queries（媒体查询）</code>的方式</li>
+<li>以天猫首页为代表的 <code>flex</code>弹性布局</li>
+<li>以淘宝首页为代表的 <code>rem + viewport</code>缩放</li>
+<li><code>rem</code>方式<h3 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h3>它主要是通过查询设备的宽度来执行不同的 css 代码，最终达到界面的配置。核心语法是：<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@media 媒体类型 <span class="keyword">and</span> (媒体特性)&#123;</span><br><span class="line">    <span class="comment">// css 代码</span></span><br><span class="line">&#125;</span><br><span class="line">媒体类型：</span><br><span class="line">    screen     ====&gt;  用于电脑显示屏</span><br><span class="line">    <span class="built_in">print</span>      ====&gt;  用于打印机 </span><br><span class="line">    projection ====&gt;  用于方案展示，比如幻灯片</span><br><span class="line">    ...</span><br><span class="line">媒体特性：</span><br><span class="line">    <span class="built_in">max</span>-<span class="built_in">width</span></span><br><span class="line">    <span class="built_in">max</span>-<span class="built_in">height</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+例如：<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="function">media screen <span class="title">and</span> <span class="params">(<span class="built_in">max</span>-<span class="built_in">width</span>:<span class="number">320</span>px)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/* 屏幕宽度小于320px时候 */</span></span><br><span class="line">&#125;</span><br><span class="line">@<span class="function">media screen <span class="title">and</span> <span class="params">(<span class="built_in">min</span>-<span class="built_in">width</span>:<span class="number">321</span>px)</span> <span class="title">and</span> <span class="params">(<span class="built_in">max</span>-<span class="built_in">width</span>:<span class="number">375</span>px)</span></span>&#123;</span><br><span class="line">    <span class="comment">/* 屏幕宽度大于等于321px时候代码生效 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="flex-方式"><a href="#flex-方式" class="headerlink" title="flex 方式"></a>flex 方式</h3>以天猫的实现方式进行说明：<br>它的viewport是固定的：<code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no&quot;&gt;</code>高度定死，宽度自适应，元素都采用px做单位。<br>随着屏幕宽度变化，页面也会跟着变化，效果就和PC页面的流体布局差不多，在哪个宽度需要调整的时候使用响应式布局调调就行（比如网易新闻），这样就实现了<code>适配</code>。<h3 id="rem-viewport-缩放"><a href="#rem-viewport-缩放" class="headerlink" title="rem + viewport 缩放"></a>rem + viewport 缩放</h3>这也是淘宝使用的方案，根据屏幕宽度设定 rem 值，需要适配的元素都使用 rem 为单位，不需要适配的元素还是使用 px 为单位。（1em = 16px）<blockquote>
+<p>rem是CSS3新增的一个相对单位（root em，根em），这个单位引起了广泛关注。这个单位与em有什么区别呢？<br>区别在于使用rem为元素设定字体大小时，仍然是相对大小，但相对的只是HTML根元素。这个单位可谓集相对大小和绝对大小的优点于一身，通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应。目前，除了IE8及更早版本外，所有浏览器均已支持rem。对于不支持它的浏览器，应对方法也很简单，就是多写一个绝对单位的声明。这些浏览器会忽略用rem设定的字体大小。比如：p{font-size:14px;font-size:0.875rem;}<br>(推荐一个单位转换的工具：<a target="_blank" rel="noopener" href="http://pxtoem.com/">http://pxtoem.com/</a>)</p>
+</blockquote>
+<h3 id="rem-方式"><a href="#rem-方式" class="headerlink" title="rem 方式"></a>rem 方式</h3><h4 id="为什么html的字体大小设置为font-size-625"><a href="#为什么html的字体大小设置为font-size-625" class="headerlink" title="为什么html的字体大小设置为font-size:625%"></a>为什么html的字体大小设置为font-size:625%</h4>浏览器默认字体大小是16px，rem与px关系为：1rem = 10px，10/16=0.625=62.5%，当设计稿和屏幕一样大的情况下（如750px），只要将设计稿中量到的px尺寸除以10就得到了相应的rem尺寸，例如：100px = 10rem，120px = 12rem。但是在项目中设置成 font-size: 62.5% 在大部分现代浏览器都没有问题，在谷歌浏览器可能会出现问题，因为chrome不支持小于12px的字体，最小就是12px，计算小于10px的时候，会默认取12px去计算，导致chrome的em/rem计算不准确。谷歌font-size:62.5%刚好是10像素，而谷歌是不支持小于12像素的字体的，所以，谷歌无形当中将所有的rem全部变大了。chrome在字体小于12px时都当12px 处理，也就是设置62.5%相当于设置成了75.0%。但是在除的时候又是除的10得到rem值，就会有问题了<br>针对这个现象，可以尝试设置html字体为625%，即100px，body修正设置为16px，这样 0.1rem 就是 10px，而body的字体仍然是默认大小，不影响未设置大小的元素的默认字体的大小。<h4 id="JS动态修改配合rem适配"><a href="#JS动态修改配合rem适配" class="headerlink" title="JS动态修改配合rem适配"></a>JS动态修改配合rem适配</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 计算屏幕宽度</span></span><br><span class="line"><span class="keyword">let</span> W = <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取html根标签</span></span><br><span class="line"><span class="keyword">let</span> HTMLDOM = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;html&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置根元素字体大小</span></span><br><span class="line">HTMLDOM.style.fontSize = W / <span class="number">10</span> +<span class="string">&#x27;px&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+
       
     </div>
     
@@ -1063,103 +1164,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.yubo365.cn/posts/987e7249.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yu Bo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="余波的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/987e7249.html" class="post-title-link" itemprop="url">【解决】无法将“XXX”项识别为 cmdlet、函数、脚本文件或可运行程序的名称……</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-25 19:17:13" itemprop="dateCreated datePublished" datetime="2020-12-25T19:17:13+08:00">2020-12-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-30 12:17:47" itemprop="dateModified" datetime="2020-12-30T12:17:47+08:00">2020-12-30</time>
-              </span>
-          <!-- 置顶 -->
-              
-          <!-- 置顶 -->
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">解决问题</span></a>
-                </span>
-            </span>
-
-          
-
-          <!-- 最近阅读 -->
-
-          <!-- busuanzi_count 统计 -->
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>259</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>无法将“XXX”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确，然后再试一次</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/987e7249.html">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1233,7 +1237,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1248,7 +1252,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1323,6 +1327,10 @@
       
       
         <li>
+          <a href="/posts/783ce8a9.html" title="移动端适配" target="_blank"><i class="fa fa-motorcycle"  aria-hidden="true"></i> 移动端适配</a>
+        </li>
+      
+        <li>
           <a href="/posts/e5b77e85.html" title="前端知识小册纲要" target="_blank"><i class="fa fa-motorcycle"  aria-hidden="true"></i> 前端知识小册纲要</a>
         </li>
       
@@ -1336,10 +1344,6 @@
       
         <li>
           <a href="/posts/5510b3d9.html" title="nginx/1.18.0进行SSL证书配置" target="_blank"><i class="fa fa-motorcycle"  aria-hidden="true"></i> nginx/1.18.0进行SSL证书配置</a>
-        </li>
-      
-        <li>
-          <a href="/posts/a477be03.html" title="腾讯云服务器nginx安装配置" target="_blank"><i class="fa fa-motorcycle"  aria-hidden="true"></i> 腾讯云服务器nginx安装配置</a>
         </li>
       
     </ul>
@@ -1644,7 +1648,7 @@ if(canvas.getContext){
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">85k</span>
+    <span title="站点总字数">87k</span>
 </div>
 
 <!-- 访问人数引入 -->

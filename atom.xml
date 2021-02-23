@@ -6,7 +6,7 @@
   <link href="https://www.yubo365.cn/atom.xml" rel="self"/>
   
   <link href="https://www.yubo365.cn/"/>
-  <updated>2021-02-07T10:13:16.807Z</updated>
+  <updated>2021-02-23T08:43:03.226Z</updated>
   <id>https://www.yubo365.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>移动端适配</title>
+    <link href="https://www.yubo365.cn/posts/783ce8a9.html"/>
+    <id>https://www.yubo365.cn/posts/783ce8a9.html</id>
+    <published>2021-02-22T06:37:32.000Z</published>
+    <updated>2021-02-23T08:43:03.226Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;所谓移动端适配，就是WebApp在不同尺寸的屏幕上等比显示&lt;/p&gt;
+&lt;h2 id=&quot;移动端适配的方案&quot;&gt;&lt;a href=&quot;#移动端适配的方案&quot; class=&quot;headerlink&quot; title=&quot;移动端适配的方案&quot;&gt;&lt;/a&gt;移动端适配的方案&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;通过&lt;</summary>
+      
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="移动端适配" scheme="https://www.yubo365.cn/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D/"/>
+    
+  </entry>
   
   <entry>
     <title>前端知识小册纲要</title>
@@ -306,7 +330,7 @@
     <link href="https://www.yubo365.cn/posts/3b4634fc.html"/>
     <id>https://www.yubo365.cn/posts/3b4634fc.html</id>
     <published>2020-12-09T15:10:50.000Z</published>
-    <updated>2020-12-30T04:17:47.718Z</updated>
+    <updated>2021-02-22T06:31:20.644Z</updated>
     
     
     <summary type="html">&lt;p&gt;本博客通过 &lt;a href=&quot;&#39;https://hexo.io/&#39;&quot;&gt;Hexo&lt;/a&gt; + &lt;a href=&quot;&#39;http://theme-next.iissnan.com/&#39;&quot;&gt;Next主题&lt;/a&gt; + &lt;a href=&quot;&#39;https://pages.github.com/&#39;&quot;&gt;Github pages&lt;/a&gt; + &lt;a href=&quot;&#39;https://coding.net/&#39;&quot;&gt;Coding&lt;/a&gt; 用了2天左右搭建而成，在此记录一下基本的使用命令，防止以后忘记&lt;/p&gt;</summary>
