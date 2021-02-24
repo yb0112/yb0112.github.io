@@ -1227,7 +1227,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff47cd;
+  background: #ffffc1;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1326,7 +1326,7 @@ pre .javascript .function {
 .sidebar-panel {
   display: none;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 .sidebar-panel-active {
   display: block;
@@ -2767,7 +2767,6 @@ ul.breadcrumb li + li:last-child {
 }
 .site-overview-wrap::-webkit-scrollbar-thumb {
   height: 50px;
-  background-color: #808080;
   -webkit-border-radius: 5px;
 }
 .feed-link {
