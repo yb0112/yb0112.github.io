@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.yubo365.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="开始配置前，需要购买一个服务器 腾讯云官网，购买过后还需要你先去备案，从提交备案到管理局通过正常大概一个星期，下面是我的备案操作记录，被腾讯云客服打电话驳回一次，因为填写的备用电话打不通，需要注意：提交备案后注意保持电话畅通。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="腾讯云服务器nginx安装配置">
+<meta property="og:url" content="https://www.yubo365.cn/posts/a477be03.html">
+<meta property="og:site_name" content="余小鱼的博客">
+<meta property="og:description" content="开始配置前，需要购买一个服务器 腾讯云官网，购买过后还需要你先去备案，从提交备案到管理局通过正常大概一个星期，下面是我的备案操作记录，被腾讯云客服打电话驳回一次，因为填写的备用电话打不通，需要注意：提交备案后注意保持电话畅通。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/1.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/2.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/3.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/4.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/5.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/6.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/7.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/8.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/9.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/10.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/11.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/12.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/a477be03/13.png">
+<meta property="article:published_time" content="2021-01-11T02:44:40.000Z">
+<meta property="article:modified_time" content="2022-07-24T19:15:00.674Z">
+<meta property="article:author" content="余小鱼">
+<meta property="article:tag" content="nginx">
+<meta property="article:tag" content="腾讯云服务器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.yubo365.cn/posts/a477be03/1.png">
+
+<link rel="canonical" href="https://www.yubo365.cn/posts/a477be03.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>腾讯云服务器nginx安装配置 | 余小鱼的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="余小鱼的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">余小鱼的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">I'm Still Here</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yubo365.cn/posts/a477be03.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="余小鱼">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="余小鱼的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          腾讯云服务器nginx安装配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-11 10:44:40" itemprop="dateCreated datePublished" datetime="2021-01-11T10:44:40+08:00">2021-01-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-25 03:15:00" itemprop="dateModified" datetime="2022-07-25T03:15:00+08:00">2022-07-25</time>
+              </span>
+          <!-- 置顶 -->
+              
+          <!-- 置顶 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">web前端</span></a>
+                </span>
+            </span>
+
+          
+
+          <!-- 最近阅读 -->
+
+          <!-- busuanzi_count 统计 -->
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>5k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>开始配置前，需要购买一个服务器 <a target="_blank" rel="noopener" href="https://url.cn/NEdlZzvJ">腾讯云官网</a>，购买过后还需要你先去备案，从提交备案到管理局通过正常大概一个星期，下面是我的备案操作记录，被腾讯云客服打电话驳回一次，因为填写的备用电话打不通，需要注意：提交备案后注意保持电话畅通。</p>
+<span id="more"></span>
+
+<p><img src="/posts/a477be03/1.png" alt="我的备案截图"></p>
+<h3 id="我的环境："><a href="#我的环境：" class="headerlink" title="我的环境："></a>我的环境：</h3><ul>
+<li>服务器：腾讯云服务器</li>
+<li>nginx版本：nginx/1.18.0 <a target="_blank" rel="noopener" href="http://nginx.org/en/download.html">nginx下载地址</a></li>
+<li>CentOS: CentOS Linux release 7.6.1810 (Core)</li>
+</ul>
+<h3 id="查看你的公网IP和私网IP"><a href="#查看你的公网IP和私网IP" class="headerlink" title="查看你的公网IP和私网IP"></a>查看你的公网IP和私网IP</h3><p><img src="/posts/a477be03/2.png" alt="查看ip"></p>
+<h3 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h3><p>windows系统需要下载个连接服务器的客户端，xshell、xmanager等，根据自己喜欢的来选择 <a target="_blank" rel="noopener" href="https://www.netsarang.com/zh/all-downloads/">下载地址</a>，我用的mac系统操作这里就直接打开终端，选择左上角的shell进行下图步骤操作就可，<br><img src="/posts/a477be03/3.png" alt="官网图"><br><img src="/posts/a477be03/4.png" alt="image.png"></p>
+<ul>
+<li>这里输入的服务器名称是购买服务器时候给你发的名称默认root，IP地址就是公网的IP地址<br><img src="/posts/a477be03/5.png" alt="image.png"><br><img src="/posts/a477be03/6.png" alt="image.png"></li>
+<li>点击连接后，终端会弹出来，让输入密码<br><img src="/posts/a477be03/7.png" alt="输入密码"></li>
+<li>输入完密码后，点击回车，即刻连接上了</li>
+</ul>
+<h3 id="用yum进行安装必要程序，安装一些服务和vim编辑器"><a href="#用yum进行安装必要程序，安装一些服务和vim编辑器" class="headerlink" title="用yum进行安装必要程序，安装一些服务和vim编辑器"></a>用yum进行安装必要程序，安装一些服务和vim编辑器</h3><p>先查看连接的linux服务器有么有安装yum（腾讯云默认是安装了）</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -<span class="keyword">qa</span> | <span class="keyword">grep</span> yum</span><br></pre></td></tr></table></figure>
+<p><img src="/posts/a477be03/8.png" alt="查看有没有安装yum"></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc gcc-c++ <span class="built_in">auto</span>conf pcre-devel make <span class="built_in">auto</span>make</span><br><span class="line">yum -y install wget httpd-tools vim</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装完成后，新建一个文件存放文件的文件夹<br><img src="/posts/a477be03/9.png" alt="新建文件夹"></li>
+<li>再进入到文件夹分别新建下面几个文件<br><code>app</code>  放程序用<br><code>backup</code> 放备份文件<br><code>download</code> 下载的东西都放这里<br><code>logs</code> 日志放在这里<br><code>work</code> 工作文档都放这里<br><img src="/posts/a477be03/10.png" alt="新建文件"></li>
+</ul>
+<h3 id="nginx下载"><a href="#nginx下载" class="headerlink" title="nginx下载"></a>nginx下载</h3><ul>
+<li>下载nginx <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> nginx</span><br></pre></td></tr></table></figure></li>
+<li>下载完成后，查看一下版本<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">nginx -v</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h3><p>在使用yum安装完Nginx后，需要知道系统中多了哪些文件，它们都安装到了那里。可以使用下面的命令进行查看。</p>
+<ul>
+<li><p>查看Nginx的安装目录</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rpm -ql nginx</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>rpm</code>是<code>linux</code>的<code>rpm</code>包管理工具，<code>-q</code> 代表询问模式，<code>-l</code> 代表返回列表，这样我们就可以找到nginx的所有安装位置了。</p>
+</blockquote>
+</li>
+<li><p>nginx.conf文件解读<br><code>nginx.conf</code> 文件是<code>Nginx</code>总配置文件，在我们搭建服务器时经常调整的文件。</p>
+</li>
+<li><p>进入<code>etc/nginx</code>目录下，然后用 <code>vim</code>进行打开<code>nginx.conf</code>文件</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> /etc/nginx</span><br><span class="line"></span><br><span class="line"><span class="keyword">vim</span> nginx.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#运行用户，默认即是nginx，可以不进行设置</span></span><br><span class="line"><span class="attribute">user</span>  nginx;</span><br><span class="line"><span class="comment">#Nginx进程，一般设置为和CPU核数一样</span></span><br><span class="line"><span class="attribute">worker_processes</span>  <span class="number">1</span>; </span><br><span class="line"><span class="comment">#错误日志存放目录</span></span><br><span class="line"><span class="attribute">error_log</span>  /var/log/nginx/<span class="literal">error</span>.log <span class="literal">warn</span>;</span><br><span class="line"><span class="comment">#进程pid存放位置</span></span><br><span class="line"><span class="attribute">pid</span>        /var/run/nginx.pid;</span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="attribute">worker_connections</span>  <span class="number">1024</span>; <span class="comment"># 单个后台进程的最大并发数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">include</span>       /etc/nginx/mime.types; <span class="comment">#文件扩展名与类型映射表</span></span><br><span class="line">    <span class="attribute">default_type</span>  application/octet-stream; <span class="comment">#默认文件类型</span></span><br><span class="line">    <span class="comment">#设置日志模式</span></span><br><span class="line">    <span class="attribute">log_format</span>  main  <span class="string">&#x27;<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] &quot;<span class="variable">$request</span>&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;<span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> &quot;<span class="variable">$http_referer</span>&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;&quot;<span class="variable">$http_user_agent</span>&quot; &quot;<span class="variable">$http_x_forwarded_for</span>&quot;&#x27;</span>;</span><br><span class="line">    <span class="comment">#nginx访问日志存放位置</span></span><br><span class="line">    <span class="attribute">access_log</span>  /var/log/nginx/access.log  main;</span><br><span class="line">    <span class="comment">#开启高效传输模式</span></span><br><span class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;</span><br><span class="line">    <span class="comment">#减少网络报文段的数量</span></span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line">    <span class="comment">#保持连接的时间，也叫超时时间</span></span><br><span class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;</span><br><span class="line">   <span class="comment">#开启gzip压缩</span></span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br><span class="line">    <span class="comment">#包含的子配置项位置和文件</span></span><br><span class="line">    <span class="attribute">include</span> /etc/nginx/conf.d/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看到<code>nginx.conf</code>文件中最底下部分有个<code>include /etc/nginx/conf.d/*.conf;</code><br>在通过命令进入到<code>/etc/nginx/conf.d</code>文件夹下面，通过<code>vim default.conf</code>打开文件</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">80</span>;   <span class="comment">#配置监听端口</span></span><br><span class="line">    server_name  localhost;  <span class="regexp">//</span>配置域名</span><br><span class="line"></span><br><span class="line">    <span class="comment">#charset koi8-r;     </span></span><br><span class="line">    <span class="comment">#access_log  /var/log/nginx/host.access.log  main;</span></span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   <span class="regexp">/usr/</span>share<span class="regexp">/nginx/</span>html;     <span class="comment">#服务默认启动目录</span></span><br><span class="line">        index  index.html index.htm;    <span class="comment">#默认访问文件</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#error_page  404              /404.html;   # 配置404页面</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># redirect server error pages to the static page /50x.html</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    error_page   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /<span class="number">50</span>x.html;   <span class="comment">#错误状态码的显示页面，配置后需要重启</span></span><br><span class="line">    location = /<span class="number">50</span>x.html &#123;</span><br><span class="line">        root   <span class="regexp">/usr/</span>share<span class="regexp">/nginx/</span>html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># proxy the PHP scripts to Apache listening on 127.0.0.1:80</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#location ~ \.php$ &#123;</span></span><br><span class="line">    <span class="comment">#    proxy_pass   http://127.0.0.1;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#location ~ \.php$ &#123;</span></span><br><span class="line">    <span class="comment">#    root           html;</span></span><br><span class="line">    <span class="comment">#    fastcgi_pass   127.0.0.1:9000;</span></span><br><span class="line">    <span class="comment">#    fastcgi_index  index.php;</span></span><br><span class="line">    <span class="comment">#    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</span></span><br><span class="line">    <span class="comment">#    include        fastcgi_params;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># deny access to .htaccess files, if Apache&#x27;s document root</span></span><br><span class="line">    <span class="comment"># concurs with nginx&#x27;s one</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#location ~ /\.ht &#123;</span></span><br><span class="line">    <span class="comment">#    deny  all;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>这里补充一下<code>vim</code>进行编辑的一个简单操作</p>
+<ol>
+<li>打开文件，首先进入 命令模式</li>
+<li>按下 <code>i(insert)</code> 进入 编辑模式</li>
+<li>按下 <code>esc</code>再按下 <code>: </code>进入 末行模式 ，以下为命令功能说明</li>
+</ol>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>英文</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:w</code></td>
+<td><code>write</code></td>
+<td>保存</td>
+</tr>
+<tr>
+<td><code>:q</code></td>
+<td><code>quit</code></td>
+<td>退出</td>
+</tr>
+<tr>
+<td><code>:q!</code></td>
+<td></td>
+<td>强制退出</td>
+</tr>
+<tr>
+<td><code>:wq</code></td>
+<td><code>write &amp; quit</code></td>
+<td>强制保存并退出</td>
+</tr>
+<tr>
+<td><code>:x</code></td>
+<td></td>
+<td>保存并退出</td>
+</tr>
+</tbody></table>
+<h3 id="nginx启动，关闭"><a href="#nginx启动，关闭" class="headerlink" title="nginx启动，关闭"></a>nginx启动，关闭</h3><ul>
+<li>查看nginx有没有启动，如果出现三条记录就说明开启了<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep nginx</span><br></pre></td></tr></table></figure>
+<img src="/posts/a477be03/11.png" alt="查看nginx运行状态"></li>
+<li>启动nginx<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx</span><br></pre></td></tr></table></figure></li>
+<li>停止nginx<br>方法一：立刻停止，无论程序有没有运行完，都立刻停止<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx  -s stop</span><br></pre></td></tr></table></figure>
+方法二：从容停止，有未运行完的程序，运行完成后才停止<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s quit</span><br></pre></td></tr></table></figure></li>
+<li>killall 方法杀死进程<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">killall nginx</span><br></pre></td></tr></table></figure></li>
+<li>查看端口<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tlnp</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="自定义错误页面"><a href="#自定义错误页面" class="headerlink" title="自定义错误页面"></a>自定义错误页面</h3><p>我们在上面的时候看到了<code>/etc/nginx/conf.d/default.conf</code>文件中</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">error_page   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /<span class="number">50</span>x.html;   <span class="comment">#错误状态码的显示页面，配置后需要重启</span></span><br><span class="line">    location = /<span class="number">50</span>x.html &#123;</span><br><span class="line">        root   <span class="regexp">/usr/</span>share<span class="regexp">/nginx/</span>html;   <span class="regexp">//</span>出现上面状态错误的时候，进入的页面</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用域名设置虚拟主机"><a href="#使用域名设置虚拟主机" class="headerlink" title="使用域名设置虚拟主机"></a>使用域名设置虚拟主机</h3><p>修改<code>etc/nginx/conf.d</code>目录下的<code>default.conf</code> 文件，把原来的80端口虚拟主机改为以域名划分的虚拟主机。代码如下：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">server</span> &#123;</span><br><span class="line">    <span class="keyword">listen</span>       <span class="number">80</span>;</span><br><span class="line">    server_name  www.yubo365.cn;</span><br><span class="line">    <span class="keyword">location</span> / &#123;</span><br><span class="line">        root   /usr/<span class="keyword">share</span>/nginx/html;</span><br><span class="line">        <span class="keyword">index</span>  <span class="keyword">index</span>.html <span class="keyword">index</span>.htm;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这时候我们再重启服务，然后属于域名就可以看到了，这里找的是<code> /usr/share/nginx/html</code>文件下面的 <code>index.html</code>文件</p>
+<h3 id="设置反向代理"><a href="#设置反向代理" class="headerlink" title="设置反向代理"></a>设置反向代理</h3><p>正常代理的是ip地址，这里用域名也是可以的</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">        listen <span class="number">80</span>;</span><br><span class="line">        server_name www.yubo365.cn;</span><br><span class="line">        <span class="keyword">location</span> <span class="title">/ &#123;</span></span><br><span class="line"><span class="title">               proxy_pass</span> https://baidu.com;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其它反向代理指令：</p>
+<ul>
+<li>proxy_set_header :在将客户端请求发送给后端服务器之前，更改来自客户端的请求头信息。</li>
+<li>proxy_connect_timeout:配置Nginx与后端代理服务器尝试建立连接的超时时间。</li>
+<li>proxy_read_timeout : 配置Nginx向后端服务器组发出read请求后，等待相应的超时时间。</li>
+<li>proxy_send_timeout：配置Nginx向后端服务器组发出write请求后，等待相应的超时时间。</li>
+<li>proxy_redirect :用于修改后端服务器返回的响应头中的Location和Refresh。</li>
+</ul>
+<h3 id="Nginx适配PC或移动设备"><a href="#Nginx适配PC或移动设备" class="headerlink" title="Nginx适配PC或移动设备"></a>Nginx适配PC或移动设备</h3><p>这里是在<code>/usr/share/nginx/</code>文件夹下面创建<code>pc</code>和<code>mobile</code>文件，然后通过<code>$http_user_agent </code>正则判断来选择进入到PC还是移动端的index</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">       root   <span class="regexp">/usr/</span>share<span class="regexp">/nginx/</span>pc;</span><br><span class="line">       <span class="keyword">if</span> (<span class="variable">$http_user_agent</span> ~* <span class="string">&quot;(Android|iPhone|Windows Phone|UC|Kindle)&quot;</span>)&#123;</span><br><span class="line">         root <span class="regexp">/usr/</span>share<span class="regexp">/nginx/m</span>obile;</span><br><span class="line">       &#125;</span><br><span class="line">       index  index.html;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启nginx的gzip压缩"><a href="#开启nginx的gzip压缩" class="headerlink" title="开启nginx的gzip压缩"></a>开启nginx的gzip压缩</h3><p>Gzip是网页的一种网页压缩技术，经过gzip压缩后，页面大小可以变为原来的30%甚至更小。更小的网页会让用户浏览的体验更好，速度更快，下面简单配置代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    gzip on;</span><br><span class="line">    gzip_comp_level 8;</span><br><span class="line">    gzip_types text/plain application/javascript text/css;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/posts/a477be03/12.png" alt="部分代码"><br>配置好以后，重启服务，查看HTTP响应头信息。你可以看见Content-Encoding为gzip类型。<br><img src="/posts/a477be03/13.png" alt="浏览器截图"><br>Nginx提供了专门的gzip模块，并且模块中的指令非常丰富，下面可以查看：</p>
+<ul>
+<li>gzip :  该指令用于开启（on）或 关闭（off）gzip模块。</li>
+<li>gzip_buffers : 设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流。</li>
+<li>gzip_comp_level : gzip压缩比，压缩级别是1-9，1的压缩级别最低，9的压缩级别最高。压缩级别越高压缩率越大，压缩时间越长。</li>
+<li>gzip_disable : 可以通过该指令对一些特定的User-Agent不使用压缩功能。</li>
+<li>gzip_min_length:设置允许压缩的页面最小字节数，页面字节数从相应消息头的Content-length中进行获取。</li>
+<li>gzip_http_version：识别HTTP协议版本，其值可以是1.1.或1.0.</li>
+<li>gzip_proxied : 用于设置启用或禁用从代理服务器上收到相应内容gzip压缩。</li>
+<li>gzip_vary : 用于在响应消息头中添加Vary：Accept-Encoding,使代理服务器根据请求头中的Accept-Encoding识别是否启用gzip压缩。</li>
+</ul>
+<blockquote>
+<p>最后分享一个可以在线压缩检测的站长工具<a target="_blank" rel="noopener" href="https://tool.chinaz.com/Gzips">https://tool.chinaz.com/Gzips</a></p>
+</blockquote>
+
+    </div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px; margin: 20px; 0px">--------- 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ---------</div>
+    
+</div>
+<!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui -mob-share-ui-theme -mob-share-ui-theme-slide-left" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <!--<li class="-mob-share-facebook"><p>Facebook</p></li>-->
+        <!--<li class="-mob-share-twitter"><p>Twitter</p></li>-->
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=31d56d51e2660"></script>
+<!--MOB SHARE END-->
+<script>
+var url = window.location.href
+mobShare.config( {
+    appkey: '31d56d51e2660', // appkey
+    params: {
+        url: url, // 分享链接
+        description: '个人博客，记录时光，记录生活', // 分享内容
+        title: "YuBo's Blog", // 分享标题
+        pic: 'https://www.yubo365.cn/images/avatar.jpg', // 分享图片，使用逗号,隔开
+    }
+} );
+</script>
+
+    
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="余小鱼 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="余小鱼 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>余小鱼
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yubo365.cn/posts/a477be03.html" title="腾讯云服务器nginx安装配置">https://www.yubo365.cn/posts/a477be03.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/nginx/" rel="tag"><i class="fa fa-tag"></i> nginx</a>
+              <a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 腾讯云服务器</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/vuex.html" rel="prev" title="Vuex">
+      <i class="fa fa-chevron-left"></i> Vuex
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/5510b3d9.html" rel="next" title="nginx/1.18.0进行SSL证书配置">
+      nginx/1.18.0进行SSL证书配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+      <div>
+    
+    </div>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E7%8E%AF%E5%A2%83%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">我的环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%BD%A0%E7%9A%84%E5%85%AC%E7%BD%91IP%E5%92%8C%E7%A7%81%E7%BD%91IP"><span class="nav-number">2.</span> <span class="nav-text">查看你的公网IP和私网IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">连接服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8yum%E8%BF%9B%E8%A1%8C%E5%AE%89%E8%A3%85%E5%BF%85%E8%A6%81%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%AE%89%E8%A3%85%E4%B8%80%E4%BA%9B%E6%9C%8D%E5%8A%A1%E5%92%8Cvim%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">用yum进行安装必要程序，安装一些服务和vim编辑器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx%E4%B8%8B%E8%BD%BD"><span class="nav-number">5.</span> <span class="nav-text">nginx下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx%E9%85%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">nginx配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx%E5%90%AF%E5%8A%A8%EF%BC%8C%E5%85%B3%E9%97%AD"><span class="nav-number">7.</span> <span class="nav-text">nginx启动，关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%99%E8%AF%AF%E9%A1%B5%E9%9D%A2"><span class="nav-number">8.</span> <span class="nav-text">自定义错误页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9F%9F%E5%90%8D%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-number">9.</span> <span class="nav-text">使用域名设置虚拟主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">10.</span> <span class="nav-text">设置反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx%E9%80%82%E9%85%8DPC%E6%88%96%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87"><span class="nav-number">11.</span> <span class="nav-text">Nginx适配PC或移动设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AFnginx%E7%9A%84gzip%E5%8E%8B%E7%BC%A9"><span class="nav-number">12.</span> <span class="nav-text">开启nginx的gzip压缩</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+    
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="余小鱼"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">余小鱼</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+
+<!-- 日志 | 分类 | 标签 -->
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+  <!-- 日志的个数 -->
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    <!-- 分类的个数 -->
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+    <!-- 标签的个数 -->
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+<!-- RSS -->
+    
+
+ <!-- <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+  -->
+  <div class="feed-link" style="color: #fc6423">
+
+        <div class="social-item">
+          <a target="_blank" style="text-decoration: none;" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+            <span class="label">RSS</span>
+          </a>
+        </div>
+  </div>
+
+<!-- RSS -->
+
+<!-- 网易音乐 -->
+<!--
+  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1363948882&auto=0&height=66"></iframe>
+-->
+
+<!-- 侧边聊天 -->
+
+<!-- 社交信息 -->
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+
+      <!-- 跳转地址渲染，icon 以及 title提示  <a href="https://github.com/yb0112/yb0112.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yb0112&#x2F;yb0112.github.io" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a> -->
+        <a href="https://github.com/yb0112/yb0112.github.io" title="帮忙点个Star吧~" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+
+      </span>
+      <span class="links-of-author-item">
+
+      <!-- 跳转地址渲染，icon 以及 title提示  <a href="mailto:yubo0112@163.com" title="E-Mail → mailto:yubo0112@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a> -->
+        <a href="mailto:yubo0112@163.com" title="mailto:yubo0112@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+
+      </span>
+  </div>
+
+
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+
+
+<!-- 侧边栏 近期文章 -->
+
+  <div class='links-of-blogroll motion-element links-of-blogroll-block'>
+    <div class="links-of-blogroll-title">
+      <!-- modify icon to fire by szw -->
+      <i class="fa fa-history fa-" aria-hidden="true"></i>
+      近期文章
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+      
+        <li>
+          <a href="/posts/783ce8a9.html" title="移动端适配" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> 移动端适配</a>
+        </li>
+      
+        <li>
+          <a href="/posts/e5b77e85.html" title="前端知识小册纲要" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> 前端知识小册纲要</a>
+        </li>
+      
+        <li>
+          <a href="/posts/654bf45c.html" title="fiddler抓包工具" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> fiddler抓包工具</a>
+        </li>
+      
+        <li>
+          <a href="/posts/2541eeff.html" title="JavaScript核心原理" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> JavaScript核心原理</a>
+        </li>
+      
+        <li>
+          <a href="/posts/5510b3d9.html" title="nginx/1.18.0进行SSL证书配置" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> nginx/1.18.0进行SSL证书配置</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+      </div>
+      <!-- 动态时间 -->
+      <!-- <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script> -->
+
+      <!-- 返回 -->
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+         <!-- 著作时间 -->
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <!-- 作者 -->
+  <span class="author" itemprop="copyrightHolder">余小鱼</span>
+
+  <!-- 文章的总字数 -->
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">87k</span>
+</div>
+
+<!-- 访问人数引入 -->
+
+
+
+
+
+
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- 总用户 -->
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv">人</span>
+      </span>
+    </span>
+  
+  <!-- 判断两者都存在就显示 | 线 -->
+    <span class="post-meta-divider">|</span>
+
+<!-- 导入网站运行时间模块 -->
+<!-- 网站运行时间 -->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+			Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+			year - 作为date对象的年份，为4位年份值
+			month - 0-11之间的整数，做为date对象的月份
+			day - 1-31之间的整数，做为date对象的天数
+			hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+			minutes - 0-59之间的整数，做为date对象的分钟数
+			seconds - 0-59之间的整数，做为date对象的秒数
+			microseconds - 0-999之间的整数，做为date对象的毫秒数
+     	*/
+		var t1 = Date.UTC(2020,12,09,22,00,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--// 添加运行时间-->
+
+<span class="post-meta-divider">|</span>
+
+  <!-- 总访问-->
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+<!-- 显示hexo驱动 -->
+
+<!-- 分享 需要到国外网站注册-->
+
+<!-- 备案 -->
+  <div class="beian">
+      <img src="/images/icp.png" style="display: inline-block;vertical-align: middle;margin-right: .2rem;"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">皖ICP备20014075号 </a>
+  </div>
+
+
+      </div>
+    </footer>
+  </div>
+
+
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!--百度统计 -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f2fdbc64da6573a6ebae3fcec155bc2b";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 自动推送代码让百度发现 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+

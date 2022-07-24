@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.yubo365.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。包含的功能有：  嵌套的路由&#x2F;视图表 模块化的、基于组件的路由配置 路由参数、查询、通配符 基于 Vue.js 过渡系统的视图过渡效果 细粒度的导航控制 带有自动激活的 CSS class 的链接 HTML5 历史模式或 hash 模式，在 IE9 中自动降级 自定义的滚动条">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-Router基本使用及hash模式和history模式实现原理">
+<meta property="og:url" content="https://www.yubo365.cn/posts/67ac0156.html">
+<meta property="og:site_name" content="余小鱼的博客">
+<meta property="og:description" content="Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。包含的功能有：  嵌套的路由&#x2F;视图表 模块化的、基于组件的路由配置 路由参数、查询、通配符 基于 Vue.js 过渡系统的视图过渡效果 细粒度的导航控制 带有自动激活的 CSS class 的链接 HTML5 历史模式或 hash 模式，在 IE9 中自动降级 自定义的滚动条">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.yubo365.cn/posts/67ac0156/no_router.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/67ac0156/route.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/67ac0156/router.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/67ac0156/router_history.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/67ac0156/nginx1.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/67ac0156/nginx2.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/67ac0156/nginx3.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/67ac0156/nginx4.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/67ac0156/router_error">
+<meta property="og:image" content="https://www.yubo365.cn/posts/67ac0156/router_config">
+<meta property="article:published_time" content="2020-12-17T05:37:04.000Z">
+<meta property="article:modified_time" content="2022-07-24T19:15:00.478Z">
+<meta property="article:author" content="余小鱼">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="vue-router">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.yubo365.cn/posts/67ac0156/no_router.png">
+
+<link rel="canonical" href="https://www.yubo365.cn/posts/67ac0156.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Vue-Router基本使用及hash模式和history模式实现原理 | 余小鱼的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="余小鱼的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">余小鱼的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">I'm Still Here</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yubo365.cn/posts/67ac0156.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="余小鱼">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="余小鱼的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue-Router基本使用及hash模式和history模式实现原理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-17 13:37:04" itemprop="dateCreated datePublished" datetime="2020-12-17T13:37:04+08:00">2020-12-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-25 03:15:00" itemprop="dateModified" datetime="2022-07-25T03:15:00+08:00">2022-07-25</time>
+              </span>
+          <!-- 置顶 -->
+              
+                <span style="color:#7D26CD" class="post-meta-item-icon">
+                  <i class="fa fa-thumbtack"></i>
+                </span>
+                <font color=7D26CD>置顶</font>
+                <span class="post-meta-divider">|</span>
+              
+          <!-- 置顶 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">web前端</span></a>
+                </span>
+            </span>
+
+          
+
+          <!-- 最近阅读 -->
+
+          <!-- busuanzi_count 统计 -->
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>14k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。包含的功能有：</p>
+<ul>
+<li>嵌套的路由/视图表</li>
+<li>模块化的、基于组件的路由配置</li>
+<li>路由参数、查询、通配符</li>
+<li>基于 Vue.js 过渡系统的视图过渡效果</li>
+<li>细粒度的导航控制</li>
+<li>带有自动激活的 CSS class 的链接</li>
+<li>HTML5 历史模式或 hash 模式，在 IE9 中自动降级</li>
+<li>自定义的滚动条行为<span id="more"></span>
+
+</li>
+</ul>
+<h3 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h3><p>根据vue-cli脚手架自动生成一个简单的带有router文件夹的项目目录</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Vue CLI v4.<span class="number">5.9</span></span><br><span class="line">Failed <span class="keyword">to</span> check <span class="keyword">for</span> updates</span><br><span class="line">? Please pick a preset: Manually <span class="keyword">select</span> features</span><br><span class="line">? Check the features needed <span class="keyword">for</span> your project: </span><br><span class="line"> ( ) Choose Vue version</span><br><span class="line"> <span class="comment">(*) Babel</span></span><br><span class="line"><span class="comment"> ( ) TypeScript</span></span><br><span class="line"><span class="comment"> ( ) Progressive Web App (PWA) Support        </span></span><br><span class="line"><span class="comment"> (*)</span> Router</span><br><span class="line"> ( ) Vuex</span><br><span class="line"> ( ) CSS Pre-processors</span><br><span class="line">&gt;( ) Linter / Formatter</span><br><span class="line"> ( ) <span class="keyword">Unit</span> Testing</span><br><span class="line"> ( ) E2E Testing</span><br></pre></td></tr></table></figure>
+
+<h3 id="Vue-Router使用"><a href="#Vue-Router使用" class="headerlink" title="Vue Router使用"></a>Vue Router使用</h3><ul>
+<li>1.注册路由插件</li>
+<li>2.创建一个router对象，创建过程中配置一些路由规则</li>
+<li>3.注册router对象，也就是在创建vue实例的时候，要在选项里面，来配置我们创建好的router对象</li>
+<li>4.创建路由组件占位和跳转链接<h4 id="注册路由插件"><a href="#注册路由插件" class="headerlink" title="注册路由插件"></a>注册路由插件</h4>在 router/index.js 文件中<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">&#x27;../views/Home.vue&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.注册路由插件</span></span><br><span class="line"><span class="comment">// Vue.use() 是用来注册插件，会调用传入对象的install方法</span></span><br><span class="line">Vue.use(VueRouter)</span><br></pre></td></tr></table></figure>
+<h4 id="创建router对象配置路由规则"><a href="#创建router对象配置路由规则" class="headerlink" title="创建router对象配置路由规则"></a>创建router对象配置路由规则</h4>在 router/index.js 文件中<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 路由规则</span></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    name: <span class="string">&#x27;Home&#x27;</span>,</span><br><span class="line">    component: Home</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&#x27;/about&#x27;</span>,</span><br><span class="line">    name: <span class="string">&#x27;About&#x27;</span>,</span><br><span class="line">    component: () =&gt; <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &quot;about&quot; */</span> <span class="string">&#x27;../views/About.vue&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.创建router路由对象</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router</span><br></pre></td></tr></table></figure>
+<h4 id="注册router对象"><a href="#注册router对象" class="headerlink" title="注册router对象"></a>注册router对象</h4>在main.js文件中<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property">config</span>.<span class="property">productionTip</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">  <span class="comment">// 3. 注册router 对象</span></span><br><span class="line">  router,</span><br><span class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> <span class="title function_">h</span>(<span class="title class_">App</span>)</span><br><span class="line">&#125;).$mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="创建路由组件占位和跳转链接"><a href="#创建路由组件占位和跳转链接" class="headerlink" title="创建路由组件占位和跳转链接"></a>创建路由组件占位和跳转链接</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;nav&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 创建路由连接 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/&quot;</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span> |</span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/about&quot;</span>&gt;</span>About<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 创建路由占位 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="route和-router区别"><a href="#route和-router区别" class="headerlink" title="$route和$router区别"></a>$route和$router区别</h3><p>在main.js中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span></span><br><span class="line"><span class="comment">// import router from &#x27;./router&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property">config</span>.<span class="property">productionTip</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">  <span class="comment">// 3. 注册router 对象</span></span><br><span class="line">  <span class="comment">// router,</span></span><br><span class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> <span class="title function_">h</span>(<span class="title class_">App</span>)</span><br><span class="line">&#125;).$mount(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(vm)</span><br></pre></td></tr></table></figure>
+<p>先将<code>router</code>注释，查看打印结果发现没有<code>$route</code>和<code>$router</code></p>
+<p>放开注释后，会发现多了<code>$route</code>和<code>$router</code><br><img src="/posts/67ac0156/no_router.png" alt="route"></p>
+<ul>
+<li><p>$route: 表示路由规则,存储的是当前路由的一些路由数据，存储了一些路径<br><img src="/posts/67ac0156/route.png" alt="route"></p>
+</li>
+<li><p>$router: 表示路由对象，就是vuerouter的一个实例，这个路由对象中会提供一些跟路由相关的一些方法<br><img src="/posts/67ac0156/router.png" alt="router"></p>
+</li>
+</ul>
+<p>需要注意的是<code>$router</code>里面有一个<code>currentRoute</code>，这个当前路由规则，有的时候不方便获取<code>$route</code>,比如在一个插件里面没有办法获取到<code>$route</code>，可以想办法获取到<code>$router</code>，然后获取<code>cunrrentRoute</code>,这样也就获取到了当前路由的规则</p>
+<h3 id="动态路由传参"><a href="#动态路由传参" class="headerlink" title="动态路由传参"></a>动态路由传参</h3><h4 id="动态传参连接跳转"><a href="#动态传参连接跳转" class="headerlink" title="动态传参连接跳转"></a>动态传参连接跳转</h4><ul>
+<li>query会在地址栏出现 <code>id=&#39;XX&#39;</code>  eg: <code>http://localhost:8080/#/?id=1</code></li>
+<li>params会在地址栏 <code>/xx</code>,eg: <code>http://localhost:8080/#/detail/1</code>，props方式需要用这个方式<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;nav&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="comment">&lt;!-- 创建路由连接 --&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/&quot;</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span> |</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/about&quot;</span>&gt;</span>About<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span> |</span></span><br><span class="line"><span class="language-xml">      <span class="comment">&lt;!-- &lt;router-link to=&quot;/detail&quot;&gt;Detail&lt;/router-link&gt;  --&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="comment">&lt;!-- &lt;router-link :to=&quot;</span></span><span class="template-variable">&#123;name:&#x27;Detail&#x27;,query:&#123;id:1&#125;</span><span class="language-xml"><span class="comment">&#125;&quot;&gt;Detail&lt;/router-link&gt;  --&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">&quot;</span></span></span><span class="template-variable">&#123;name:&#x27;Detail&#x27;,params:&#123;id:1&#125;</span><span class="language-xml"><span class="tag"><span class="string">&#125;&quot;</span>&gt;</span>Detail<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span> </span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="comment">&lt;!-- 创建占位 --&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="路由配置"><a href="#路由配置" class="headerlink" title="路由配置"></a>路由配置</h4>在router/index.js文件中<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 路由规则</span><br><span class="line">const routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    <span class="type">name</span>: <span class="string">&#x27;Home&#x27;</span>,</span><br><span class="line">    component: Home</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">path</span>: <span class="string">&#x27;/about&#x27;</span>,</span><br><span class="line">    <span class="type">name</span>: <span class="string">&#x27;About&#x27;</span>,</span><br><span class="line">    component: () =&gt; <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &quot;about&quot; */</span> <span class="string">&#x27;../views/About.vue&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">path</span>: <span class="string">&#x27;/detail/:id&#x27;</span>,</span><br><span class="line">    <span class="type">name</span>: <span class="string">&#x27;Detail&#x27;</span>,</span><br><span class="line">    // 开启props会把url中的参数传递给组件</span><br><span class="line">    // 当为<span class="keyword">true</span>时，会将url中的参数传递给相应的组件，在组件中通过props来接收就可以了</span><br><span class="line">    props: <span class="keyword">true</span>,</span><br><span class="line">    component: () =&gt; <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &quot;about&quot; */</span> <span class="string">&#x27;../views/Detail.vue&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="接收方式"><a href="#接收方式" class="headerlink" title="接收方式"></a>接收方式</h4>两种方式接收（方式1需要强依赖，更推荐方式2）：<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml"><span class="comment">&lt;!-- Detail.vue内容 --&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;detail&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>This is an Detail page<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="comment">&lt;!-- 方式1： 通过路由规则获取 --&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>路由规则获取query方式：</span><span class="template-variable">&#123;&#123;<span class="name">$route.query.id</span>&#125;&#125;</span><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>路由规则获取params方式：</span><span class="template-variable">&#123;&#123;<span class="name">$route.params.id</span>&#125;&#125;</span><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">    <span class="comment">&lt;!-- 方式2： 通过prop获取 --&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>props方式获取：</span><span class="template-variable">&#123;&#123;<span class="name">id</span>&#125;&#125;</span><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">name</span>:<span class="string">&#x27;Detail&#x27;</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">props</span>:[<span class="string">&#x27;id&#x27;</span>]</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h3>在router/index.js文件中<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 路由规则</span></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    name: <span class="string">&#x27;Home&#x27;</span>,</span><br><span class="line">    component: Home</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">&#x27;/about&#x27;</span>,</span><br><span class="line">    name: <span class="string">&#x27;About&#x27;</span>,</span><br><span class="line">    component: () =&gt; <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &quot;about&quot; */</span> <span class="string">&#x27;../views/About.vue&#x27;</span>),</span><br><span class="line">    children: [</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">&#x27;detail/:id&#x27;</span>,</span><br><span class="line">        <span class="comment">// 开启props会把url中的参数传递给组件</span></span><br><span class="line">        <span class="comment">// 当为true时，会将url中的参数传递给相应的组件，在组件中通过props来接收就可以了</span></span><br><span class="line">        props: <span class="keyword">true</span>,</span><br><span class="line">        component: () =&gt; <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &quot;about&quot; */</span> <span class="string">&#x27;../views/Detail.vue&#x27;</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h3 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">this.<span class="variable">$router</span>.<span class="title function_ invoke__">push</span>(<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line"></span><br><span class="line">this.<span class="variable">$router</span>.<span class="title function_ invoke__">push</span>(&#123;<span class="attr">name</span>:<span class="string">&#x27;Home&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">this.<span class="variable">$router</span>.<span class="title function_ invoke__">push</span>(&#123;<span class="attr">name</span>:<span class="string">&#x27;Home&#x27;</span>,<span class="attr">params</span>:&#123;<span class="attr">id</span>:<span class="number">1</span>&#125;&#125;)</span><br><span class="line"></span><br><span class="line">this.<span class="variable">$router</span>.<span class="title function_ invoke__">push</span>(&#123;<span class="attr">path</span>:<span class="string">&#x27;/home&#x27;</span>,<span class="attr">query</span>:&#123;<span class="attr">id</span>:<span class="number">1</span>&#125;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不会记录本次历史</span></span><br><span class="line">this.<span class="variable">$router</span>.<span class="title function_ invoke__">replace</span>(<span class="string">&#x27;/home&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 跳转到历史的某一次，如果是负数就是后退</span></span><br><span class="line">this.<span class="variable">$router</span>.<span class="title function_ invoke__">go</span>(-<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Hash模式-和-History模式区别"><a href="#Hash模式-和-History模式区别" class="headerlink" title="Hash模式 和 History模式区别"></a>Hash模式 和 History模式区别</h3>无论那种模式，都是客户端路由的实现方式，也就是当路径发生变化之后不会向服务器发送请求，使用JS监视路径的变化，然后根据不同的地址渲染不同的内容，如果需要服务器端内容的话会发送ajax请求去获取。<h4 id="表现形式的区别"><a href="#表现形式的区别" class="headerlink" title="表现形式的区别"></a>表现形式的区别</h4></li>
+<li>hash模式:<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//mu</span>sic.<span class="number">163</span>.com<span class="regexp">/#/</span>playlist?id=<span class="number">121212</span></span><br></pre></td></tr></table></figure></li>
+<li>history模式：<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//mu</span>sic.<span class="number">163</span>.com<span class="regexp">/playlist/</span><span class="number">31032232</span></span><br></pre></td></tr></table></figure>
+<h4 id="原理区别"><a href="#原理区别" class="headerlink" title="原理区别"></a>原理区别</h4><h5 id="Hash模式"><a href="#Hash模式" class="headerlink" title="Hash模式"></a>Hash模式</h5>hash模式是基于锚点，以及onhashchange事件，通过锚点的值作为路由地址，地址发生变化出发onhashchange事件，在根据路径决定页面上呈现的内容<h5 id="History模式"><a href="#History模式" class="headerlink" title="History模式"></a>History模式</h5>history是基于HTML5中的History API</li>
+<li>history.pushState()</li>
+<li>history.replaceState()<h6 id="history-pushState和-history-push区别"><a href="#history-pushState和-history-push区别" class="headerlink" title="history.pushState和 history.push区别"></a>history.pushState和 history.push区别</h6></li>
+<li>history.pushState() 不会向服务器发送请求，只会改变浏览器地址栏中的地址，并且把地址记录到历史记录中，所以可以实现客户端路由 另外，IE10 以后才支持</li>
+<li>history.push() 路径发生变化，需要向服务器发送请求<h4 id="History模式使用"><a href="#History模式使用" class="headerlink" title="History模式使用"></a>History模式使用</h4></li>
+<li>history需要服务器的支持</li>
+<li>单页面应用中，只有一个index.html这样的页面，服务端不存在<a target="_blank" rel="noopener" href="http://www.test.com/login">http://www.test.com/login</a> 这样的地址，服务端不存在/login这样的页面</li>
+<li>在服务端应该除了静态资源外都返回单页应用的index.html<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2.创建router对象</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  mode: <span class="string">&#x27;history&#x27;</span>,    <span class="comment">//默认是hash</span></span><br><span class="line">  routes</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+因为vue-cli自带的服务器已经配置好了上面说的内容，下面将代码打包部署的到node服务器中进行一个测试</li>
+<li>Node服务器配置 history模式<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="keyword">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入history模式的模块</span></span><br><span class="line"><span class="keyword">const</span> history = <span class="keyword">require</span>(<span class="string">&#x27;connect-history-api-fallback&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入express</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="keyword">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册处理history模式的中间件</span></span><br><span class="line"><span class="comment">// app.use(history())</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理静态资源的中间件 网站根目录 ../web</span></span><br><span class="line">app.<span class="keyword">use</span>(express.<span class="keyword">static</span>(path.join(__dirname,<span class="string">&#x27;../web&#x27;</span>))) </span><br><span class="line"></span><br><span class="line"><span class="comment">// 开启服务</span></span><br><span class="line">app.listen(<span class="number">3000</span>, ()=&gt;&#123;</span><br><span class="line">    console.log(<span class="string">&#x27;服务器开启，端口：3000&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="/posts/67ac0156/router_history.png" alt="关闭history刷新页面"><br>这是先关闭处理history（注释app.use(history())），当前求地址后，刷新页面就会出错了 </p>
+<p>如下放开注释，打开history支持，再去刷新页面，就可以了</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注册处理history模式的中间件</span></span><br><span class="line"><span class="keyword">app</span>.<span class="keyword">use</span>(history())</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>加载过程是：<br>服务器会判断当前请求的页面，服务器上没有会把我们单页应用默认的index.html返回给浏览器，浏览器接收到这个index.html,会再去判断路由地址，然后根据路由去加载对应配置的组件，这就是加载的过程。</p>
+</blockquote>
+<ul>
+<li>Nginx配置 history模式 mac下载nginx教程地址参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/meng1314-shuai/p/8335140.html">https://www.cnblogs.com/meng1314-shuai/p/8335140.html</a><br><img src="/posts/67ac0156/nginx1.png" alt="Nginx配置"></li>
+</ul>
+<p>将打包好的前端项目，复制到html中<br><img src="/posts/67ac0156/nginx2.png" alt="Nginx配置2"></p>
+<p>启动nginx点击访问可以，但是一旦刷新，就会出现如下问题<br><img src="/posts/67ac0156/nginx3.png" alt="Nginx配置3"></p>
+<p>这个时候就需要去nginx.config里面配置一下<br><img src="/posts/67ac0156/nginx4.png" alt="Nginx配置4"></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">try_files <span class="variable">$uri</span> <span class="variable">$uri</span><span class="regexp">/ /i</span>ndex.html;   <span class="comment">#新加一个 </span></span><br></pre></td></tr></table></figure>
+<p>try_files 试着去请求当前浏览器请求的路径所对应的文件，没找到就去找这个目录下的默认首页，如果没有找到就去单文件应用下的首页（/index.html） 重启nginx，现在访问的时候再刷新页面就不会出现上面的404了</p>
+<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><h5 id="hash模式"><a href="#hash模式" class="headerlink" title="hash模式"></a>hash模式</h5><ul>
+<li>URL中#后面的内容作为路径地址</li>
+<li>监听hashchange事件</li>
+<li>根据当前路由地址找到对应的组件重新渲染</li>
+</ul>
+<h5 id="history模式"><a href="#history模式" class="headerlink" title="history模式"></a>history模式</h5><ul>
+<li>通过history.pushState()方法改变地址栏</li>
+<li>监听popstate事件</li>
+<li>根据当前路由地址找到对应组件重新渲染</li>
+</ul>
+<h3 id="实现一个自己的vue-router"><a href="#实现一个自己的vue-router" class="headerlink" title="实现一个自己的vue-router"></a>实现一个自己的vue-router</h3><p>原文件<code>router/index.js</code>中生成的默认vue-router如下：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注册插件</span></span><br><span class="line">Vue.use(VueRouter)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建路由对象</span></span><br><span class="line">const router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    <span class="attr">routes</span>:[</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;home&#x27;</span>, <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>, <span class="attr">component</span>: homeComponent &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="comment">// 创建Vue实例 注册router对象</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    router,</span><br><span class="line">    <span class="attr">reder</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).<span class="symbol">$mou</span>nt(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="创建router-link"><a href="#创建router-link" class="headerlink" title="创建router-link"></a>创建router-link</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">let _Vue = null</span><br><span class="line">export default class VueRouter &#123;</span><br><span class="line">    <span class="comment">// 导出一个静态方法 install</span></span><br><span class="line">    <span class="comment">// Vue.use() 中调用install方法时候，会传递两个参数，一个是vue构造函数 另一个是 可选的选项对象 </span></span><br><span class="line">    static install (Vue) &#123;  <span class="comment">//这里传递构造函数</span></span><br><span class="line">        <span class="comment">// 1. 判断当前插件是否已经被安装</span></span><br><span class="line">        <span class="built_in">if</span>(VueRouter<span class="selector-class">.install</span>.installed)&#123; </span><br><span class="line">            return</span><br><span class="line">        &#125;</span><br><span class="line">        VueRouter<span class="selector-class">.install</span><span class="selector-class">.installed</span> = true</span><br><span class="line">        <span class="comment">// 2. 把vue构造函数记录到全局变量</span></span><br><span class="line">        _Vue = Vue</span><br><span class="line">        <span class="comment">// 3. 把创建vue实例时候传入的router 对象注入到vue实例上</span></span><br><span class="line">        <span class="comment">// 混入</span></span><br><span class="line">        _Vue<span class="selector-class">.mixin</span>(&#123;</span><br><span class="line">            <span class="built_in">beforeCreate</span>()&#123;</span><br><span class="line">                <span class="comment">// 只有vue $options里面才会有router 组件没有</span></span><br><span class="line">                <span class="built_in">if</span>(this.<span class="variable">$options</span>.router)&#123;</span><br><span class="line">                    _Vue<span class="selector-class">.prototype</span>.<span class="variable">$router</span> = this.<span class="variable">$options</span><span class="selector-class">.router</span></span><br><span class="line">                    <span class="comment">// 先找到route对象，然后再调用init方法</span></span><br><span class="line">                    this.<span class="variable">$options</span><span class="selector-class">.router</span><span class="selector-class">.init</span>()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个构造函数</span></span><br><span class="line">    <span class="built_in">constructor</span>(options)&#123;</span><br><span class="line">        this<span class="selector-class">.options</span> = options    <span class="comment">//作用就是记录构造函数传入的options路由规则</span></span><br><span class="line">        this<span class="selector-class">.routeMap</span> = &#123;&#125;  <span class="comment">// routeMap里面是一个键值对形式，健存的就是路由地址，值就是路由组件 将来在router-view这个组件里面会根据当前的路由地址到routeMap里面找到对应的组件然后渲染到浏览器中</span></span><br><span class="line">        this<span class="selector-class">.data</span> = _Vue<span class="selector-class">.observable</span>(&#123;  <span class="comment">// 响应式对象</span></span><br><span class="line">            current: <span class="string">&#x27;/&#x27;</span>  <span class="comment">//  current用来记录当前路由地址，默认情况下是 / 斜杠</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个初始化方法 方便调用</span></span><br><span class="line">    init () &#123;</span><br><span class="line">        this<span class="selector-class">.createRouteMap</span>()</span><br><span class="line">        this<span class="selector-class">.initComponents</span>(_Vue)  <span class="comment">// 传入构造函数</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这个方法的作用是去遍历所有的路由规则，把这些路由规则解析成键值对的形式存储到routeMap中</span></span><br><span class="line">    <span class="built_in">createRouteMap</span>()&#123;</span><br><span class="line">        <span class="comment">// this.options.routes // 所有的路由规则</span></span><br><span class="line">        this<span class="selector-class">.options</span><span class="selector-class">.routes</span><span class="selector-class">.forEach</span>(route =&gt; &#123;</span><br><span class="line">            this<span class="selector-class">.routeMap</span><span class="selector-attr">[route.path]</span> = route<span class="selector-class">.component</span> </span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    initComponents (Vue) &#123;   <span class="comment">// 参数是vue构造函数</span></span><br><span class="line">        <span class="comment">// 创建router-link 组件</span></span><br><span class="line">        Vue<span class="selector-class">.component</span>(<span class="string">&#x27;router-link&#x27;</span>, &#123;</span><br><span class="line">            props: &#123;</span><br><span class="line">                to: String</span><br><span class="line">            &#125;,</span><br><span class="line">            template: `&lt;<span class="selector-tag">a</span> :href = <span class="string">&quot;to&quot;</span>&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/a&gt;`</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="引入自己写的vueRouter"><a href="#引入自己写的vueRouter" class="headerlink" title="引入自己写的vueRouter"></a>引入自己写的vueRouter</h4><p>这个时候页面直接去引入这个方法，</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="regexp">//</span> <span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">&#x27;../vuerouter&#x27;</span>  <span class="regexp">//</span> 这里引入自己写的vuerouter</span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">&#x27;../views/Home.vue&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>然后发现页面会有报错<br><img src="/posts/67ac0156/router_error" alt="router_error"></p>
+<p>因为Vue的构建版本分为<code>运行时版</code> 和 <code>完整版</code></p>
+<ul>
+<li>运行时版：不支持template模版，需要打包的时候提前编译</li>
+<li>完整版：包含运行时和编译器，体积比运行时版本大10K左右，程序运行的时候把模版转换成render函数</li>
+</ul>
+<p>我们的vue-vli创建的项目默认的是运行时版，所有就出现上面的错误了，解决如下：</p>
+<ul>
+<li><p>方法一：通过完整版来解决问题，<a target="_blank" rel="noopener" href="https://cli.vuejs.org/zh/config/#%E5%85%A8%E5%B1%80-cli-%E9%85%8D%E7%BD%AE">https://cli.vuejs.org/zh/config/#全局-cli-配置</a><br><img src="/posts/67ac0156/router_config" alt="router_error"><br>在根目录下创建一个vue.config.js文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span>.<span class="keyword">exports</span> = &#123;</span><br><span class="line">    runtimeCompiler: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样配置后，页面中router-link就能显示了，还有一个报错，是因为自己手写时候还没有写router-view 的组件</p>
+</li>
+<li><p>方法二：通过运行时版来解决问题，运行时版本的vue不带编译器，也就是不支持组件中的template选项，编译器的作用就是将template编译成render函数，所有直接写render函数来解决</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">initComponents (Vue) &#123;   <span class="regexp">//</span> 参数是vue构造函数</span><br><span class="line">        <span class="regexp">//</span> 创建router-link 组件</span><br><span class="line">        Vue.component(<span class="string">&#x27;router-link&#x27;</span>, &#123;</span><br><span class="line">            props: &#123;</span><br><span class="line">                to: String</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="regexp">//</span> template: `&lt;a :href = <span class="string">&quot;to&quot;</span>&gt;&lt;slot&gt;&lt;<span class="regexp">/slot&gt;&lt;/</span>a&gt;`</span><br><span class="line">            render (h)&#123; </span><br><span class="line">                return h(<span class="string">&#x27;a&#x27;</span>,&#123;   <span class="regexp">//</span> h函数 可以接收三个参数，<span class="number">1</span>创建元素的选择器 <span class="number">2</span>.设置属性 <span class="number">3</span>.生成元素的子元素所以数组的形式</span><br><span class="line">                    attrs: &#123;</span><br><span class="line">                        href: this.to  <span class="regexp">//</span> 传的props中的 to</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, [this.<span class="variable">$slots</span>.default])   <span class="regexp">//</span>this.<span class="variable">$slots</span>.default获取默认插槽的内容</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="创建router-view-这个组件"><a href="#创建router-view-这个组件" class="headerlink" title="创建router-view 这个组件"></a>创建router-view 这个组件</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">initComponents (Vue) &#123;   <span class="regexp">//</span> 参数是vue构造函数</span><br><span class="line">        <span class="regexp">//</span> 创建router-link 组件</span><br><span class="line">        Vue.component(<span class="string">&#x27;router-link&#x27;</span>, &#123;</span><br><span class="line">            props: &#123;</span><br><span class="line">                to: String</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="regexp">//</span> template: `&lt;a :href = <span class="string">&quot;to&quot;</span>&gt;&lt;slot&gt;&lt;<span class="regexp">/slot&gt;&lt;/</span>a&gt;`</span><br><span class="line">            render (h)&#123; </span><br><span class="line">                return h(<span class="string">&#x27;a&#x27;</span>,&#123;   <span class="regexp">//</span> h函数 可以接收三个参数，<span class="number">1</span>创建元素的选择器 <span class="number">2</span>.设置属性 <span class="number">3</span>.生成元素的子元素所以数组的形式</span><br><span class="line">                    attrs: &#123;</span><br><span class="line">                        href: this.to  <span class="regexp">//</span> 传的props中的 to</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, [this.<span class="variable">$slots</span>.default])   <span class="regexp">//</span>this.<span class="variable">$slots</span>.default获取默认插槽的内容</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        const self = this</span><br><span class="line">        <span class="regexp">//</span> 创建router-view 组件</span><br><span class="line">        Vue.component(<span class="string">&#x27;router-view&#x27;</span>,&#123;</span><br><span class="line">            render(h)&#123;   <span class="regexp">//</span> h作用是创建虚拟DOM</span><br><span class="line">                <span class="regexp">//</span> 找到当前路由的地址 根据当前路由地址，去routeMap对象中，找到对应的组件，然后再调用h函数，把找到的组件转换成虚拟DOM直接返回</span><br><span class="line">                const component = self.routeMap[self.data.current]  <span class="regexp">//</span>获取组件</span><br><span class="line">                return h(component)   <span class="regexp">//</span> 调用h函数，返回虚拟DOM ，h函数还可以直接把组件转换成虚拟DOM</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这个时候去页面查看，没有报错了，可以显示了，但是当点击切换的时候，页面会刷新,需要给这个超链接注册一个点击时间，取消后续执行，还需要将地址栏中的值，改为超链接href中的值，就需要history.pushState()方法</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> 创建router-link 组件</span><br><span class="line">        Vue.component(<span class="string">&#x27;router-link&#x27;</span>, &#123;</span><br><span class="line">            props: &#123;</span><br><span class="line">                to: String</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="regexp">//</span> template: `&lt;a :href = <span class="string">&quot;to&quot;</span>&gt;&lt;slot&gt;&lt;<span class="regexp">/slot&gt;&lt;/</span>a&gt;`</span><br><span class="line">            render (h)&#123; </span><br><span class="line">                return h(<span class="string">&#x27;a&#x27;</span>,&#123;   <span class="regexp">//</span> h函数 可以接收三个参数，<span class="number">1</span>创建元素的选择器 <span class="number">2</span>.设置属性 <span class="number">3</span>.生成元素的子元素所以数组的形式</span><br><span class="line">                    attrs: &#123;</span><br><span class="line">                        href: this.to  <span class="regexp">//</span> 传的props中的 to</span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="regexp">//</span> 给a标签添加事件</span><br><span class="line">                    on: &#123;</span><br><span class="line">                        click: this.clickHandler</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, [this.<span class="variable">$slots</span>.default])   <span class="regexp">//</span>this.<span class="variable">$slots</span>.default获取默认插槽的内容</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                clickHandler(e)&#123;</span><br><span class="line">                    history.pushState(&#123;&#125;,<span class="string">&#x27;&#x27;</span>, this.to)  <span class="regexp">//</span>三个参数：<span class="number">1</span>.data 将来触发pushState这个事件对象的参数  <span class="number">2</span>.title网页标题 <span class="number">3</span>.url地址</span><br><span class="line">                    </span><br><span class="line">                    <span class="regexp">//</span> 将当前的路径，记录到data.current里面</span><br><span class="line">                    this.<span class="variable">$router</span>.data.current = this.to</span><br><span class="line">                    </span><br><span class="line">                    <span class="regexp">//</span> 阻止跳转默认行为</span><br><span class="line">                    e.preventDefault()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+<p>现在就可以点击了，不会刷新了，地址栏也会跟着点击标签的href所改变了，虽然现在可以，但是当我们点击浏览器前进，后退的时候，地址栏发生了变化，但是组件没有发生变化，因为前进后退的时候，没有重新加载地址栏对应的组件，下面通过popstate进行改进，当历史发生变化触发，到这里模拟router的history模式就搞定了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解决前进后退 地址栏变化组件不变化的问题</span></span><br><span class="line">    <span class="title function_">initEvent</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;popstate&#x27;</span>, <span class="function">()=&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">current</span> = <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">pathname</span>  <span class="comment">//路径部分</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>完整代码如下：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">let _Vue = <span class="literal">null</span></span><br><span class="line">export default <span class="class"><span class="keyword">class</span> <span class="title">VueRouter</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 导出一个静态方法 install</span></span><br><span class="line">    <span class="comment">// Vue.use() 中调用install方法时候，会传递两个参数，一个是vue构造函数 另一个是 可选的选项对象 </span></span><br><span class="line">    static install (Vue) &#123;  <span class="comment">//这里传递构造函数</span></span><br><span class="line">        <span class="comment">// 1. 判断当前插件是否已经被安装</span></span><br><span class="line">        <span class="keyword">if</span>(VueRouter.install.installed)&#123; </span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        VueRouter.install.installed = <span class="literal">true</span></span><br><span class="line">        <span class="comment">// 2. 把vue构造函数记录到全局变量</span></span><br><span class="line">        _Vue = Vue</span><br><span class="line">        <span class="comment">// 3. 把创建vue实例时候传入的router 对象注入到vue实例上</span></span><br><span class="line">        <span class="comment">// 混入</span></span><br><span class="line">        _Vue.mixin(&#123;</span><br><span class="line">            beforeCreate()&#123;</span><br><span class="line">                <span class="comment">// 只有vue $options里面才会有router 组件没有</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">this</span>.$options.router)&#123;</span><br><span class="line">                    _Vue.prototype.$router = <span class="keyword">this</span>.$options.router</span><br><span class="line">                    <span class="comment">// 先找到route对象，然后再调用init方法</span></span><br><span class="line">                    <span class="keyword">this</span>.$options.router.<span class="keyword">init</span>()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个构造函数</span></span><br><span class="line">    <span class="keyword">constructor</span>(options)&#123;</span><br><span class="line">        <span class="keyword">this</span>.options = options    <span class="comment">//作用就是记录构造函数传入的options路由规则</span></span><br><span class="line">        <span class="keyword">this</span>.routeMap = &#123;&#125;  <span class="comment">// routeMap里面是一个键值对形式，健存的就是路由地址，值就是路由组件 将来在router-view这个组件里面会根据当前的路由地址到routeMap里面找到对应的组件然后渲染到浏览器中</span></span><br><span class="line">        <span class="keyword">this</span>.<span class="keyword">data</span> = _Vue.observable(&#123;  <span class="comment">// 响应式对象</span></span><br><span class="line">            current: <span class="string">&#x27;/&#x27;</span>  <span class="comment">//  current用来记录当前路由地址，默认情况下是 / 斜杠</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个初始化方法 方便调用</span></span><br><span class="line">    <span class="keyword">init</span> () &#123;</span><br><span class="line">        <span class="keyword">this</span>.createRouteMap()</span><br><span class="line">        <span class="keyword">this</span>.initComponents(_Vue)  <span class="comment">// 传入构造函数</span></span><br><span class="line">        <span class="keyword">this</span>.initEvent()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这个方法的作用是去遍历所有的路由规则，把这些路由规则解析成键值对的形式存储到routeMap中</span></span><br><span class="line">    createRouteMap()&#123;</span><br><span class="line">        <span class="comment">// this.options.routes // 所有的路由规则</span></span><br><span class="line">        <span class="keyword">this</span>.options.routes.forEach(route =&gt; &#123;</span><br><span class="line">            <span class="keyword">this</span>.routeMap[route.path] = route.component </span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    initComponents (Vue) &#123;   <span class="comment">// 参数是vue构造函数</span></span><br><span class="line">        <span class="comment">// 创建router-link 组件</span></span><br><span class="line">        Vue.component(<span class="string">&#x27;router-link&#x27;</span>, &#123;</span><br><span class="line">            props: &#123;</span><br><span class="line">                to: String</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="comment">// template: `&lt;a :href = &quot;to&quot;&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/a&gt;`</span></span><br><span class="line">            render (h)&#123; </span><br><span class="line">                <span class="keyword">return</span> h(<span class="string">&#x27;a&#x27;</span>,&#123;   <span class="comment">// h函数 可以接收三个参数，1创建元素的选择器 2.设置属性 3.生成元素的子元素所以数组的形式</span></span><br><span class="line">                    attrs: &#123;</span><br><span class="line">                        href: <span class="keyword">this</span>.to  <span class="comment">// 传的props中的 to</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="comment">// 给a标签添加事件</span></span><br><span class="line">                    on: &#123;</span><br><span class="line">                        click: <span class="keyword">this</span>.clickHandler</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, [<span class="keyword">this</span>.$slots.default])   <span class="comment">//this.$slots.default获取默认插槽的内容</span></span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                clickHandler(e)&#123;</span><br><span class="line">                    history.pushState(&#123;&#125;,<span class="string">&#x27;&#x27;</span>, <span class="keyword">this</span>.to)  <span class="comment">//三个参数：1.data 将来触发pushState这个事件对象的参数  2.title网页标题 3.url地址</span></span><br><span class="line">                    </span><br><span class="line">                    <span class="comment">// 将当前的路径，记录到data.current里面</span></span><br><span class="line">                    <span class="keyword">this</span>.$router.<span class="keyword">data</span>.current = <span class="keyword">this</span>.to</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment">// 阻止跳转默认行为</span></span><br><span class="line">                    e.preventDefault()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">const</span> self = <span class="keyword">this</span></span><br><span class="line">        <span class="comment">// 创建router-view 组件</span></span><br><span class="line">        Vue.component(<span class="string">&#x27;router-view&#x27;</span>,&#123;</span><br><span class="line">            render(h)&#123;   <span class="comment">// h作用是创建虚拟DOM</span></span><br><span class="line">                <span class="comment">// 找到当前路由的地址 根据当前路由地址，去routeMap对象中，找到对应的组件，然后再调用h函数，把找到的组件转换成虚拟DOM直接返回</span></span><br><span class="line">                <span class="keyword">const</span> component = self.routeMap[self.<span class="keyword">data</span>.current]  <span class="comment">//获取组件</span></span><br><span class="line">                <span class="keyword">return</span> h(component)   <span class="comment">// 调用h函数，返回虚拟DOM ，h函数还可以直接把组件转换成虚拟DOM</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 解决前进后退 地址栏变化组件不变化的问题</span></span><br><span class="line">    initEvent()&#123;</span><br><span class="line">        window.addEventListener(<span class="string">&#x27;popstate&#x27;</span>, ()=&gt; &#123;</span><br><span class="line">            <span class="keyword">this</span>.<span class="keyword">data</span>.current = window.location.pathname  <span class="comment">// 路径部分就是/斜杠和斜杠后面的部分  eg: /home</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px; margin: 20px; 0px">--------- 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ---------</div>
+    
+</div>
+<!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui -mob-share-ui-theme -mob-share-ui-theme-slide-left" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <!--<li class="-mob-share-facebook"><p>Facebook</p></li>-->
+        <!--<li class="-mob-share-twitter"><p>Twitter</p></li>-->
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=31d56d51e2660"></script>
+<!--MOB SHARE END-->
+<script>
+var url = window.location.href
+mobShare.config( {
+    appkey: '31d56d51e2660', // appkey
+    params: {
+        url: url, // 分享链接
+        description: '个人博客，记录时光，记录生活', // 分享内容
+        title: "YuBo's Blog", // 分享标题
+        pic: 'https://www.yubo365.cn/images/avatar.jpg', // 分享图片，使用逗号,隔开
+    }
+} );
+</script>
+
+    
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="余小鱼 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="余小鱼 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>余小鱼
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yubo365.cn/posts/67ac0156.html" title="Vue-Router基本使用及hash模式和history模式实现原理">https://www.yubo365.cn/posts/67ac0156.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+              <a href="/tags/vue-router/" rel="tag"><i class="fa fa-tag"></i> vue-router</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/64663d25.html" rel="prev" title="Windows下安装nvm管理nodejs版本">
+      <i class="fa fa-chevron-left"></i> Windows下安装nvm管理nodejs版本
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/e3abf81e.html" rel="next" title="响应式原理模拟">
+      响应式原理模拟 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+      <div>
+    
+    </div>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">创建目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-Router%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Vue Router使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E8%B7%AF%E7%94%B1%E6%8F%92%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">注册路由插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BArouter%E5%AF%B9%E8%B1%A1%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99"><span class="nav-number">2.2.</span> <span class="nav-text">创建router对象配置路由规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E5%86%8Crouter%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.</span> <span class="nav-text">注册router对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%B7%AF%E7%94%B1%E7%BB%84%E4%BB%B6%E5%8D%A0%E4%BD%8D%E5%92%8C%E8%B7%B3%E8%BD%AC%E9%93%BE%E6%8E%A5"><span class="nav-number">2.4.</span> <span class="nav-text">创建路由组件占位和跳转链接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#route%E5%92%8C-router%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">$route和$router区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82"><span class="nav-number">4.</span> <span class="nav-text">动态路由传参</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E4%BC%A0%E5%8F%82%E8%BF%9E%E6%8E%A5%E8%B7%B3%E8%BD%AC"><span class="nav-number">4.1.</span> <span class="nav-text">动态传参连接跳转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">路由配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E6%96%B9%E5%BC%8F"><span class="nav-number">4.3.</span> <span class="nav-text">接收方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1"><span class="nav-number">5.</span> <span class="nav-text">嵌套路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA"><span class="nav-number">6.</span> <span class="nav-text">编程式导航</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash%E6%A8%A1%E5%BC%8F-%E5%92%8C-History%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB"><span class="nav-number">7.</span> <span class="nav-text">Hash模式 和 History模式区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E7%8E%B0%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.1.</span> <span class="nav-text">表现形式的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.</span> <span class="nav-text">原理区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Hash%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.2.1.</span> <span class="nav-text">Hash模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#History%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.2.2.</span> <span class="nav-text">History模式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#history-pushState%E5%92%8C-history-push%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.2.1.</span> <span class="nav-text">history.pushState和 history.push区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#History%E6%A8%A1%E5%BC%8F%E4%BD%BF%E7%94%A8"><span class="nav-number">7.3.</span> <span class="nav-text">History模式使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">7.4.</span> <span class="nav-text">实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hash%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.4.1.</span> <span class="nav-text">hash模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#history%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.4.2.</span> <span class="nav-text">history模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84vue-router"><span class="nav-number">8.</span> <span class="nav-text">实现一个自己的vue-router</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BArouter-link"><span class="nav-number">8.1.</span> <span class="nav-text">创建router-link</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84vueRouter"><span class="nav-number">8.2.</span> <span class="nav-text">引入自己写的vueRouter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BArouter-view-%E8%BF%99%E4%B8%AA%E7%BB%84%E4%BB%B6"><span class="nav-number">8.3.</span> <span class="nav-text">创建router-view 这个组件</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+    
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="余小鱼"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">余小鱼</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+
+<!-- 日志 | 分类 | 标签 -->
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+  <!-- 日志的个数 -->
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    <!-- 分类的个数 -->
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+    <!-- 标签的个数 -->
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+<!-- RSS -->
+    
+
+ <!-- <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+  -->
+  <div class="feed-link" style="color: #fc6423">
+
+        <div class="social-item">
+          <a target="_blank" style="text-decoration: none;" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+            <span class="label">RSS</span>
+          </a>
+        </div>
+  </div>
+
+<!-- RSS -->
+
+<!-- 网易音乐 -->
+<!--
+  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1363948882&auto=0&height=66"></iframe>
+-->
+
+<!-- 侧边聊天 -->
+
+<!-- 社交信息 -->
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+
+      <!-- 跳转地址渲染，icon 以及 title提示  <a href="https://github.com/yb0112/yb0112.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yb0112&#x2F;yb0112.github.io" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a> -->
+        <a href="https://github.com/yb0112/yb0112.github.io" title="帮忙点个Star吧~" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+
+      </span>
+      <span class="links-of-author-item">
+
+      <!-- 跳转地址渲染，icon 以及 title提示  <a href="mailto:yubo0112@163.com" title="E-Mail → mailto:yubo0112@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a> -->
+        <a href="mailto:yubo0112@163.com" title="mailto:yubo0112@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+
+      </span>
+  </div>
+
+
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+
+
+<!-- 侧边栏 近期文章 -->
+
+  <div class='links-of-blogroll motion-element links-of-blogroll-block'>
+    <div class="links-of-blogroll-title">
+      <!-- modify icon to fire by szw -->
+      <i class="fa fa-history fa-" aria-hidden="true"></i>
+      近期文章
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+      
+        <li>
+          <a href="/posts/783ce8a9.html" title="移动端适配" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> 移动端适配</a>
+        </li>
+      
+        <li>
+          <a href="/posts/e5b77e85.html" title="前端知识小册纲要" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> 前端知识小册纲要</a>
+        </li>
+      
+        <li>
+          <a href="/posts/654bf45c.html" title="fiddler抓包工具" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> fiddler抓包工具</a>
+        </li>
+      
+        <li>
+          <a href="/posts/2541eeff.html" title="JavaScript核心原理" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> JavaScript核心原理</a>
+        </li>
+      
+        <li>
+          <a href="/posts/5510b3d9.html" title="nginx/1.18.0进行SSL证书配置" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> nginx/1.18.0进行SSL证书配置</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+      </div>
+      <!-- 动态时间 -->
+      <!-- <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script> -->
+
+      <!-- 返回 -->
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+         <!-- 著作时间 -->
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <!-- 作者 -->
+  <span class="author" itemprop="copyrightHolder">余小鱼</span>
+
+  <!-- 文章的总字数 -->
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">87k</span>
+</div>
+
+<!-- 访问人数引入 -->
+
+
+
+
+
+
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- 总用户 -->
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv">人</span>
+      </span>
+    </span>
+  
+  <!-- 判断两者都存在就显示 | 线 -->
+    <span class="post-meta-divider">|</span>
+
+<!-- 导入网站运行时间模块 -->
+<!-- 网站运行时间 -->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+			Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+			year - 作为date对象的年份，为4位年份值
+			month - 0-11之间的整数，做为date对象的月份
+			day - 1-31之间的整数，做为date对象的天数
+			hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+			minutes - 0-59之间的整数，做为date对象的分钟数
+			seconds - 0-59之间的整数，做为date对象的秒数
+			microseconds - 0-999之间的整数，做为date对象的毫秒数
+     	*/
+		var t1 = Date.UTC(2020,12,09,22,00,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--// 添加运行时间-->
+
+<span class="post-meta-divider">|</span>
+
+  <!-- 总访问-->
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+<!-- 显示hexo驱动 -->
+
+<!-- 分享 需要到国外网站注册-->
+
+<!-- 备案 -->
+  <div class="beian">
+      <img src="/images/icp.png" style="display: inline-block;vertical-align: middle;margin-right: .2rem;"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">皖ICP备20014075号 </a>
+  </div>
+
+
+      </div>
+    </footer>
+  </div>
+
+
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!--百度统计 -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f2fdbc64da6573a6ebae3fcec155bc2b";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 自动推送代码让百度发现 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+

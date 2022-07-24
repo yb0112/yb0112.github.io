@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>余小鱼的博客</title>
+  
+  <subtitle>I&#39;m Still Here</subtitle>
+  <link href="https://www.yubo365.cn/atom.xml" rel="self"/>
+  
+  <link href="https://www.yubo365.cn/"/>
+  <updated>2022-07-24T19:15:00.697Z</updated>
+  <id>https://www.yubo365.cn/</id>
+  
+  <author>
+    <name>余小鱼</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>移动端适配</title>
+    <link href="https://www.yubo365.cn/posts/783ce8a9.html"/>
+    <id>https://www.yubo365.cn/posts/783ce8a9.html</id>
+    <published>2021-02-22T06:37:32.000Z</published>
+    <updated>2022-07-24T19:15:00.697Z</updated>
+    
+    
+    <summary type="html">所谓移动端适配，就是WebApp在不同尺寸的屏幕上等比显示</summary>
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="移动端适配" scheme="https://www.yubo365.cn/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端知识小册纲要</title>
+    <link href="https://www.yubo365.cn/posts/e5b77e85.html"/>
+    <id>https://www.yubo365.cn/posts/e5b77e85.html</id>
+    <published>2021-02-07T08:21:00.000Z</published>
+    <updated>2022-07-24T19:15:00.482Z</updated>
+    
+    
+    <summary type="html">这是一篇加密的文章，请输入密码查看.</summary>
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>fiddler抓包工具</title>
+    <link href="https://www.yubo365.cn/posts/654bf45c.html"/>
+    <id>https://www.yubo365.cn/posts/654bf45c.html</id>
+    <published>2021-02-01T02:37:00.000Z</published>
+    <updated>2022-07-24T19:15:00.643Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/posts/654bf45c/fiddler.jpg&quot; alt=&quot;fiddler&quot;&gt;&lt;br&gt;&lt;code&gt;Fiddler&lt;/code&gt;是一个通过代理的方式进行抓包工具，它能记录所有客户端和服务器的&lt;code&gt;http&lt;/code&gt;和&lt;code&gt;https&lt;/code&gt;请求，允许你监视，设置断点，甚至修改输入输出数据，它运行时会在本地建立一个代理服务，可以将网络传输发送与接受的数据包进行&lt;code&gt;截获&lt;/code&gt;、&lt;code&gt;重发&lt;/code&gt;、&lt;code&gt;编辑&lt;/code&gt;、&lt;code&gt;转存&lt;/code&gt;等操作，也可以用来&lt;code&gt;检测网络安全&lt;/code&gt;。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="抓包" scheme="https://www.yubo365.cn/tags/%E6%8A%93%E5%8C%85/"/>
+    
+    <category term="fiddler" scheme="https://www.yubo365.cn/tags/fiddler/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript核心原理</title>
+    <link href="https://www.yubo365.cn/posts/2541eeff.html"/>
+    <id>https://www.yubo365.cn/posts/2541eeff.html</id>
+    <published>2021-01-13T02:37:05.000Z</published>
+    <updated>2022-07-24T19:15:00.467Z</updated>
+    
+    
+    <summary type="html">作为前端开发，想要在这个领域走的长远，必须要有扎实的JavaScript编码能力，朋友圈中刚好看到有朋友购买并分享这个课程，果断下单购买并开始学习，这里对这个课程的学习做的一些记录总结和拓展，方便温故知新。</summary>
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="javascript" scheme="https://www.yubo365.cn/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nginx/1.18.0进行SSL证书配置</title>
+    <link href="https://www.yubo365.cn/posts/5510b3d9.html"/>
+    <id>https://www.yubo365.cn/posts/5510b3d9.html</id>
+    <published>2021-01-11T07:19:32.000Z</published>
+    <updated>2022-07-24T19:15:00.689Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;服务器：腾讯云服务器&lt;br&gt;nginx版本：nginx/1.18.0 &lt;a href=&quot;http://nginx.org/en/download.html&quot;&gt;nginx下载地址&lt;/a&gt;&lt;br&gt;CentOS:   CentOS Linux release 7.6.1810 (Core)&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="nginx" scheme="https://www.yubo365.cn/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>腾讯云服务器nginx安装配置</title>
+    <link href="https://www.yubo365.cn/posts/a477be03.html"/>
+    <id>https://www.yubo365.cn/posts/a477be03.html</id>
+    <published>2021-01-11T02:44:40.000Z</published>
+    <updated>2022-07-24T19:15:00.674Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;开始配置前，需要购买一个服务器 &lt;a href=&quot;https://url.cn/NEdlZzvJ&quot;&gt;腾讯云官网&lt;/a&gt;，购买过后还需要你先去备案，从提交备案到管理局通过正常大概一个星期，下面是我的备案操作记录，被腾讯云客服打电话驳回一次，因为填写的备用电话打不通，需要注意：提交备案后注意保持电话畅通。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="nginx" scheme="https://www.yubo365.cn/tags/nginx/"/>
+    
+    <category term="腾讯云服务器" scheme="https://www.yubo365.cn/tags/%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vuex</title>
+    <link href="https://www.yubo365.cn/posts/vuex.html"/>
+    <id>https://www.yubo365.cn/posts/vuex.html</id>
+    <published>2021-01-07T02:52:24.000Z</published>
+    <updated>2022-07-24T19:15:00.481Z</updated>
+    
+    
+    <summary type="html">vue对于组件之间传递数据方法有很多，但是想要数据能在所有组件中都能访问到，为了方便管理，常用的还是Vuex，本文主要介绍Vuex的基本使用，以及简单模拟手写Vuex。</summary>
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="Vue" scheme="https://www.yubo365.cn/tags/Vue/"/>
+    
+    <category term="Vuex" scheme="https://www.yubo365.cn/tags/Vuex/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HybridApp</title>
+    <link href="https://www.yubo365.cn/posts/449b5459.html"/>
+    <id>https://www.yubo365.cn/posts/449b5459.html</id>
+    <published>2020-12-28T09:25:07.000Z</published>
+    <updated>2022-07-24T19:15:00.467Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;为了开发Hybrid App，在vue项目中通过对WebViewJavaScriptBridge第三方库的封装，创建一个桥梁，实现H5和android、ios的通信。也可以去github查看详细的介绍&lt;a href=&quot;https://github.com/marcuswestin/WebViewJavascriptBridge&quot;&gt;WebViewJavascriptBridge&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="HybridApp" scheme="https://www.yubo365.cn/tags/HybridApp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【解决】无法将“XXX”项识别为 cmdlet、函数、脚本文件或可运行程序的名称……</title>
+    <link href="https://www.yubo365.cn/posts/987e7249.html"/>
+    <id>https://www.yubo365.cn/posts/987e7249.html</id>
+    <published>2020-12-25T11:17:13.000Z</published>
+    <updated>2022-07-24T19:15:00.474Z</updated>
+    
+    
+    <summary type="html">无法将“XXX”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确，然后再试一次</summary>
+    
+    
+    
+    <category term="解决问题" scheme="https://www.yubo365.cn/categories/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/"/>
+    
+    
+    <category term="解决问题" scheme="https://www.yubo365.cn/tags/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo Next 主题添加 Valine 评论系统</title>
+    <link href="https://www.yubo365.cn/posts/f65b37a2.html"/>
+    <id>https://www.yubo365.cn/posts/f65b37a2.html</id>
+    <published>2020-12-23T14:48:20.000Z</published>
+    <updated>2022-07-24T19:15:00.476Z</updated>
+    
+    
+    <summary type="html">刚开始网上找了一堆各路大神介绍的添加评论功能的文章，可能因为时间久远，很多已经不能用了，再或者就是体验不合适很好，最终发现了这款评论功能，特此记录一下设置过程。</summary>
+    
+    
+    
+    <category term="Hexo" scheme="https://www.yubo365.cn/categories/Hexo/"/>
+    
+    
+    <category term="Next" scheme="https://www.yubo365.cn/tags/Next/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Next主题美化</title>
+    <link href="https://www.yubo365.cn/posts/c2d19cb2.html"/>
+    <id>https://www.yubo365.cn/posts/c2d19cb2.html</id>
+    <published>2020-12-23T07:40:08.000Z</published>
+    <updated>2022-07-24T19:15:00.473Z</updated>
+    
+    
+    <summary type="html">Hexo默认搭建出来的next主题，真的是简洁，需要慢慢去美化，这里记录一下，部分功能美化的过程，持续更新……</summary>
+    
+    
+    
+    <category term="Hexo" scheme="https://www.yubo365.cn/categories/Hexo/"/>
+    
+    
+    <category term="Next" scheme="https://www.yubo365.cn/tags/Next/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>响应式原理模拟</title>
+    <link href="https://www.yubo365.cn/posts/e3abf81e.html"/>
+    <id>https://www.yubo365.cn/posts/e3abf81e.html</id>
+    <published>2020-12-22T16:14:54.000Z</published>
+    <updated>2022-07-24T19:15:00.695Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/posts/e3abf81e/liuchen.png&quot; alt=&quot;mvvm响应式原理&quot;&gt; &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="Vue" scheme="https://www.yubo365.cn/tags/Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue-Router基本使用及hash模式和history模式实现原理</title>
+    <link href="https://www.yubo365.cn/posts/67ac0156.html"/>
+    <id>https://www.yubo365.cn/posts/67ac0156.html</id>
+    <published>2020-12-17T05:37:04.000Z</published>
+    <updated>2022-07-24T19:15:00.478Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。包含的功能有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;嵌套的路由/视图表&lt;/li&gt;
+&lt;li&gt;模块化的、基于组件的路由配置&lt;/li&gt;
+&lt;li&gt;路由参数、查询、通配符&lt;/li&gt;
+&lt;li&gt;基于 Vue.js 过渡系统的视图过渡效果&lt;/li&gt;
+&lt;li&gt;细粒度的导航控制&lt;/li&gt;
+&lt;li&gt;带有自动激活的 CSS class 的链接&lt;/li&gt;
+&lt;li&gt;HTML5 历史模式或 hash 模式，在 IE9 中自动降级&lt;/li&gt;
+&lt;li&gt;自定义的滚动条行为&lt;/li&gt;&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="web前端" scheme="https://www.yubo365.cn/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="Vue" scheme="https://www.yubo365.cn/tags/Vue/"/>
+    
+    <category term="vue-router" scheme="https://www.yubo365.cn/tags/vue-router/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows下安装nvm管理nodejs版本</title>
+    <link href="https://www.yubo365.cn/posts/64663d25.html"/>
+    <id>https://www.yubo365.cn/posts/64663d25.html</id>
+    <published>2020-12-12T05:11:28.000Z</published>
+    <updated>2022-07-24T19:15:00.694Z</updated>
+    
+    
+    <summary type="html">在我们的日常开发中经常会遇到这种情况：手上有好几个项目，每个项目的需求不同，进而不同项目必须依赖不同版的 NodeJS 运行环境。如果没有一个合适的工具，这个问题将非常棘手。</summary>
+    
+    
+    
+    <category term="工具" scheme="https://www.yubo365.cn/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="Nvm" scheme="https://www.yubo365.cn/tags/Nvm/"/>
+    
+    <category term="Node" scheme="https://www.yubo365.cn/tags/Node/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>npm的镜像源以及代理的查看和配置</title>
+    <link href="https://www.yubo365.cn/posts/b660c1ef.html"/>
+    <id>https://www.yubo365.cn/posts/b660c1ef.html</id>
+    <published>2020-12-11T14:41:54.000Z</published>
+    <updated>2022-07-24T19:15:00.693Z</updated>
+    
+    
+    <summary type="html">npm 是 JavaScript 世界的包管理工具,并且是 Node.js 平台的默认包管理工具。通过 npm 可以安装、共享、分发代码,管理项目依赖关系。但是npm官方镜像在国外，当我们下载一些依赖包的时候，受到限制，可以通过进行一些国内镜像配置来下载，有的时候在公司里面网络会被设置代理，也需要我们对工具进行一些代理设置才能进行下载，下面一些基本的操作</summary>
+    
+    
+    
+    <category term="工具" scheme="https://www.yubo365.cn/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="Npm" scheme="https://www.yubo365.cn/tags/Npm/"/>
+    
+    <category term="Git" scheme="https://www.yubo365.cn/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo使用</title>
+    <link href="https://www.yubo365.cn/posts/3b4634fc.html"/>
+    <id>https://www.yubo365.cn/posts/3b4634fc.html</id>
+    <published>2020-12-09T15:10:50.000Z</published>
+    <updated>2022-07-24T19:15:00.674Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本博客通过 &lt;a href=&quot;&#39;https://hexo.io/&#39;&quot;&gt;Hexo&lt;/a&gt; + &lt;a href=&quot;&#39;http://theme-next.iissnan.com/&#39;&quot;&gt;Next主题&lt;/a&gt; + &lt;a href=&quot;&#39;https://pages.github.com/&#39;&quot;&gt;Github pages&lt;/a&gt; + &lt;a href=&quot;&#39;https://coding.net/&#39;&quot;&gt;Coding&lt;/a&gt; 用了2天左右搭建而成，在此记录一下基本的使用命令，防止以后忘记&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Hexo" scheme="https://www.yubo365.cn/categories/Hexo/"/>
+    
+    
+    <category term="Hexo" scheme="https://www.yubo365.cn/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nrm管理镜像源</title>
+    <link href="https://www.yubo365.cn/posts/54eb2703.html"/>
+    <id>https://www.yubo365.cn/posts/54eb2703.html</id>
+    <published>2020-12-09T14:10:24.000Z</published>
+    <updated>2022-07-24T19:15:00.693Z</updated>
+    
+    
+    <summary type="html">nrm(npm registry manager)是npm的镜像源管理工具，有时候国外资源太慢，使用这个就可以快速地在 npm 源间切换</summary>
+    
+    
+    
+    <category term="工具" scheme="https://www.yubo365.cn/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="Npm" scheme="https://www.yubo365.cn/tags/Npm/"/>
+    
+    <category term="Nrm" scheme="https://www.yubo365.cn/tags/Nrm/"/>
+    
+  </entry>
+  
+</feed>

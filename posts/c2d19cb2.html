@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.yubo365.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Hexo默认搭建出来的next主题，真的是简洁，需要慢慢去美化，这里记录一下，部分功能美化的过程，持续更新……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Next主题美化">
+<meta property="og:url" content="https://www.yubo365.cn/posts/c2d19cb2.html">
+<meta property="og:site_name" content="余小鱼的博客">
+<meta property="og:description" content="Hexo默认搭建出来的next主题，真的是简洁，需要慢慢去美化，这里记录一下，部分功能美化的过程，持续更新……">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.yubo365.cn/posts/c2d19cb2/tagcolor.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/c2d19cb2/imgshow.png">
+<meta property="article:published_time" content="2020-12-23T07:40:08.000Z">
+<meta property="article:modified_time" content="2022-07-24T19:15:00.473Z">
+<meta property="article:author" content="余小鱼">
+<meta property="article:tag" content="Next">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.yubo365.cn/posts/c2d19cb2/tagcolor.png">
+
+<link rel="canonical" href="https://www.yubo365.cn/posts/c2d19cb2.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Next主题美化 | 余小鱼的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="余小鱼的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">余小鱼的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">I'm Still Here</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yubo365.cn/posts/c2d19cb2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="余小鱼">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="余小鱼的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Next主题美化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-23 15:40:08" itemprop="dateCreated datePublished" datetime="2020-12-23T15:40:08+08:00">2020-12-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-25 03:15:00" itemprop="dateModified" datetime="2022-07-25T03:15:00+08:00">2022-07-25</time>
+              </span>
+          <!-- 置顶 -->
+              
+          <!-- 置顶 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                </span>
+            </span>
+
+          
+
+          <!-- 最近阅读 -->
+
+          <!-- busuanzi_count 统计 -->
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>5.5k</span>
+            </span>
+            <div class="post-description">Hexo默认搭建出来的next主题，真的是简洁，需要慢慢去美化，这里记录一下，部分功能美化的过程，持续更新……</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="彩色标签页"><a href="#彩色标签页" class="headerlink" title="彩色标签页"></a>彩色标签页</h3><h4 id="新建个性文件"><a href="#新建个性文件" class="headerlink" title="新建个性文件"></a>新建个性文件</h4><p>在 <code>themes/next/layout</code>文件夹下，新建<code>tag-color.swig</code>文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">     <span class="keyword">var</span> alltags = <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">&#x27;tag-cloud-tags&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">     <span class="keyword">var</span> tags = alltags[<span class="number">0</span>].<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;a&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;11111111111111&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">     <span class="keyword">for</span> (<span class="keyword">var</span> i = tags.<span class="property">length</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span></span><br><span class="line"><span class="language-javascript">       <span class="keyword">var</span> r=<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">75</span>+<span class="number">130</span>);</span></span><br><span class="line"><span class="language-javascript">       <span class="keyword">var</span> g=<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">75</span>+<span class="number">100</span>);</span></span><br><span class="line"><span class="language-javascript">       <span class="keyword">var</span> b=<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">75</span>+<span class="number">80</span>);</span></span><br><span class="line"><span class="language-javascript">       tags[i].<span class="property">style</span>.<span class="property">background</span> = <span class="string">&quot;rgb(&quot;</span>+r+<span class="string">&quot;,&quot;</span>+g+<span class="string">&quot;,&quot;</span>+b+<span class="string">&quot;)&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">     &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">  <span class="selector-class">.tag-cloud-tags</span>&#123;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">font-family</span>: Helvetica, Tahoma, Arial;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">font-weight</span>: <span class="number">100</span>;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">text-align</span>: center;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">counter-reset</span>: tags;</span></span><br><span class="line"><span class="language-css">  &#125;</span></span><br><span class="line"><span class="language-css">  <span class="selector-class">.tag-cloud-tags</span> <span class="selector-tag">a</span>&#123;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">border-radius</span>: <span class="number">6px</span>;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">padding-right</span>: <span class="number">5px</span>;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">padding-left</span>: <span class="number">5px</span>;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">margin</span>: <span class="number">8px</span> <span class="number">5px</span> <span class="number">0px</span> <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">  &#125;</span></span><br><span class="line"><span class="language-css">  <span class="selector-class">.tag-cloud-tags</span> <span class="selector-tag">a</span><span class="selector-pseudo">:before</span>&#123;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">content</span>: <span class="string">&quot;🔖&quot;</span>;</span></span><br><span class="line"><span class="language-css">  &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">  <span class="selector-class">.tag-cloud-tags</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;</span></span><br><span class="line"><span class="language-css">     <span class="attribute">box-shadow</span>: <span class="number">0px</span> <span class="number">5px</span> <span class="number">15px</span> <span class="number">0px</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">4</span>);</span></span><br><span class="line"><span class="language-css">     <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1.1</span>);</span></span><br><span class="line"><span class="language-css">     <span class="comment">/*box-shadow: 10px 10px 15px 2px rgba(0,0,0,.12), 0 0 6px 0 rgba(104, 104, 105, 0.1);*/</span></span></span><br><span class="line"><span class="language-css">     <span class="attribute">transition-duration</span>: <span class="number">0.15s</span>;</span></span><br><span class="line"><span class="language-css">  &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="引入新建文件"><a href="#引入新建文件" class="headerlink" title="引入新建文件"></a>引入新建文件</h4><p>在同目录下的<code>page.swig</code>文件中引入</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">include</span></span> &#x27;tag-color.swig&#x27; %&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/posts/c2d19cb2/tagcolor.png" alt="tagcolor"></p>
+<p>设置完成后<code>hexo g  &amp;&amp; hexo s</code>就可以预览效果了 <a href="https://www.yubo365.cn/tags">标签页地址</a></p>
+<h3 id="设置canvas粒子时钟"><a href="#设置canvas粒子时钟" class="headerlink" title="设置canvas粒子时钟"></a>设置canvas粒子时钟</h3><p>通过该篇<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaohuochai/p/6368039.html">粒子时钟</a>内容的开发思想，整合到页面中</p>
+<h4 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h4><p>在<code>/themes/next/layout/_custom/</code>目录下新建<code>clock.swig</code>文件,内容下载：<br><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/leafjame/cdn/share/swig/clock.swig">clock.swig</a></p>
+<h4 id="引入文件"><a href="#引入文件" class="headerlink" title="引入文件"></a>引入文件</h4><p>在<code>/themes/next/layout/_macro/sidebar.swig</code>文件中引入</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">include</span></span> &#x27;../_custom/clock.swig&#x27; %&#125;</span></span><br></pre></td></tr></table></figure>
+<p>具体放在什么位置，根据自己喜欢来。</p>
+<h3 id="网站运行时间"><a href="#网站运行时间" class="headerlink" title="网站运行时间"></a>网站运行时间</h3><p>在<code>/themes/next/layout/_custom/</code>目录下新建<code>runtime.swig</code>文件，然后将下面代码拷贝进去：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;span id=<span class="string">&quot;sitetime&quot;</span>&gt;&lt;/span&gt;</span><br><span class="line">&lt;script language=javascript&gt;</span><br><span class="line">	<span class="keyword">function</span> site<span class="constructor">Time()</span>&#123;</span><br><span class="line">		window.set<span class="constructor">Timeout(<span class="string">&quot;siteTime()&quot;</span>, 1000)</span>;</span><br><span class="line">		var seconds = <span class="number">1000</span>;</span><br><span class="line">		var minutes = seconds<span class="operator"> * </span><span class="number">60</span>;</span><br><span class="line">		var hours = minutes<span class="operator"> * </span><span class="number">60</span>;</span><br><span class="line">		var days = hours<span class="operator"> * </span><span class="number">24</span>;</span><br><span class="line">		var years = days<span class="operator"> * </span><span class="number">365</span>;</span><br><span class="line">		var today = <span class="keyword">new</span> <span class="constructor">Date()</span>;</span><br><span class="line">		var todayYear = today.get<span class="constructor">FullYear()</span>;</span><br><span class="line">		var todayMonth = today.get<span class="constructor">Month()</span>+<span class="number">1</span>;</span><br><span class="line">		var todayDate = today.get<span class="constructor">Date()</span>;</span><br><span class="line">		var todayHour = today.get<span class="constructor">Hours()</span>;</span><br><span class="line">		var todayMinute = today.get<span class="constructor">Minutes()</span>;</span><br><span class="line">		var todaySecond = today.get<span class="constructor">Seconds()</span>;</span><br><span class="line">                <span class="comment">/** </span></span><br><span class="line"><span class="comment">                * Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)</span></span><br><span class="line"><span class="comment">                * year - 作为date对象的年份，为4位年份值</span></span><br><span class="line"><span class="comment">                * month - 0-11之间的整数，做为date对象的月份</span></span><br><span class="line"><span class="comment">                * day - 1-31之间的整数，做为date对象的天数</span></span><br><span class="line"><span class="comment">                * hours - 0(午夜24点)-23之间的整数，做为date对象的小时数</span></span><br><span class="line"><span class="comment">                * minutes - 0-59之间的整数，做为date对象的分钟数</span></span><br><span class="line"><span class="comment">                * seconds - 0-59之间的整数，做为date对象的秒数</span></span><br><span class="line"><span class="comment">                * microseconds - 0-999之间的整数，做为date对象的毫秒数</span></span><br><span class="line"><span class="comment">                **/</span></span><br><span class="line">		var t1 = Date.<span class="constructor">UTC(2020,12,09,22,00,00)</span>; <span class="comment">//北京时间2018-2-13 00:00:00</span></span><br><span class="line">		var t2 = Date.<span class="constructor">UTC(<span class="params">todayYear</span>,<span class="params">todayMonth</span>,<span class="params">todayDate</span>,<span class="params">todayHour</span>,<span class="params">todayMinute</span>,<span class="params">todaySecond</span>)</span>;</span><br><span class="line">		var diff = t2-t1;</span><br><span class="line">		var diffYears = <span class="module-access"><span class="module"><span class="identifier">Math</span>.</span></span>floor(diff/years);</span><br><span class="line">		var diffDays = <span class="module-access"><span class="module"><span class="identifier">Math</span>.</span></span>floor((diff/days)-diffYears*<span class="number">365</span>);</span><br><span class="line">		var diffHours = <span class="module-access"><span class="module"><span class="identifier">Math</span>.</span></span>floor((diff-(diffYears*<span class="number">365</span>+diffDays)*days)/hours);</span><br><span class="line">		var diffMinutes = <span class="module-access"><span class="module"><span class="identifier">Math</span>.</span></span>floor((diff-(diffYears*<span class="number">365</span>+diffDays)*days-diffHours*hours)/minutes);</span><br><span class="line">		var diffSeconds = <span class="module-access"><span class="module"><span class="identifier">Math</span>.</span></span>floor((diff-(diffYears*<span class="number">365</span>+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);</span><br><span class="line">		document.get<span class="constructor">ElementById(<span class="string">&quot;sitetime&quot;</span>)</span>.innerHTML=<span class="string">&quot; 已运行&quot;</span>+<span class="comment">/*diffYears+&quot; 年 &quot;+*/</span>diffDays+<span class="string">&quot; 天 &quot;</span>+diffHours+<span class="string">&quot; 小时 &quot;</span>+diffMinutes+<span class="string">&quot; 分钟 &quot;</span>+diffSeconds+<span class="string">&quot; 秒&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	site<span class="constructor">Time()</span>;</span><br></pre></td></tr></table></figure>
+<p>修改BirthDay为建站时间<br>在<code>/themes/next/layout/_macro/sidebar.swig</code>同级文件目录下导入运行时间模块</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">include</span></span> &#x27;../_custom/runtime.swig&#x27; %&#125;</span></span><br></pre></td></tr></table></figure>
+<p>在其他位置导入运行时间模块</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-variable">&#123;&#123; <span class="name"><span class="built_in">partial</span></span>(<span class="name">&#x27;_custom/runtime.swig&#x27;</span>, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>重新打包，运行，然后就可以展示网站运行时间了</p>
+<h3 id="美化url地址（-html后缀）"><a href="#美化url地址（-html后缀）" class="headerlink" title="美化url地址（.html后缀）"></a>美化url地址（.html后缀）</h3><p>hexo-next文章链接默认的生成规则是：<code>:year/:month/:day/:title</code>，是按照年、月、日、标题来生成的。</p>
+<p>安装插件</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-abbrlink <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>执行此命令可能会不成功，提示你缺少相应的依赖，比如babel-eslint、mini-css-extract-plugin、webpack-cli…<br>使用npm命令安装即可，比如<code>npm install eslint@4.x babel-eslint@8 --save-dev</code></p>
+</blockquote>
+<p>修改根目录站点配置文件<code>config.yml</code>，改为：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">permalink:</span> posts/:abbrlink.html</span><br><span class="line"><span class="symbol">abbrlink:</span></span><br><span class="line"><span class="symbol">	alg:</span> crc32   <span class="meta">#算法： crc16(default) and crc32</span></span><br><span class="line"><span class="symbol">	rep:</span> hex     <span class="meta">#进制： dec(default) and hex</span></span><br></pre></td></tr></table></figure>
+<p>这样设置过后地址栏可以展示.html后缀格式的地址了，但是这个时候会出现一个问题，之前使用<code>hexo-asset-image</code>插件生成的图片无法显示了<br>解决方法：<br>打开源文件<code>\node_modules\hexo-asset-image\index.js</code>,修改如下：<br><img src="/posts/c2d19cb2/imgshow.png" alt="imgshow"></p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> appendLink = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(/.*\/index\.html$/.test(<span class="keyword">link</span>))&#123;</span><br><span class="line">	appendLink = <span class="string">&#x27;index/&#x27;</span></span><br><span class="line">	<span class="built_in">var</span> endPos = <span class="keyword">link</span>.lastIndexOf(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="built_in">var</span> endPos = <span class="keyword">link</span>.length - <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// var endPos = link.lastIndexOf(&#x27;/&#x27;) + 1;</span></span><br><span class="line">   <span class="comment">// link = link.substring(beginPos, endPos);</span></span><br><span class="line">   <span class="keyword">link</span> = <span class="keyword">link</span>.substring(beginPos, endPos) + <span class="string">&#x27;/&#x27;</span> + appendLink;</span><br></pre></td></tr></table></figure>
+<p>重新运行，图片就可以正常展示了</p>
+<h3 id="文章加密访问"><a href="#文章加密访问" class="headerlink" title="文章加密访问"></a>文章加密访问</h3><p>通过引入<a target="_blank" rel="noopener" href="https://github.com/D0n9X1n/hexo-blog-encrypt">hexo-blog-encrypt</a>依赖包，进行加密.</p>
+<h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ul>
+<li>一旦你输入了正确的密码, 它将会被存储在本地浏览器的 localStorage中. 按个按钮, 密码将会被清空. 若博客中又脚本, 它将会被正确地执行.</li>
+<li>支持按标签加密.</li>
+<li>所有的核心功能都是由原生的 API 所提供的. 在 Node.js中, 我们使用 <a target="_blank" rel="noopener" href="https://nodejs.org/dist/latest-v12.x/docs/api/crypto.html">Crypto</a>. 在浏览器中, 我们使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>.</li>
+<li><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc2898">PBKDF2</a>, <a target="_blank" rel="noopener" href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf">SHA256</a> 被用于分发密钥, <a target="_blank" rel="noopener" href="https://csrc.nist.gov/publications/detail/sp/800-38a/final">AES256-CBC</a> 被用于加解密, 我们还使用 <a target="_blank" rel="noopener" href="https://csrc.nist.gov/csrc/media/publications/fips/198/1/final/documents/fips-198-1_final.pdf">HMAC</a> 来验证密文的来源, 并确保其未被篡改.</li>
+<li>我们广泛地使用 Promise 来进行异步操作, 以此确保线程不被杜塞.</li>
+<li>加密页面多主题支持, 现在已经支持的主题有 [default, xray], 更多的主题正在开发中.</li>
+<li>过时的浏览器将不能正常显示, 因此, 请升级您的浏览器.  </li>
+</ul>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install </span>hexo-<span class="keyword">blog-encrypt </span>-S</span><br></pre></td></tr></table></figure>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ul>
+<li>文章信息头使用<br>将<code>password</code>字段，添加到文章信息头<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020-01-11 14:11:00</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">bac123</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure></li>
+<li>高级设置<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">加密文章tag</span></span><br><span class="line"><span class="attr">date:</span> </span><br><span class="line"><span class="attr">password:</span> <span class="string">aabbcc</span></span><br><span class="line"><span class="attr">abstract:</span> <span class="string">该文章已加密,</span> <span class="string">请输入密码查看。</span></span><br><span class="line"><span class="attr">message:</span> <span class="string">该文章已加密,</span> <span class="string">请输入密码查看。</span></span><br><span class="line"><span class="attr">wrong_pass_message:</span> <span class="string">密码不正确，请重新输入！</span></span><br><span class="line"><span class="attr">wrong_hash_message:</span> <span class="string">文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容！</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure></li>
+<li>在根目录下<code>_config.yml</code>中全局设置<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">encrypt:</span></span><br><span class="line">  <span class="attr">abstract:</span> <span class="string">该文章已加密,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">该文章已加密,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> &#123;<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码A</span>&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123;<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码B</span>&#125;</span><br><span class="line">  <span class="attr">wrong_pass_message:</span> <span class="string">密码不正确，请重新输入.</span></span><br><span class="line">  <span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br></pre></td></tr></table></figure>
+注：若文章中采用_config.yml中的全局配置，则文章的tags只能有一个，若有多个tags，则失效。  </li>
+</ul>
+<h4 id="设置主题"><a href="#设置主题" class="headerlink" title="设置主题"></a>设置主题</h4><p>增加一个<code>theme</code>字段，可以选择的主题：<code>default</code>、<code>blink</code>、<code>shrink</code>、<code>flip</code>、<code>up</code>、<code>surge</code>、<code>wave</code>、<code>xray</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Security</span></span><br><span class="line"><span class="attr">encrypt:</span> <span class="comment"># hexo-blog-encrypt</span></span><br><span class="line">  <span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> &#123;<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码A</span>&#125;</span><br><span class="line">  <span class="bullet">-</span> &#123;<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码B</span>&#125;</span><br><span class="line">  <span class="attr">theme:</span> <span class="string">xray</span></span><br><span class="line">  <span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line">  <span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br></pre></td></tr></table></figure>
+<h4 id="配置优先级"><a href="#配置优先级" class="headerlink" title="配置优先级"></a>配置优先级</h4><p>文章信息头 <code>&gt;</code> _config.yml (站点根目录下的) <code>&gt;</code> 默认配置  </p>
+<p>使用<code>hexo clean</code> &amp;&amp; <code>hexo g</code> &amp;&amp; <code>hexo s</code>在本地预览加密的文章。</p>
+
+    </div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px; margin: 20px; 0px">--------- 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ---------</div>
+    
+</div>
+<!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui -mob-share-ui-theme -mob-share-ui-theme-slide-left" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <!--<li class="-mob-share-facebook"><p>Facebook</p></li>-->
+        <!--<li class="-mob-share-twitter"><p>Twitter</p></li>-->
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=31d56d51e2660"></script>
+<!--MOB SHARE END-->
+<script>
+var url = window.location.href
+mobShare.config( {
+    appkey: '31d56d51e2660', // appkey
+    params: {
+        url: url, // 分享链接
+        description: '个人博客，记录时光，记录生活', // 分享内容
+        title: "YuBo's Blog", // 分享标题
+        pic: 'https://www.yubo365.cn/images/avatar.jpg', // 分享图片，使用逗号,隔开
+    }
+} );
+</script>
+
+    
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="余小鱼 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="余小鱼 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>余小鱼
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yubo365.cn/posts/c2d19cb2.html" title="Next主题美化">https://www.yubo365.cn/posts/c2d19cb2.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Next/" rel="tag"><i class="fa fa-tag"></i> Next</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/e3abf81e.html" rel="prev" title="响应式原理模拟">
+      <i class="fa fa-chevron-left"></i> 响应式原理模拟
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/f65b37a2.html" rel="next" title="Hexo Next 主题添加 Valine 评论系统">
+      Hexo Next 主题添加 Valine 评论系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+      <div>
+    
+    </div>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%A9%E8%89%B2%E6%A0%87%E7%AD%BE%E9%A1%B5"><span class="nav-number">1.</span> <span class="nav-text">彩色标签页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E4%B8%AA%E6%80%A7%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">新建个性文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">引入新建文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEcanvas%E7%B2%92%E5%AD%90%E6%97%B6%E9%92%9F"><span class="nav-number">2.</span> <span class="nav-text">设置canvas粒子时钟</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">新建文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">引入文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4"><span class="nav-number">3.</span> <span class="nav-text">网站运行时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%8E%E5%8C%96url%E5%9C%B0%E5%9D%80%EF%BC%88-html%E5%90%8E%E7%BC%80%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">美化url地址（.html后缀）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%8A%A0%E5%AF%86%E8%AE%BF%E9%97%AE"><span class="nav-number">5.</span> <span class="nav-text">文章加密访问</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E6%80%A7"><span class="nav-number">5.1.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">5.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">5.3.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="nav-number">5.4.</span> <span class="nav-text">设置主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">5.5.</span> <span class="nav-text">配置优先级</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+    
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="余小鱼"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">余小鱼</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+
+<!-- 日志 | 分类 | 标签 -->
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+  <!-- 日志的个数 -->
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    <!-- 分类的个数 -->
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+    <!-- 标签的个数 -->
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+<!-- RSS -->
+    
+
+ <!-- <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+  -->
+  <div class="feed-link" style="color: #fc6423">
+
+        <div class="social-item">
+          <a target="_blank" style="text-decoration: none;" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+            <span class="label">RSS</span>
+          </a>
+        </div>
+  </div>
+
+<!-- RSS -->
+
+<!-- 网易音乐 -->
+<!--
+  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1363948882&auto=0&height=66"></iframe>
+-->
+
+<!-- 侧边聊天 -->
+
+<!-- 社交信息 -->
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+
+      <!-- 跳转地址渲染，icon 以及 title提示  <a href="https://github.com/yb0112/yb0112.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yb0112&#x2F;yb0112.github.io" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a> -->
+        <a href="https://github.com/yb0112/yb0112.github.io" title="帮忙点个Star吧~" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+
+      </span>
+      <span class="links-of-author-item">
+
+      <!-- 跳转地址渲染，icon 以及 title提示  <a href="mailto:yubo0112@163.com" title="E-Mail → mailto:yubo0112@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a> -->
+        <a href="mailto:yubo0112@163.com" title="mailto:yubo0112@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+
+      </span>
+  </div>
+
+
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+
+
+<!-- 侧边栏 近期文章 -->
+
+  <div class='links-of-blogroll motion-element links-of-blogroll-block'>
+    <div class="links-of-blogroll-title">
+      <!-- modify icon to fire by szw -->
+      <i class="fa fa-history fa-" aria-hidden="true"></i>
+      近期文章
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+      
+        <li>
+          <a href="/posts/783ce8a9.html" title="移动端适配" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> 移动端适配</a>
+        </li>
+      
+        <li>
+          <a href="/posts/e5b77e85.html" title="前端知识小册纲要" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> 前端知识小册纲要</a>
+        </li>
+      
+        <li>
+          <a href="/posts/654bf45c.html" title="fiddler抓包工具" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> fiddler抓包工具</a>
+        </li>
+      
+        <li>
+          <a href="/posts/2541eeff.html" title="JavaScript核心原理" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> JavaScript核心原理</a>
+        </li>
+      
+        <li>
+          <a href="/posts/5510b3d9.html" title="nginx/1.18.0进行SSL证书配置" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> nginx/1.18.0进行SSL证书配置</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+      </div>
+      <!-- 动态时间 -->
+      <!-- <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script> -->
+
+      <!-- 返回 -->
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+         <!-- 著作时间 -->
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <!-- 作者 -->
+  <span class="author" itemprop="copyrightHolder">余小鱼</span>
+
+  <!-- 文章的总字数 -->
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">87k</span>
+</div>
+
+<!-- 访问人数引入 -->
+
+
+
+
+
+
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- 总用户 -->
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv">人</span>
+      </span>
+    </span>
+  
+  <!-- 判断两者都存在就显示 | 线 -->
+    <span class="post-meta-divider">|</span>
+
+<!-- 导入网站运行时间模块 -->
+<!-- 网站运行时间 -->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+			Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+			year - 作为date对象的年份，为4位年份值
+			month - 0-11之间的整数，做为date对象的月份
+			day - 1-31之间的整数，做为date对象的天数
+			hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+			minutes - 0-59之间的整数，做为date对象的分钟数
+			seconds - 0-59之间的整数，做为date对象的秒数
+			microseconds - 0-999之间的整数，做为date对象的毫秒数
+     	*/
+		var t1 = Date.UTC(2020,12,09,22,00,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--// 添加运行时间-->
+
+<span class="post-meta-divider">|</span>
+
+  <!-- 总访问-->
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+<!-- 显示hexo驱动 -->
+
+<!-- 分享 需要到国外网站注册-->
+
+<!-- 备案 -->
+  <div class="beian">
+      <img src="/images/icp.png" style="display: inline-block;vertical-align: middle;margin-right: .2rem;"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">皖ICP备20014075号 </a>
+  </div>
+
+
+      </div>
+    </footer>
+  </div>
+
+
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!--百度统计 -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f2fdbc64da6573a6ebae3fcec155bc2b";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 自动推送代码让百度发现 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+

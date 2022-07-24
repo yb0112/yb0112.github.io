@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.yubo365.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在我们的日常开发中经常会遇到这种情况：手上有好几个项目，每个项目的需求不同，进而不同项目必须依赖不同版的 NodeJS 运行环境。如果没有一个合适的工具，这个问题将非常棘手。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows下安装nvm管理nodejs版本">
+<meta property="og:url" content="https://www.yubo365.cn/posts/64663d25.html">
+<meta property="og:site_name" content="余小鱼的博客">
+<meta property="og:description" content="在我们的日常开发中经常会遇到这种情况：手上有好几个项目，每个项目的需求不同，进而不同项目必须依赖不同版的 NodeJS 运行环境。如果没有一个合适的工具，这个问题将非常棘手。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.yubo365.cn/posts/64663d25/1.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/64663d25/2.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/64663d25/3.png">
+<meta property="og:image" content="https://www.yubo365.cn/posts/64663d25/4.png">
+<meta property="article:published_time" content="2020-12-12T05:11:28.000Z">
+<meta property="article:modified_time" content="2022-07-24T19:15:00.694Z">
+<meta property="article:author" content="余小鱼">
+<meta property="article:tag" content="Nvm">
+<meta property="article:tag" content="Node">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.yubo365.cn/posts/64663d25/1.png">
+
+<link rel="canonical" href="https://www.yubo365.cn/posts/64663d25.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Windows下安装nvm管理nodejs版本 | 余小鱼的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="余小鱼的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">余小鱼的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">I'm Still Here</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yubo365.cn/posts/64663d25.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="余小鱼">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="余小鱼的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windows下安装nvm管理nodejs版本
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-12 13:11:28" itemprop="dateCreated datePublished" datetime="2020-12-12T13:11:28+08:00">2020-12-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-25 03:15:00" itemprop="dateModified" datetime="2022-07-25T03:15:00+08:00">2022-07-25</time>
+              </span>
+          <!-- 置顶 -->
+              
+          <!-- 置顶 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+          <!-- 最近阅读 -->
+
+          <!-- busuanzi_count 统计 -->
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.8k</span>
+            </span>
+            <div class="post-description">在我们的日常开发中经常会遇到这种情况：手上有好几个项目，每个项目的需求不同，进而不同项目必须依赖不同版的 NodeJS 运行环境。如果没有一个合适的工具，这个问题将非常棘手。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>nvm全名node.js version management，顾名思义是一个nodejs的版本管理工具。通过它可以安装和切换不同版本的nodejs。下面列出下载、安装及使用方法。</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>可在<a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/releases">github</a>上下载最新版本,本次下载安装的是windows版本。打开网址我们可以看到有两个版本：</p>
+<ul>
+<li>nvm-noinstall.zip：绿色免安装版，但使用时需进行配置。</li>
+<li>nvm-setup.zip：安装版，推荐使用<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="双击安装文件-nvm-setup-exe"><a href="#双击安装文件-nvm-setup-exe" class="headerlink" title="双击安装文件 nvm-setup.exe"></a>双击安装文件 nvm-setup.exe</h4><img src="/posts/64663d25/1.png" alt="安装文件"><h4 id="选择nvm安装路径"><a href="#选择nvm安装路径" class="headerlink" title="选择nvm安装路径"></a>选择nvm安装路径</h4><img src="/posts/64663d25/2.png" alt="选择nvm安装路径"><h4 id="选择nodejs路径"><a href="#选择nodejs路径" class="headerlink" title="选择nodejs路径"></a>选择nodejs路径</h4><img src="/posts/64663d25/3.png" alt="选择nodejs路径"><h4 id="确认安装即可"><a href="#确认安装即可" class="headerlink" title="确认安装即可"></a>确认安装即可</h4><img src="/posts/64663d25/4.png" alt="确认安装"><h4 id="安装完确认"><a href="#安装完确认" class="headerlink" title="安装完确认"></a>安装完确认</h4>安装成功则如下显示。可以看到里面列出了各种命令<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">  $ nvm</span><br><span class="line"></span><br><span class="line">Running <span class="built_in">version</span> <span class="number">1.1</span><span class="number">.7</span>.</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">  nvm arch                     : Show <span class="keyword">if</span> node is running <span class="keyword">in</span> <span class="number">32</span> <span class="keyword">or</span> <span class="number">64</span> bit mode.</span><br><span class="line">  nvm install &lt;<span class="built_in">version</span>&gt; [arch] : The <span class="built_in">version</span> can be <span class="keyword">a</span> node.js <span class="built_in">version</span> <span class="keyword">or</span> <span class="string">&quot;latest&quot;</span> <span class="keyword">for</span> <span class="keyword">the</span> latest stable <span class="built_in">version</span>.</span><br><span class="line">                                 Optionally specify whether <span class="built_in">to</span> install <span class="keyword">the</span> <span class="number">32</span> <span class="keyword">or</span> <span class="number">64</span> bit <span class="built_in">version</span> (defaults <span class="built_in">to</span> <span class="keyword">system</span> arch).</span><br><span class="line">                                 Set [arch] <span class="built_in">to</span> <span class="string">&quot;all&quot;</span> <span class="built_in">to</span> install <span class="number">32</span> AND <span class="number">64</span> bit versions.</span><br><span class="line">                                 Add <span class="comment">--insecure to the end of this command to bypass SSL validation of the remote download server.</span></span><br><span class="line">  nvm list [available]         : List <span class="keyword">the</span> node.js installations. Type <span class="string">&quot;available&quot;</span> <span class="keyword">at</span> <span class="keyword">the</span> <span class="function"><span class="keyword">end</span> <span class="title">to</span> <span class="title">see</span> <span class="title">what</span> <span class="title">can</span> <span class="title">be</span> <span class="title">installed</span>. <span class="title">Aliased</span> <span class="title">as</span> <span class="title">ls</span>.</span></span><br><span class="line">  nvm <span class="keyword">on</span>                       : <span class="title">Enable</span> <span class="title">node</span>.<span class="title">js</span> <span class="title">version</span> <span class="title">management</span>.</span><br><span class="line">  nvm off                      : Disable node.js <span class="built_in">version</span> management.</span><br><span class="line">  nvm proxy [url]              : Set <span class="keyword">a</span> proxy <span class="built_in">to</span> use <span class="keyword">for</span> downloads. Leave [url] blank <span class="built_in">to</span> see <span class="keyword">the</span> current proxy.</span><br><span class="line">                                 Set [url] <span class="built_in">to</span> <span class="string">&quot;none&quot;</span> <span class="built_in">to</span> remove <span class="keyword">the</span> proxy.</span><br><span class="line">  nvm node_mirror [url]        : Set <span class="keyword">the</span> node mirror. Defaults <span class="built_in">to</span> <span class="keyword">https</span>://nodejs.org/dist/. Leave [url] blank <span class="built_in">to</span> use default url.</span><br><span class="line">  nvm npm_mirror [url]         : Set <span class="keyword">the</span> npm mirror. Defaults <span class="built_in">to</span> <span class="keyword">https</span>://github.com/npm/cli/archive/. Leave [url] blank <span class="built_in">to</span> default url.</span><br><span class="line">  nvm uninstall &lt;<span class="built_in">version</span>&gt;      : The <span class="built_in">version</span> must be <span class="keyword">a</span> specific <span class="built_in">version</span>.</span><br><span class="line">  nvm use [<span class="built_in">version</span>] [arch]     : Switch <span class="built_in">to</span> use <span class="keyword">the</span> specified <span class="built_in">version</span>. Optionally specify <span class="number">32</span>/<span class="number">64</span>bit architecture.</span><br><span class="line">                                 nvm use &lt;arch&gt; will continue <span class="keyword">using</span> <span class="keyword">the</span> selected <span class="built_in">version</span>, but <span class="keyword">switch</span> <span class="built_in">to</span> <span class="number">32</span>/<span class="number">64</span> bit mode.</span><br><span class="line">  nvm root [path]              : Set <span class="keyword">the</span> <span class="built_in">directory</span> where nvm should store different versions <span class="keyword">of</span> node.js.</span><br><span class="line">                                 If &lt;path&gt; is <span class="keyword">not</span> <span class="built_in">set</span>, <span class="keyword">the</span> current root will be displayed.</span><br><span class="line">  nvm <span class="built_in">version</span>                  : Displays <span class="keyword">the</span> current running <span class="built_in">version</span> <span class="keyword">of</span> nvm <span class="keyword">for</span> Windows. Aliased <span class="keyword">as</span> v.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="安装管理nodejs"><a href="#安装管理nodejs" class="headerlink" title="安装管理nodejs"></a>安装管理nodejs</h3><h4 id="查看本地安装的所有版本"><a href="#查看本地安装的所有版本" class="headerlink" title="查看本地安装的所有版本"></a>查看本地安装的所有版本</h4>nvm list 后显示的 * 表示的是当前正在使用的版本<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> nvm list</span><br><span class="line"></span><br><span class="line">  * <span class="number">15.3</span>.<span class="number">0</span> (Currently <span class="keyword">using</span> 64-bit executable)</span><br><span class="line">    <span class="number">10.4</span>.<span class="number">0</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="安装，版本号可自定义"><a href="#安装，版本号可自定义" class="headerlink" title="安装，版本号可自定义"></a>安装，版本号可自定义</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">nvm</span> install <span class="number">10</span>.<span class="number">4</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用特定版本"><a href="#使用特定版本" class="headerlink" title="使用特定版本"></a>使用特定版本</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">nvm</span> use <span class="number">10</span>.<span class="number">4</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">nvm</span> uninstall <span class="number">11</span>.<span class="number">13</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px; margin: 20px; 0px">--------- 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ---------</div>
+    
+</div>
+<!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui -mob-share-ui-theme -mob-share-ui-theme-slide-left" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <!--<li class="-mob-share-facebook"><p>Facebook</p></li>-->
+        <!--<li class="-mob-share-twitter"><p>Twitter</p></li>-->
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=31d56d51e2660"></script>
+<!--MOB SHARE END-->
+<script>
+var url = window.location.href
+mobShare.config( {
+    appkey: '31d56d51e2660', // appkey
+    params: {
+        url: url, // 分享链接
+        description: '个人博客，记录时光，记录生活', // 分享内容
+        title: "YuBo's Blog", // 分享标题
+        pic: 'https://www.yubo365.cn/images/avatar.jpg', // 分享图片，使用逗号,隔开
+    }
+} );
+</script>
+
+    
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="余小鱼 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="余小鱼 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>余小鱼
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yubo365.cn/posts/64663d25.html" title="Windows下安装nvm管理nodejs版本">https://www.yubo365.cn/posts/64663d25.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Nvm/" rel="tag"><i class="fa fa-tag"></i> Nvm</a>
+              <a href="/tags/Node/" rel="tag"><i class="fa fa-tag"></i> Node</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/b660c1ef.html" rel="prev" title="npm的镜像源以及代理的查看和配置">
+      <i class="fa fa-chevron-left"></i> npm的镜像源以及代理的查看和配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/67ac0156.html" rel="next" title="Vue-Router基本使用及hash模式和history模式实现原理">
+      Vue-Router基本使用及hash模式和history模式实现原理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+      <div>
+    
+    </div>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E5%87%BB%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6-nvm-setup-exe"><span class="nav-number">3.1.</span> <span class="nav-text">双击安装文件 nvm-setup.exe</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9nvm%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84"><span class="nav-number">3.2.</span> <span class="nav-text">选择nvm安装路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9nodejs%E8%B7%AF%E5%BE%84"><span class="nav-number">3.3.</span> <span class="nav-text">选择nodejs路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E5%AE%89%E8%A3%85%E5%8D%B3%E5%8F%AF"><span class="nav-number">3.4.</span> <span class="nav-text">确认安装即可</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AE%8C%E7%A1%AE%E8%AE%A4"><span class="nav-number">3.5.</span> <span class="nav-text">安装完确认</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86nodejs"><span class="nav-number">4.</span> <span class="nav-text">安装管理nodejs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85%E7%9A%84%E6%89%80%E6%9C%89%E7%89%88%E6%9C%AC"><span class="nav-number">4.1.</span> <span class="nav-text">查看本地安装的所有版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%EF%BC%8C%E7%89%88%E6%9C%AC%E5%8F%B7%E5%8F%AF%E8%87%AA%E5%AE%9A%E4%B9%89"><span class="nav-number">4.2.</span> <span class="nav-text">安装，版本号可自定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%89%B9%E5%AE%9A%E7%89%88%E6%9C%AC"><span class="nav-number">4.3.</span> <span class="nav-text">使用特定版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD"><span class="nav-number">4.4.</span> <span class="nav-text">卸载</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+    
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="余小鱼"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">余小鱼</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+
+<!-- 日志 | 分类 | 标签 -->
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+  <!-- 日志的个数 -->
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    <!-- 分类的个数 -->
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+    <!-- 标签的个数 -->
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+<!-- RSS -->
+    
+
+ <!-- <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+  -->
+  <div class="feed-link" style="color: #fc6423">
+
+        <div class="social-item">
+          <a target="_blank" style="text-decoration: none;" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+            <span class="label">RSS</span>
+          </a>
+        </div>
+  </div>
+
+<!-- RSS -->
+
+<!-- 网易音乐 -->
+<!--
+  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1363948882&auto=0&height=66"></iframe>
+-->
+
+<!-- 侧边聊天 -->
+
+<!-- 社交信息 -->
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+
+      <!-- 跳转地址渲染，icon 以及 title提示  <a href="https://github.com/yb0112/yb0112.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yb0112&#x2F;yb0112.github.io" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a> -->
+        <a href="https://github.com/yb0112/yb0112.github.io" title="帮忙点个Star吧~" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+
+      </span>
+      <span class="links-of-author-item">
+
+      <!-- 跳转地址渲染，icon 以及 title提示  <a href="mailto:yubo0112@163.com" title="E-Mail → mailto:yubo0112@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a> -->
+        <a href="mailto:yubo0112@163.com" title="mailto:yubo0112@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+
+      </span>
+  </div>
+
+
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+
+
+<!-- 侧边栏 近期文章 -->
+
+  <div class='links-of-blogroll motion-element links-of-blogroll-block'>
+    <div class="links-of-blogroll-title">
+      <!-- modify icon to fire by szw -->
+      <i class="fa fa-history fa-" aria-hidden="true"></i>
+      近期文章
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+      
+        <li>
+          <a href="/posts/783ce8a9.html" title="移动端适配" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> 移动端适配</a>
+        </li>
+      
+        <li>
+          <a href="/posts/e5b77e85.html" title="前端知识小册纲要" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> 前端知识小册纲要</a>
+        </li>
+      
+        <li>
+          <a href="/posts/654bf45c.html" title="fiddler抓包工具" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> fiddler抓包工具</a>
+        </li>
+      
+        <li>
+          <a href="/posts/2541eeff.html" title="JavaScript核心原理" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> JavaScript核心原理</a>
+        </li>
+      
+        <li>
+          <a href="/posts/5510b3d9.html" title="nginx/1.18.0进行SSL证书配置" target="_blank"><i class="fa fa-book"  aria-hidden="true"></i> nginx/1.18.0进行SSL证书配置</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+      </div>
+      <!-- 动态时间 -->
+      <!-- <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script> -->
+
+      <!-- 返回 -->
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+         <!-- 著作时间 -->
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <!-- 作者 -->
+  <span class="author" itemprop="copyrightHolder">余小鱼</span>
+
+  <!-- 文章的总字数 -->
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">87k</span>
+</div>
+
+<!-- 访问人数引入 -->
+
+
+
+
+
+
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- 总用户 -->
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv">人</span>
+      </span>
+    </span>
+  
+  <!-- 判断两者都存在就显示 | 线 -->
+    <span class="post-meta-divider">|</span>
+
+<!-- 导入网站运行时间模块 -->
+<!-- 网站运行时间 -->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+			Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+			year - 作为date对象的年份，为4位年份值
+			month - 0-11之间的整数，做为date对象的月份
+			day - 1-31之间的整数，做为date对象的天数
+			hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+			minutes - 0-59之间的整数，做为date对象的分钟数
+			seconds - 0-59之间的整数，做为date对象的秒数
+			microseconds - 0-999之间的整数，做为date对象的毫秒数
+     	*/
+		var t1 = Date.UTC(2020,12,09,22,00,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--// 添加运行时间-->
+
+<span class="post-meta-divider">|</span>
+
+  <!-- 总访问-->
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+<!-- 显示hexo驱动 -->
+
+<!-- 分享 需要到国外网站注册-->
+
+<!-- 备案 -->
+  <div class="beian">
+      <img src="/images/icp.png" style="display: inline-block;vertical-align: middle;margin-right: .2rem;"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">皖ICP备20014075号 </a>
+  </div>
+
+
+      </div>
+    </footer>
+  </div>
+
+
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!--百度统计 -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f2fdbc64da6573a6ebae3fcec155bc2b";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 自动推送代码让百度发现 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }else{
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
